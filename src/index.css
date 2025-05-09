@@ -1,0 +1,89 @@
+@charset "UTF-8";
+/* CSS 리셋 */
+@import url('https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css');
+
+/* 폰트 관련 */
+@import url('https://fonts.googleapis.com/css2?family=Nanum+Myeongjo&family=Noto+Sans+KR:wght@200&display=swap');
+/* 기본 스타일 */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  /* 색상 */
+  --main-color: #4a4a4a;
+  --background-color: #f2f2f2;
+  --gray-700: #0d0d0d;
+  --gray-600: #1a1a1a;
+  --gray-500: #262626;
+  --gray-400: #333333;
+  --gray-300: #808080;
+  --gray-200: #d9d9d9;
+  --gray-100: #f2f2f2;
+  --danger: #e25858;
+
+  font-family: 'Noto Sans KR', sans-serif;
+
+  /* 폰트 사이즈 */
+  --fs-1: 8px;
+  --fs-2: 12px;
+  --fs-3: 16px;
+  --fs-4: 20px;
+  --fs-5: 24px;
+  --fs-6: 33px;
+
+  /* 기본 폰트 색상 및 라인 높이 */
+  line-height: 1.6;
+  color: var(--gray-400);
+}
+html,
+body {
+  width: 100%;
+  min-height: 100%;
+  font-family: var(--font-family);
+  background-color: var(--background-color);
+  overflow-x: hidden;
+  display: flex;
+  justify-content: center;
+}
+/* 앱 콘텐츠 영역 360px로 고정 */
+#root {
+  width: 360px;
+  min-height: 640px;
+  background-color: #fff;
+  overflow-y: auto;
+  overflow-x: hidden;
+  /* 모바일 width라서 컴포 생성 시 position fixed 아니고 absolute로 진행해야합니다! */
+  position: relative;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+main {
+  padding: 60px var(--fs-2);
+  border: red solid 1px;
+}
+main h2 {
+  font-size: var(--fs-6);
+}
+footer {
+  border: red solid 1px;
+  padding: var(--fs-1);
+  font-size: var(--fs-2);
+  text-align: center;
+}
+button {
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+}
+a {
+  text-decoration: none;
+  color: inherit;
+}
+input {
+  border: none;
+  outline: none;
+  background-color: transparent;
+  font-size: var(--fs-2);
+}

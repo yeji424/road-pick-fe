@@ -1,0 +1,28 @@
+.hd {
+  position: absolute; /* 모바일 width라서 fixed 아니고 absolute입니당 */
+  border: 1px blue solid;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 999;
+  /* background: linear-gradient(180deg, rgba(255, 255, 255, 1) 50%, rgba(255, 255, 255, 0) 100%); */
+  padding: var(--fs-1) 0;
+}
+.con {
+  border: 1px blue solid;
+  width: calc(100% - 1rem);
+  margin: auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.icon {
+  color: var(--gray-700);
+  border: green 1px solid;
+  display: flex;
+  gap: var(--fs-2) var(--fs-2);
+}
+/* 혼자 btn이라 다른 아이콘이랑 gap이 안맞아서 추가*/
+.icon button {
+  padding: 1.5px;
+}
