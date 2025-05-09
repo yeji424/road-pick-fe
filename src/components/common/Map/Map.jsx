@@ -1,27 +1,36 @@
 // src/components/common/Map/Map.jsx
-import React, { useEffect } from 'react'
-import { loadKakaoMapScript } from '../../../loaders/kakaoLoader' // 여기서 import
+import React, { useEffect, useRef } from 'react'
+import { loadKakaoMapScript } from '../../../loaders/kakaoLoader'
 import css from './Map.module.css'
 
-const Map = () => {
+const Map = ({ center }) => {
+  const mapRef = useRef(null)
+
   useEffect(() => {
     loadKakaoMapScript()
       .then(() => {
-        // 지도를 표시할 <div> 요소를 id="map"으로로
+        // 지도를 표시할 <div> 요소를 id="map"으로
         const container = document.getElementById('map')
-        //지도 생성 옵션션
+        //지도 생성 옵션
         const options = {
-          center: new window.kakao.maps.LatLng(37.5665, 126.978), // 서울
-          level: 3, // 초기 확대 레벨
+          center: new window.kakao.maps.LatLng(center[0], center[1]), // 첫 위치: 서울
+          level: 8, // 초기 확대 레벨
         }
-
-        // 해당 컨테이너에 Kakao 지도를 그려줌줌
-        new window.kakao.maps.Map(container, options)
+        mapRef.current = new window.kakao.maps.Map(container, options)
       })
       .catch(error => {
         console.error('지도 로드 실패:', error)
       })
   }, [])
+
+  // center prop이 바뀔 때마다 지도 위치 이동
+  useEffect(() => {
+    if (mapRef.current) {
+      const moveLatLon = new window.kakao.maps.LatLng(center[0], center[1])
+      mapRef.current.setCenter(moveLatLon)
+    }
+  }, [center])
+
   return (
     <>
       <div id="map" className={css.map}></div>
