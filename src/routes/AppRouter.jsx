@@ -57,7 +57,7 @@ const AppRouter = createBrowserRouter([
         ),
       },
       {
-        path: '/detail/:contentid',
+        path: '/detail/:contenttypeid/:contentid',
         element: (
           <Suspense fallback={<Spinner />}>
             <DetailPage />
