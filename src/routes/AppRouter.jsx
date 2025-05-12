@@ -8,6 +8,7 @@ import CalenderPage from '@/pages/CalenderPage'
 import MyPage from '@/pages/MyPage'
 import ListPage from '@/pages/ListPage'
 import BookMarkPage from '@/pages/BookMarkPage'
+import DetailPage from '@/pages/DetailPage'
 
 const AppRouter = createBrowserRouter([
   {
@@ -52,6 +53,14 @@ const AppRouter = createBrowserRouter([
         element: (
           <Suspense fallback={<Spinner />}>
             <ListPage />
+          </Suspense>
+        ),
+      },
+      {
+        path: '/detail/:contentid',
+        element: (
+          <Suspense fallback={<Spinner />}>
+            <DetailPage />
           </Suspense>
         ),
       },
