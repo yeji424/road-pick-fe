@@ -137,3 +137,8 @@ input {
   font-size: var(--fs-1);
   font-weight: var(--weight-demilight);
 }
+
+.layout-container.mapPage {
+  height: 100vh;
+  padding: 0;
+}
