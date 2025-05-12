@@ -17,7 +17,7 @@ const ListCard = item => {
   } = item
   const navigate = useNavigate()
   const MoveDetail = () => {
-    navigate(`/detail/${contentid}`, { state: { contentid, contenttypeid } })
+    navigate(`/detail/${contenttypeid}/${contentid}`)
   }
   return (
     <div className={css.card} onClick={MoveDetail}>
