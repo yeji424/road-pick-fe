@@ -33,9 +33,9 @@
 }
 
 .iconLink:hover {
-  color: var(--primary-blue); 
+  color: var(--primary-blue);
 }
 
 .active {
-  color: var(--primary-blue); 
+  color: var(--primary-blue);
 }
