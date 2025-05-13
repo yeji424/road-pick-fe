@@ -1,4 +1,3 @@
-import React, { useState } from 'react'
 import css from './Navbar.module.css'
 import { NavLink } from 'react-router-dom'
 import HomeIcon from '@/assets/icons/homeIcon.svg?react'
@@ -6,8 +5,6 @@ import CalendarIcon from '@/assets/icons/calendarIcon.svg?react'
 import UserIcon from '@/assets/icons/userIcon.svg?react'
 
 const Navbar = () => {
-  const [showSearch, setShowSearch] = useState(false)
-
   return (
     <>
       <nav className={css.navbar}>
@@ -19,7 +16,6 @@ const Navbar = () => {
           </div>
         </div>
       </nav>
-      {showSearch && <SearchModal onClose={() => setShowSearch(false)} />}
     </>
   )
 }
