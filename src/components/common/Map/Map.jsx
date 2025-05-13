@@ -10,6 +10,7 @@ const Map = ({ center }) => {
   const mapRef = useRef(null)
   const [isReady, setIsReady] = useState(false)
   const [detail, setDetail] = useState(null)
+  const [modalClosing, setModalClosing] = useState(false)
   const navigate = useNavigate()
 
   useEffect(() => {
@@ -28,7 +29,7 @@ const Map = ({ center }) => {
 
         // 지도 클릭 시 모달 창 닫힘
         window.kakao.maps.event.addListener(map, 'click', () => {
-          setDetail(null)
+          setModalClosing(true)
         })
 
         // 관광지 데이터 받아오기
@@ -47,6 +48,7 @@ const Map = ({ center }) => {
               //title: item.title, // 마커 hover 시 뜨는 제목
             })
             window.kakao.maps.event.addListener(marker, 'click', () => {
+              setModalClosing(false)
               setDetail(item) // item = 관광지 데이터
             })
           }
@@ -82,7 +84,16 @@ const Map = ({ center }) => {
 
       <div id="map" className={css.map} style={{ visibility: isReady ? 'visible' : 'hidden' }} />
 
-      {detail && <MapModal detail={detail} />}
+      {detail && (
+        <MapModal
+          detail={detail}
+          isClosing={modalClosing}
+          onCloseComplete={() => {
+            setDetail(null)
+            setModalClosing(false)
+          }}
+        />
+      )}
     </div>
   )
 }

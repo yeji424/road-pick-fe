@@ -1,0 +1,20 @@
+.head {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: var(--fs-4);
+}
+.back {
+  width: 24px;
+  height: 24px;
+  cursor: pointer;
+}
+.head p {
+  text-align: center;
+  font-size: var(--fs-4);
+  transform: translateX(10px);
+  color: var(--gray-600);
+}
+.plus {
+  font-size: var(--fs-3);
+  color: var(--gray-500);
+}

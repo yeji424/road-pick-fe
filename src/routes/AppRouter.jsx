@@ -10,6 +10,7 @@ import BookMarkPage from '@/pages/BookMarkPage'
 import DetailPage from '@/pages/DetailPage'
 import CalendarPage from '@/pages/CalendarPage'
 import MapPage from '@/pages/MapPage'
+import RegisterPage from '@/pages/RegisterPage'
 
 const AppRouter = createBrowserRouter([
   {
@@ -70,6 +71,14 @@ const AppRouter = createBrowserRouter([
         element: (
           <Suspense fallback={<Spinner />}>
             <MapPage />
+          </Suspense>
+        ),
+      },
+      {
+        path: '/register',
+        element: (
+          <Suspense fallback={<Spinner />}>
+            <RegisterPage />
           </Suspense>
         ),
       },

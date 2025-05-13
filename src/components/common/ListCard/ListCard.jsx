@@ -3,18 +3,7 @@ import css from './ListCard.module.css'
 import HeartToggle from './HeartToggle'
 import { useNavigate } from 'react-router-dom'
 
-const ListCard = item => {
-  const {
-    firstimage,
-    title,
-    description,
-    location,
-    withPet,
-    rating,
-    reviewCnt,
-    contentid,
-    contenttypeid,
-  } = item
+const ListCard = ({ firstimage, title, addr1, addr2, contentid, contenttypeid }) => {
   const navigate = useNavigate()
   const MoveDetail = () => {
     navigate(`/detail/${contenttypeid}/${contentid}`)
@@ -27,16 +16,16 @@ const ListCard = item => {
       <div className={css.content}>
         <div className={css.title}>
           <strong>{title}</strong>
-          <span className={css.rating}>
+          {/* <span className={css.rating}>
             <i className="bi bi-star-fill"></i>
             {rating} ({reviewCnt})
-          </span>
+          </span> */}
         </div>
-        <p className={css.desc}>{description}</p>
-        <p className={css.location}>{location}</p>
-        <p className={css.pet}>
-          반려동물 출입 여부 : <span>{withPet ? '가능' : '불가능'}</span>
+        {/* <p className={css.desc}>{description}</p> */}
+        <p className={css.location}>
+          {addr1} {addr2}
         </p>
+
       </div>
       <div className={css.heart}>
         <HeartToggle />

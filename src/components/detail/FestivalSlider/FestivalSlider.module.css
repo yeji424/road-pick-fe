@@ -1,0 +1,7 @@
+.festival {
+  padding: var(--fs-6) 0;
+}
+
+.festival h3 {
+  font-size: var(--fs-4);
+}

@@ -52,9 +52,9 @@
   --fs-2: 11px; /*detailDescription*/
   --fs-3: 13px; /*listDescription*/
   --fs-4: 16px; /*subTitle*/
-  --fs-4: 19px; /*list,detail_subTitle*/
-  --fs-5: 24px; /*firstPageTitle*/
-  --fs-6: 30px; /*mainTitle*/
+  --fs-5: 19px; /*list,detail_subTitle*/
+  --fs-6: 24px; /*firstPageTitle*/
+  --fs-7: 30px; /*mainTitle*/
 
   /* 자간 및 높이 */
 
@@ -130,6 +130,10 @@ input {
 }
 
 .mapPage {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
   height: 100vh;
-  padding: 0;
+  overflow: hidden;
 }
