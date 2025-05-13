@@ -22,6 +22,8 @@
 
 .imgWrap {
   overflow: hidden;
+  width: 355px;
+  height: 215px;
   border-radius: var(--fs-3);
 }
 img {
