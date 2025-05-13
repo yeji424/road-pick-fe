@@ -12,7 +12,7 @@ export const getTourList = async ({ areaCode, sigunguCode }) => {
       areaCode,
       sigunguCode,
       arrange: 'B', // 인기순
-      numOfRows: 100,
+      numOfRows: 20,
       serviceKey: SERVICE_KEY,
     },
   })
