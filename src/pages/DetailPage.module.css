@@ -2,52 +2,12 @@
   display: flex;
   flex-direction: column;
   border: 1px solid green;
+  padding: 0;
+}
+.container h3 {
+  color: var(--gray-600);
 }
 .container > * {
-  margin: var(--fs-1) 0;
-}
-.head {
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: var(--fs-4);
-}
-.head button {
-  float: left;
-  font-size: var(--fs-3);
-}
-.head h3 {
-  text-align: center;
-  transform: translateX(20px);
+  margin: 2px 0;
 }
 
-.imgWrap {
-  overflow: hidden;
-  width: 355px;
-  height: 215px;
-  border-radius: var(--fs-3);
-}
-img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-.titleWrap {
-  display: flex;
-  justify-content: space-between;
-}
-
-.addr {
-  font-size: var(--fs-2);
-}
-
-.content {
-  display: flex;
-  flex-direction: column;
-  gap: var(--fs-2);
-}
-.content p,
-.content span {
-  font-size: var(--fs-2);
-  line-height: 1rem;
-}
