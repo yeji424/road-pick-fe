@@ -28,8 +28,8 @@
   --background-color-80: #fafafa;
 
   --gray-blue: #8f9ba7;
-  --gray-700: #1e1e1e; /*CustomBlack50*/
-  --gray-600: #3a3a3a; /*CustomBlack*/
+  --gray-700: #1e1e1e; /*CustomBlack*/
+  --gray-600: #3a3a3a; /*CustomBlack50*/
   --gray-500: #717379; /*gray70*/
   --gray-400: #9a9da4; /*gray50*/
   --gray-300: #a5a8af; /*gray*/
@@ -69,10 +69,11 @@
 html,
 body {
   display: flex;
+  position: relative;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
   width: 100%;
-  min-height: 100%;
+  min-height: calc(100vh - 73px);
   font-family: var(--font-body);
   font-weight: var(--weight-regular);
   letter-spacing: var(--letter-spacing-description);
@@ -80,32 +81,22 @@ body {
   font-size: var(--fs-3);
   background-color: var(--background-color);
   overflow-x: hidden;
-  display: flex;
-  justify-content: center;
 }
 
-/* 앱 콘텐츠 영역 360px로 고정 */
 #root {
-  width: 390px;
-  max-height: 844px;
+  max-width: 600px;
+  width: 100%;
+  min-height: calc(100vh - 73px);
+  border: red solid 1px;
   background-color: var(--background-color);
-  overflow-y: hidden;
+  overflow-y: auto;
   overflow-x: hidden;
-  /* 모바일 width라서 컴포 생성 시 position fixed 아니고 absolute로 진행해야합니다! */
   position: relative;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-.layout-container {
-  min-height: calc(100vh - 73px); /* navbar 높이를 제외한 나머지 공간 차지 */
-
-  padding-top: 47px;
-  padding-bottom: 34px;
-  padding-right: 18px;
-  padding-left: 18px;
-  border: blue solid 3px;
+  padding: 47px 18px 34px 18px;
 }
 main {
-  padding: 60px var(--fs-2);
+  /* padding: 60px var(--fs-2); */
   border: red solid 1px;
 }
 main h2 {
@@ -116,7 +107,7 @@ footer {
   justify-content: center;
   align-items: center;
   height: 25px;
-  border: red solid 1px;
+  /* border: red solid 1px; */
   font-size: var(--fs-2);
   color: var(--primary-blue);
   text-align: center;
@@ -138,7 +129,7 @@ input {
   font-weight: var(--weight-demilight);
 }
 
-.layout-container.mapPage {
+.mapPage {
   height: 100vh;
   padding: 0;
 }
