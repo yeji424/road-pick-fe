@@ -1,26 +1,13 @@
-import { useEffect, useState } from 'react'
 import { getTourList } from '../apis/getTourList'
+import { useQuery } from '@tanstack/react-query'
 
-export const useTourList = ({ areaCode, sigunguCode }) => {
-  const [list, setList] = useState([])
-  const [loading, setLoading] = useState(false)
-  const [error, setError] = useState(null)
-
-  useEffect(() => {
-    const getList = async () => {
-      try {
-        setLoading(true)
-        const data = await getTourList({ areaCode, sigunguCode })
-        setList(data)
-      } catch (error) {
-        setError(error)
-      } finally {
-        setLoading(false)
-      }
-    }
-
-    getList()
-  }, [areaCode, sigunguCode])
-
-  return { list, loading, error }
+export const useTourList = ({ areaCode, contentTypeId }) => {
+  return useQuery({
+    queryKey: ['tourList', areaCode, contentTypeId],
+    queryFn: () => {
+      return getTourList({ areaCode, contentTypeId })
+    },
+    enabled: !!areaCode && !!contentTypeId, // undefined 방지
+    staleTime: 1000 * 60 * 5, // 5분 동안 fresh 상태 유지
+  })
 }

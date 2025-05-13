@@ -1,31 +1,32 @@
-import { useEffect, useState } from 'react'
-import { getTourDetailCommon } from '../apis/getTourDetailCommon'
+import { useQueries } from '@tanstack/react-query'
+import { getTourDetailCommon } from '@/apis/getTourDetailCommon'
 import { getTourDetailIntro } from '@/apis/getTourDetailIntro'
 
 export const useTourDetail = (contentId, contentTypeId) => {
-  const [commonData, setCommonData] = useState(null)
-  const [introData, setIntroData] = useState(null)
-  const [loading, setLoading] = useState(false)
-  const [error, setError] = useState(null)
+  const results = useQueries({
+    queries: [
+      {
+        queryKey: ['tourDetailCommon', contentId, contentTypeId],
+        queryFn: () => getTourDetailCommon(contentId, contentTypeId),
+        enabled: !!contentId && !!contentTypeId, // contentId contentTypeId 필수
+      },
+      {
+        queryKey: ['tourDetailIntro', contentId, contentTypeId],
+        queryFn: () => getTourDetailIntro(contentId, contentTypeId),
+        enabled: !!contentId && !!contentTypeId, // contentId contentTypeId 필수
+      },
+    ],
+  })
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        setLoading(true)
-        const [common, intro] = await Promise.all([
-          getTourDetailCommon(contentId, contentTypeId),
-          getTourDetailIntro(contentId, contentTypeId),
-        ])
-        setCommonData(common)
-        setIntroData(intro)
-      } catch (error) {
-        setError(error)
-      } finally {
-        setLoading(false)
-      }
-    }
-    fetchData()
-  }, [contentId, contentTypeId])
+  const [commonQuery, introQuery] = results
 
-  return { commonData, introData, loading, error }
+  const loading = commonQuery.isLoading || introQuery.isLoading
+  const error = commonQuery.error || introQuery.error
+
+  return {
+    commonData: commonQuery.data,
+    introData: introQuery.data,
+    loading,
+    error,
+  }
 }
