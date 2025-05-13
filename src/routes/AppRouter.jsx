@@ -7,6 +7,7 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import MyPage from '@/pages/MyPage'
 import ListPage from '@/pages/ListPage'
 import BookMarkPage from '@/pages/BookMarkPage'
+import DetailPage from '@/pages/DetailPage'
 import CalendarPage from '@/pages/CalendarPage'
 import MapPage from '@/pages/MapPage'
 
@@ -53,6 +54,14 @@ const AppRouter = createBrowserRouter([
         element: (
           <Suspense fallback={<Spinner />}>
             <ListPage />
+          </Suspense>
+        ),
+      },
+      {
+        path: '/detail/:contenttypeid/:contentid',
+        element: (
+          <Suspense fallback={<Spinner />}>
+            <DetailPage />
           </Suspense>
         ),
       },

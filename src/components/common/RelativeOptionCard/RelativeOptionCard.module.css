@@ -1,0 +1,36 @@
+.box {
+  background-color: #ffffff;
+  box-shadow: 0 0 7px rgba(0, 0, 0, 0.2);
+  width: 143px;
+  border-radius: var(--fs-2);
+  height: 116px;
+  margin-top: var(--fs-1);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.imgWrap {
+  overflow: hidden;
+}
+
+.imgWrap img {
+  border-radius: var(--fs-2);
+  width: 100%;
+  object-fit: cover;
+  max-height: 65px;
+  padding: var(--fs-1);
+}
+
+.title {
+  font-size: var(--fs-2);
+  color: black;
+  padding: 0 var(--fs-1);
+}
+
+.dist {
+  width: 127px;
+  font-size: var(--fs-1);
+  color: var(--danger);
+  padding: var(--fs-1);
+}
