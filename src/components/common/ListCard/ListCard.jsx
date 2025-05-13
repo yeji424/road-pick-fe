@@ -2,6 +2,7 @@ import React from 'react'
 import css from './ListCard.module.css'
 import HeartToggle from './HeartToggle'
 import { useNavigate } from 'react-router-dom'
+import StarIcon from '@/assets/icons/starIcon.svg?react'
 
 const ListCard = ({ firstimage, title, addr1, addr2, contentid, contenttypeid }) => {
   const navigate = useNavigate()
@@ -14,20 +15,15 @@ const ListCard = ({ firstimage, title, addr1, addr2, contentid, contenttypeid })
         <img src={firstimage} alt={title} />
       </div>
       <div className={css.content}>
-        <div className={css.title}>
-          <strong>{title}</strong>
-          {/* <span className={css.rating}>
-            <i className="bi bi-star-fill"></i>
-            {rating} ({reviewCnt})
-          </span> */}
-        </div>
-        {/* <p className={css.desc}>{description}</p> */}
+        <h3 className={css.title}>{title}</h3>
+        <p className={css.rating}>
+          <StarIcon /> 4.8 (24)
+        </p>
         <p className={css.location}>
           {addr1} {addr2}
         </p>
-
       </div>
-      <div className={css.heart}>
+      <div className={css.saveBtn}>
         <HeartToggle />
       </div>
     </div>
