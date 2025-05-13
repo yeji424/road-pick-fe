@@ -5,6 +5,7 @@ const RelativeOptionCard = ({ festival, currentTitle }) => {
   const { firstimage, title, dist, contentid, contenttypeid } = festival
   const navigate = useNavigate()
 
+  /*디테일 페이지 이동*/
   const moveDetailPage = () => {
     navigate(`/detail/${contenttypeid}/${contentid}`)
   }
@@ -14,9 +15,9 @@ const RelativeOptionCard = ({ festival, currentTitle }) => {
         <img src={firstimage} alt={title} />
       </div>
       <h3 className={css.title}>{title}</h3>
-      <h6 className={css.dist}>
-        {currentTitle}으로부터 {(dist / 1000).toFixed(1)} 떨어져있어요!
-      </h6>
+      <p className={css.dist}>
+        {currentTitle}으로부터 {(dist / 1000).toFixed(1)}km 떨어져있어요!
+      </p>
     </div>
   )
 }
