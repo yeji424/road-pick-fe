@@ -1,9 +1,10 @@
 @charset "UTF-8";
+
 /* CSS 리셋 */
 @import url('https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css');
-
-/* 폰트 관련 */
+/* FONT : Noto Sans KR */
 @import url('https://fonts.googleapis.com/css2?family=Nanum+Myeongjo&family=Noto+Sans+KR:wght@200&display=swap');
+
 /* 기본 스타일 */
 * {
   box-sizing: border-box;
@@ -13,51 +14,95 @@
 
 :root {
   /* 색상 */
-  --main-color: #4a4a4a;
-  --background-color: #f2f2f2;
-  --gray-700: #0d0d0d;
-  --gray-600: #1a1a1a;
-  --gray-500: #262626;
-  --gray-400: #333333;
-  --gray-300: #808080;
-  --gray-200: #d9d9d9;
-  --gray-100: #f2f2f2;
-  --danger: #e25858;
+  --primary-blue: #719eff;
+  --primary-blue-40: #a2bfff;
+  --primary-blue-60: #89afff;
+  --primary-blue-80: #668ee3;
 
-  font-family: 'Noto Sans KR', sans-serif;
+  --secondary-orange: #ff6d48;
+  --secondary-orange-40: #ff9e86;
+  --secondary-orange-60: #ff8466;
+  --secondary-orange-80: #e95a37;
+
+  --background-color: #fefefe;
+  --background-color-80: #fafafa;
+
+  --gray-blue: #8f9ba7;
+  --gray-700: #1e1e1e; /*CustomBlack50*/
+  --gray-600: #3a3a3a; /*CustomBlack*/
+  --gray-500: #717379; /*gray70*/
+  --gray-400: #9a9da4; /*gray50*/
+  --gray-300: #a5a8af; /*gray*/
+  --gray-200: #fafafa; /*LightGray60*/
+  --gray-100: #fafafa; /*LightGray10*/
+
+  --danger: #e94e4e;
+
+  /* 폰트 기본값 : Noto Sans KR */
+  --font-body: 'Noto Sans KR', sans-serif;
+  --font-size-base: 13px;
+
+  /* 폰트 굵기 */
+  --weight-demilight: 200; /*inputExample*/
+  --weight-regular: 400; /*content*/
+  --weight-medium: 500; /*title*/
 
   /* 폰트 사이즈 */
   --fs-1: 8px;
-  --fs-2: 12px;
-  --fs-3: 16px;
-  --fs-4: 20px;
-  --fs-5: 24px;
-  --fs-6: 33px;
+  --fs-2: 11px; /*detailDescription*/
+  --fs-3: 13px; /*listDescription*/
+  --fs-4: 16px; /*subTitle*/
+  --fs-4: 19px; /*list,detail_subTitle*/
+  --fs-5: 24px; /*firstPageTitle*/
+  --fs-6: 30px; /*mainTitle*/
 
-  /* 기본 폰트 색상 및 라인 높이 */
-  line-height: 1.6;
-  color: var(--gray-400);
+  /* 자간 및 높이 */
+
+  --letter-spacing-title: -0.03em;
+  --letter-spacing-description: -0.01em;
+  --line-height: 1.5;
+
+  /* 그림자 */
+  --shadow-map-modal: 0px 0px 10px rgba(0, 0, 0, 0.2);
+  --shadow-login-modal: 7px 7px 10px rgba(0, 0, 0, 0.08);
 }
 html,
 body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 100%;
   min-height: 100%;
-  font-family: var(--font-family);
+  font-family: var(--font-body);
+  font-weight: var(--weight-regular);
+  letter-spacing: var(--letter-spacing-description);
+  line-height: var(--line-height);
+  font-size: var(--fs-3);
   background-color: var(--background-color);
   overflow-x: hidden;
   display: flex;
   justify-content: center;
 }
+
 /* 앱 콘텐츠 영역 360px로 고정 */
 #root {
-  width: 360px;
-  min-height: 640px;
-  background-color: #fff;
-  overflow-y: auto;
+  width: 390px;
+  max-height: 844px;
+  background-color: var(--background-color);
+  overflow-y: hidden;
   overflow-x: hidden;
   /* 모바일 width라서 컴포 생성 시 position fixed 아니고 absolute로 진행해야합니다! */
   position: relative;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+.layout-container {
+  min-height: calc(100vh - 73px); /* navbar 높이를 제외한 나머지 공간 차지 */
+
+  padding-top: 47px;
+  padding-bottom: 34px;
+  padding-right: 18px;
+  padding-left: 18px;
+  border: blue solid 3px;
 }
 main {
   padding: 60px var(--fs-2);
@@ -67,9 +112,13 @@ main h2 {
   font-size: var(--fs-6);
 }
 footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 25px;
   border: red solid 1px;
-  padding: var(--fs-1);
   font-size: var(--fs-2);
+  color: var(--primary-blue);
   text-align: center;
 }
 button {
@@ -85,5 +134,11 @@ input {
   border: none;
   outline: none;
   background-color: transparent;
-  font-size: var(--fs-2);
+  font-size: var(--fs-1);
+  font-weight: var(--weight-demilight);
+}
+
+.layout-container.mapPage {
+  height: 100vh;
+  padding: 0;
 }

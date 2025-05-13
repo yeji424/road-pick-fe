@@ -4,11 +4,12 @@ import MainLayout from '@/layout/MainLayout'
 import MainPage from '@/pages/MainPage'
 import NotFoundPage from '@/pages/NotFoundPage'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
-import CalenderPage from '@/pages/CalenderPage'
 import MyPage from '@/pages/MyPage'
 import ListPage from '@/pages/ListPage'
 import BookMarkPage from '@/pages/BookMarkPage'
 import DetailPage from '@/pages/DetailPage'
+import CalendarPage from '@/pages/CalendarPage'
+import MapPage from '@/pages/MapPage'
 
 const AppRouter = createBrowserRouter([
   {
@@ -41,10 +42,10 @@ const AppRouter = createBrowserRouter([
         ),
       },
       {
-        path: '/calender',
+        path: '/calendar',
         element: (
           <Suspense fallback={<Spinner />}>
-            <CalenderPage />
+            <CalendarPage />
           </Suspense>
         ),
       },
@@ -61,6 +62,14 @@ const AppRouter = createBrowserRouter([
         element: (
           <Suspense fallback={<Spinner />}>
             <DetailPage />
+          </Suspense>
+        ),
+      },
+      {
+        path: '/map',
+        element: (
+          <Suspense fallback={<Spinner />}>
+            <MapPage />
           </Suspense>
         ),
       },
