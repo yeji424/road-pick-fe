@@ -2,13 +2,18 @@ import React from 'react'
 import css from './BottomSheet.module.css'
 import ListCard from '@/components/common/ListCard/ListCard'
 
-const BottomSheetContent = ({ list }) => {
+const BottomSheetContent = ({ list, setContentTypeId }) => {
+  if (list.length === 0 || !list) return <div>데이터 불러오는중..</div>
   return (
     <div className={css.contentWrapper}>
       {/* 카테고리 탭 */}
       <div className={css.tabWrapper}>
-        <button className={css.tabButton}>관광지</button>
-        <button className={css.tabButton}>축제/행사</button>
+        <button className={css.tabButton} onClick={() => setContentTypeId(12)}>
+          관광지
+        </button>
+        <button className={css.tabButton} onClick={() => setContentTypeId(15)}>
+          축제/행사
+        </button>
       </div>
 
       {/* 타이틀 + 정렬 */}
@@ -19,7 +24,7 @@ const BottomSheetContent = ({ list }) => {
 
       {/* 리스트 영역 */}
       <div className={css.listWrapper}>
-        {list.map((item, idx) => (
+        {list?.map((item, idx) => (
           <div key={idx} className={css.listItemPlaceholder}>
             <ListCard key={idx} {...item} />
           </div>
