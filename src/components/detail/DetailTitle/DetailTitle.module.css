@@ -1,0 +1,12 @@
+.titlewrap {
+  display: flex;
+  justify-content: space-between;
+}
+.titlewrap h3 {
+  font-size: var(--fs-4);
+  color: var(--gray-600);
+}
+.archive {
+  width: 24px;
+  height: 24px;
+}

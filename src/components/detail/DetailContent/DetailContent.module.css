@@ -1,0 +1,16 @@
+.infointro {
+  font-size: var(--fs-4);
+  color: var(--gray-600);
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  color: var(--gray-blue);
+  gap: var(--fs-2);
+}
+.content p,
+.content span {
+  font-size: var(--fs-2);
+  line-height: 1rem;
+}
