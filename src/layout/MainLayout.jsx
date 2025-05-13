@@ -7,10 +7,14 @@ import Spinner from '@/components/loading/Spinner'
 const MainLayout = () => {
   const location = useLocation()
   const isMapPage = location.pathname === '/map'
+  const isPage =
+    location.pathname === '/register' ||
+    location.pathname === '/login' ||
+    location.pathname === '/map'
 
   return (
     <div className={`${isMapPage ? 'mapPage' : ''}`}>
-      {!isMapPage && <Navbar />}
+      {!isPage && <Navbar />}
       <Suspense fallback={<Spinner />}>
         <Outlet />
       </Suspense>
