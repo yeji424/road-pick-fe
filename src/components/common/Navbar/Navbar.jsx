@@ -32,7 +32,7 @@ const iconMap = {
 
 // icon 링크용 컴포넌트
 const CustomIconLink = ({ to, icon }) => (
-  <NavLink to={to} className={({ isActive }) => (isActive ? css.active : '')}>
+  <NavLink to={to} className={({ isActive }) => `${css.iconLink} ${isActive ? css.active : ''}`}>
     {iconMap[icon]}
   </NavLink>
 )

@@ -15,8 +15,6 @@ const MainLayout = () => {
         <Outlet />
       </Suspense>
       <Footer />
-
-      <Navbar />
     </div>
   )
 }
