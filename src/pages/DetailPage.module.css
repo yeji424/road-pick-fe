@@ -6,8 +6,8 @@
 }
 .container h3 {
   color: var(--gray-600);
+  font-weight: var(--weight-medium);
 }
 .container > * {
   margin: 2px 0;
 }
-
