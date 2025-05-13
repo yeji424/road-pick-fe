@@ -1,8 +1,11 @@
-import React from 'react'
+import React, { useState } from 'react'
 import css from './BottomSheet.module.css'
 import ListCard from '@/components/common/ListCard/ListCard'
+import SortDropdown from './SortDropdown'
 
 const BottomSheetContent = ({ list }) => {
+  const [sortBy, setSortBy] = useState('name')
+
   return (
     <div className={css.contentWrapper}>
       {/* 카테고리 탭 */}
@@ -14,7 +17,7 @@ const BottomSheetContent = ({ list }) => {
       {/* 타이틀 + 정렬 */}
       <div className={css.headerRow}>
         <h2 className={css.title}>서울 유명 관광지</h2>
-        <button className={css.sortButton}>이름순</button>
+        <SortDropdown sortBy={sortBy} onChange={setSortBy} />
       </div>
 
       {/* 리스트 영역 */}

@@ -9,8 +9,15 @@
   /* border: 1px solid #67d026; */
   position: relative;
   gap: 13px;
+  cursor: pointer;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
 }
-
+.card:hover {
+  transform: translateY(-4px);
+  /* box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); */
+}
 .thumbnail {
   width: 108px;
   height: 93px;

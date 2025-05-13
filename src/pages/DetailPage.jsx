@@ -3,10 +3,11 @@ import React from 'react'
 import { useParams } from 'react-router-dom'
 import css from './DetailPage.module.css'
 import { useLocationTourList } from '@/hooks/useLocationTourList'
-import DetailHeader from '@/components/detail/Header/DetailHeader'
-import DetailImage from '@/components/detail/DetailImage/DetailImage'
-import DetailTitle from '@/components/detail/DetailTitle/DetailTitle'
-import DetailContent from '@/components/detail/DetailContent/DetailContent'
+import DetailHeader from '@/components/detail/DetailHeader'
+import DetailImage from '@/components/detail/DetailImage'
+import DetailTitle from '@/components/detail/DetailTitle'
+import DetailContent from '@/components/detail/DetailContent'
+import Spinner from '@/components/loading/Spinner'
 
 const DetailPage = () => {
   const { contentid, contenttypeid } = useParams() // 파라미터 정보 받아옴
@@ -22,11 +23,11 @@ const DetailPage = () => {
       : null
   )
 
-  if (!commonData || !introData || !contentid || !contenttypeid) return <div>loading..</div>
+  if (!commonData || !introData || !contentid || !contenttypeid) return <Spinner />
 
   return (
     <main className={css.container}>
-      {loading && <p>loading...</p>}
+      {loading && <Spinner />}
       {error && <p>error..</p>}
       <DetailHeader />
       <DetailImage common={commonData[0]} />
