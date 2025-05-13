@@ -1,13 +1,13 @@
 .card {
   display: flex;
   align-items: center;
-  background-color: #f9f9f9;
+  background-color: var(--background-color);
   border-radius: 12px;
-  padding: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  position: relative;
-  gap: 16px;
-  margin-bottom: 16px;
+  padding: 1px;
+  max-width: ;
+  width: 100%;
+  border: 1px solid #67d026;
+  gap: 4px;
 }
 
 .thumbnail {
@@ -16,6 +16,7 @@
   background-color: #e0e0e0;
   border-radius: 8px;
   flex-shrink: 0;
+  overflow: hidden;
 }
 
 .thumbnail img {
