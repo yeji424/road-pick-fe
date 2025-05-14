@@ -5,13 +5,14 @@
 }
 .arrowLeftIcon {
   cursor: pointer;
-  color: #3a3a3a;
+  color: var(--gray-500);
   transition: color 0.2s ease;
 }
 .plus {
   letter-spacing: -0.03em;
   font-size: 14px;
   color: var(--gray-500);
+  transition: color 0.2s ease;
 }
 .head p {
   font-weight: var(--weight-regular);
