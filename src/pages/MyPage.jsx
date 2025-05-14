@@ -59,6 +59,12 @@ const MyPage = () => {
 
       {/* 탭 별 컨텐츠 랜딩 영역 */}
       <div className={css.content}>{renderContent()}</div>
+    </main>
+  )
+}
+
+export default MyPage
+
 // import React from 'react'
 // import { useSelector } from 'react-redux'
 
@@ -72,8 +78,3 @@ const MyPage = () => {
 //       <p>이메일: {user.email}</p>
 //       <p>테스트: {user._id}</p>
 //       {/* 필요에 따라 프로필 사진, 즐겨찾기, 가입일 등 추가 */}
-    </main>
-  )
-}
-
-export default MyPage
