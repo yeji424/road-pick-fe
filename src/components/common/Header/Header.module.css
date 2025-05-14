@@ -1,0 +1,27 @@
+.head {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 21px;
+}
+.arrowLeftIcon {
+  cursor: pointer;
+  color: var(--gray-500);
+  transition: color 0.2s ease;
+}
+.plus {
+  letter-spacing: -0.03em;
+  font-size: 14px;
+  color: var(--gray-500);
+  transition: color 0.2s ease;
+}
+.head p {
+  font-weight: var(--weight-regular);
+  letter-spacing: -0.03em;
+  font-size: var(--fs-4);
+  transform: translateX(10px);
+  color: var(--gray-600);
+}
+.arrowLeftIcon:hover,
+.plus:hover {
+  color: var(--primary-blue);
+}

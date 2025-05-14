@@ -3,8 +3,7 @@ import css from './BottomSheet.module.css'
 import ListCard from '@/components/common/ListCard/ListCard'
 import SortDropdown from './SortDropdown'
 
-
-const BottomSheetContent = ({ list,setContentTypeId }) => {
+const BottomSheetContent = ({ list, setContentTypeId, onItemClick }) => {
   const [sortBy, setSortBy] = useState('name')
   if (list.length === 0 || !list) return <div>데이터 불러오는중..</div>
 
@@ -28,9 +27,10 @@ const BottomSheetContent = ({ list,setContentTypeId }) => {
 
       {/* 리스트 영역 */}
       <div className={css.listWrapper}>
-        {list?.map((item, idx) => (
-          <div key={idx} className={css.listItemPlaceholder}>
-            <ListCard key={idx} {...item} />
+        {list.map(item => (
+          <div key={item.contentid} className={css.listItemWrapper}>
+            <ListCard {...item} />
+            <div className={css.itemOverlay} onClick={() => onItemClick(item.mapy, item.mapx)} />
           </div>
         ))}
       </div>

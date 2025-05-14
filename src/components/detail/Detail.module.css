@@ -1,31 +1,3 @@
-/* --------------------------------- Header css */
-.head {
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 21px;
-}
-.arrowLeftIcon {
-  cursor: pointer;
-  color: #3a3a3a;
-  transition: color 0.2s ease;
-}
-.plus {
-  letter-spacing: -0.03em;
-  font-size: 14px;
-  color: var(--gray-500);
-}
-.head p {
-  font-weight: var(--weight-regular);
-  letter-spacing: -0.03em;
-  font-size: var(--fs-4);
-  transform: translateX(10px);
-  color: var(--gray-600);
-}
-.arrowLeftIcon:hover,
-.plus:hover {
-  color: var(--primary-blue);
-}
-
 /* --------------------------------- DetailImg css */
 .imgwrap {
   overflow: hidden;

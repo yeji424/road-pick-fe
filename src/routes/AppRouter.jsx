@@ -2,6 +2,7 @@ import React, { Suspense } from 'react'
 import Spinner from '@/components/loading/Spinner'
 import MainLayout from '@/layout/MainLayout'
 import MainPage from '@/pages/MainPage'
+import SearchPage from '@/pages/SearchPage'
 import NotFoundPage from '@/pages/NotFoundPage'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import MyPage from '@/pages/MyPage'
@@ -12,6 +13,8 @@ import CalendarPage from '@/pages/CalendarPage'
 import MapPage from '@/pages/MapPage'
 import RegisterPage from '@/pages/RegisterPage'
 import SelectDatePage from '@/pages/SelectDatePage'
+import LoginPage from '@/pages/LoginPage'
+import { RequireAuth } from '@/hooks/requireAuth'
 
 const AppRouter = createBrowserRouter([
   {
@@ -28,11 +31,21 @@ const AppRouter = createBrowserRouter([
         ),
       },
       {
-        path: '/mypage',
+        path: '/search',
         element: (
           <Suspense fallback={<Spinner />}>
-            <MyPage />
+            <SearchPage />
           </Suspense>
+        ),
+      },
+      {
+        path: '/mypage',
+        element: (
+          <RequireAuth>
+            <Suspense fallback={<Spinner />}>
+              <MyPage />
+            </Suspense>
+          </RequireAuth>
         ),
       },
       {
@@ -46,9 +59,11 @@ const AppRouter = createBrowserRouter([
       {
         path: '/calendar',
         element: (
-          <Suspense fallback={<Spinner />}>
-            <CalendarPage />
-          </Suspense>
+          <RequireAuth>
+            <Suspense fallback={<Spinner />}>
+              <CalendarPage />
+            </Suspense>
+          </RequireAuth>
         ),
       },
       {
@@ -88,6 +103,14 @@ const AppRouter = createBrowserRouter([
         element: (
           <Suspense fallback={<Spinner />}>
             <SelectDatePage />
+          </Suspense>
+        ),
+      },
+      {
+        path: '/login',
+        element: (
+          <Suspense fallback={<Spinner />}>
+            <LoginPage />
           </Suspense>
         ),
       },

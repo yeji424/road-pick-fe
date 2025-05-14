@@ -1,8 +1,10 @@
 import React, { useState } from 'react'
 import css from './RegisterPage.module.css'
 import { register } from '@/apis/authApi'
+import { useNavigate } from 'react-router-dom'
 
 const RegisterPage = () => {
+  const navigate = useNavigate()
   const [form, setForm] = useState({
     email: '',
     username: '',
@@ -77,7 +79,7 @@ const RegisterPage = () => {
       }
       const data = await register(payload)
       setRegisterMsg(data.message)
-      // navigate('/login')
+      navigate('/login')
     } catch (err) {
       if (err.status === 400 && err.validation) {
         const apiErrors = {}
