@@ -22,9 +22,7 @@ export const getLocationTourList = async ({ mapX, mapY, radius, contentTypeId })
   )
 
   const items = response.data.response.body.items.item || []
-
   const filtered = items.filter(item => item.firstimage).slice(0, 10)
-
   const shuffled = filtered.sort(() => Math.random() - 0.5)
   return shuffled
 }
