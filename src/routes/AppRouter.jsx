@@ -2,6 +2,7 @@ import React, { Suspense } from 'react'
 import Spinner from '@/components/loading/Spinner'
 import MainLayout from '@/layout/MainLayout'
 import MainPage from '@/pages/MainPage'
+import SearchPage from '@/pages/SearchPage'
 import NotFoundPage from '@/pages/NotFoundPage'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import MyPage from '@/pages/MyPage'
@@ -23,6 +24,14 @@ const AppRouter = createBrowserRouter([
         element: (
           <Suspense fallback={<Spinner />}>
             <MainPage />
+          </Suspense>
+        ),
+      },
+      {
+        path: '/search',
+        element: (
+          <Suspense fallback={<Spinner />}>
+            <SearchPage />
           </Suspense>
         ),
       },

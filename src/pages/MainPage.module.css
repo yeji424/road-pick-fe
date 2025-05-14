@@ -1,37 +1,14 @@
 .title {
   font-size: var(--fs-7);
-  font-weight: var(--weight-medium);
+  font-weight: 700;
   color: var(--gray-700);
 }
 
 .description {
   margin-top: 13px;
   font-size: var(--fs-3);
-  font-weight: var(--weight-regular);
+  font-weight: 600;
   color: var(--gray-400);
-}
-
-.searchWrapper {
-  margin-top: 20px;
-  position: relative;
-  display: flex;
-  align-items: center;
-  width: 100%;
-  height: 44.94px;
-  border-radius: 7.15px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-  background-color: white;
-  padding-left: 15px;
-}
-
-.searchIcon {
-  margin-right: 7px;
-}
-
-.searchInput {
-  font-size: var(--fs-3);
-  font-weight: var(--weight-demilight);
-  flex: 1;
 }
 
 .cityWrapper {
@@ -58,7 +35,7 @@
   background-color: white;
   color: var(--gray-400);
   font-size: 13px;
-  font-weight: var(--weight-regular);
+  font-weight: 600;
   cursor: pointer;
   white-space: nowrap;
 }
@@ -79,7 +56,7 @@
 
 .selectedInfoText {
   font-size: var(--fs-5);
-  font-weight: var(--weight-medium);
+  font-weight: 700;
   color: var(--gray-700);
 }
 
@@ -98,7 +75,7 @@
   overflow-x: auto;
   scroll-behavior: smooth;
   cursor: grab;
-  padding-bottom:80px;
+  padding-bottom: 85px;
 }
 
 .popularWrapper::-webkit-scrollbar {
@@ -107,11 +84,25 @@
 
 .popularItem {
   position: relative;
-  flex: 0 0 auto;
-  margin-right: 17px;
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin-right: 17px;
+}
+
+.popularContent {
+  display: flex;
+  position: absolute;
+  bottom: -50px;
+  width: 196px;
+  gap: 3px;
+  border-radius: 10px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  padding: 10px;
+  background-color: white;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 1;
 }
 
 .popularImage {
@@ -121,36 +112,36 @@
   border-radius: 13px;
 }
 
-.popularBox {
-  position: absolute;
-  bottom: -47px;
-  width: 196px;
-  border-radius: 10px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+.popularTextWrapper {
   display: flex;
   flex-direction: column;
-  padding: 10px;
-  background-color: white;
-  z-index: 1;
+  flex: 1;
+  min-width: 0;
 }
 
 .popularTitle {
-  font-size: 18px;
+  font-size: var(--fs-4);
   color: var(--gray-600);
-  font-weight: var(--weight-medium);
+  font-weight: 700;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .popularAddress {
-  margin-top: 5px;
-  font-size: 10.07px;
+  margin-top: 2px;
+  font-size: 10px;
   color: var(--gray-300);
-  font-weight: var(--weight-regular);
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .recommendTitleText {
   font-size: var(--fs-5);
   color: var(--gray-700);
-  font-weight: var(--weight-medium);
+  font-weight: 700;
 }
 
 .recommendWrapper {
@@ -189,27 +180,20 @@
 .recommendTitle {
   font-size: 20px;
   color: var(--gray-600);
-  font-weight: var(--weight-medium);
+  font-weight: 700;
 }
 
 .recommendAddress {
   margin-top: 5px;
   font-size: var(--fs-2);
   color: var(--gray-300);
-  font-weight: var(--weight-regular);
+  font-weight: 600;
 }
 
 .eventBannerSection {
   margin-top: 30px;
   font-size: var(--fs-5);
   color: var(--gray-700);
-  font-weight: var(--weight-medium);
+  font-weight: 700;
   margin-bottom: 34px;
-}
-
-.bookmarkIcon {
-  position: absolute;
-  top: 14px;
-  right: 10px;
-  cursor: pointer;
 }
