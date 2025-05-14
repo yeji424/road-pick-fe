@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useMemo } from 'react'
 import css from './MainPage.module.css'
 import Spinner from '@/components/loading/Spinner'
 import SearchCard from '@/components/common/Search/SearchCard'
@@ -11,37 +11,49 @@ const MainPage = () => {
   const [selectedCity, setSelectedCity] = useState('전국')
   const navigate = useNavigate()
 
-  const cities = [
-    '전국',
-    '서울',
-    '인천',
-    '대전',
-    '대구',
-    '광주',
-    '부산',
-    '울산',
-    '경기',
-    '강원',
-    '충북',
-    '충남',
-    '경북',
-    '경남',
-    '전북',
-    '전남',
-    '제주',
-    '세종',
-  ]
+  const areaCodeMap = useMemo(
+    () => ({
+      전국: 0,
+      서울: 1,
+      인천: 2,
+      대전: 3,
+      대구: 4,
+      광주: 5,
+      부산: 6,
+      울산: 7,
+      세종: 8,
+      경기: 31,
+      강원: 32,
+      충북: 33,
+      충남: 34,
+      경북: 35,
+      경남: 36,
+      전북: 37,
+      전남: 38,
+      제주: 39,
+    }),
+    []
+  )
+
+  const cities = Object.keys(areaCodeMap)
 
   const {
     populars,
     loading: popLoading,
     error: popError,
-  } = usePopularTourList({ areaCode: 1, sigunguCode: 2 })
+  } = usePopularTourList({
+    areaCode: selectedCity === '전국' ? undefined : areaCodeMap[selectedCity],
+    sigunguCode: selectedCity === '전국' ? undefined : 2,
+  })
+
   const {
     recommendations,
     loading: recLoading,
     error: recError,
-  } = useRecommendTourList({ areaCode: 1, sigunguCode: 2 })
+  } = useRecommendTourList({
+    areaCode: selectedCity === '전국' ? undefined : areaCodeMap[selectedCity],
+    sigunguCode: selectedCity === '전국' ? undefined : 2,
+  })
 
   if (recLoading || popLoading) return <Spinner />
   if (recError || popError) return <div>오류 발생: {recError?.message || popError?.message}</div>
