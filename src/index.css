@@ -43,9 +43,10 @@
   --font-size-base: 13px;
 
   /* 폰트 굵기 */
-  --weight-demilight: 200; /*inputExample*/
+  --weight-demilight: 300; /*inputExample*/
   --weight-regular: 400; /*content*/
   --weight-medium: 500; /*title*/
+  --weight-semibold: 600;
 
   /* 폰트 사이즈 */
   --fs-1: 8px;
@@ -87,17 +88,17 @@ body {
   max-width: 600px;
   width: 100%;
   min-height: calc(100vh - 73px);
-  border: red solid 1px;
+  /* border: red solid 1px; */
   background-color: var(--background-color);
   overflow-y: auto;
   overflow-x: hidden;
   position: relative;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  padding: 47px 18px 34px 18px;
+  padding: 69px 18px 34px 18px;
 }
 main {
   /* padding: 60px var(--fs-2); */
-  border: red solid 1px;
+  /* border: red solid 1px; */
 }
 main h2 {
   font-size: var(--fs-6);
