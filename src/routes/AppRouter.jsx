@@ -11,6 +11,8 @@ import DetailPage from '@/pages/DetailPage'
 import CalendarPage from '@/pages/CalendarPage'
 import MapPage from '@/pages/MapPage'
 import RegisterPage from '@/pages/RegisterPage'
+import LoginPage from '@/pages/LoginPage'
+import { RequireAuth } from '@/hooks/requireAuth'
 
 const AppRouter = createBrowserRouter([
   {
@@ -29,9 +31,11 @@ const AppRouter = createBrowserRouter([
       {
         path: '/mypage',
         element: (
-          <Suspense fallback={<Spinner />}>
-            <MyPage />
-          </Suspense>
+          <RequireAuth>
+            <Suspense fallback={<Spinner />}>
+              <MyPage />
+            </Suspense>
+          </RequireAuth>
         ),
       },
       {
@@ -45,9 +49,11 @@ const AppRouter = createBrowserRouter([
       {
         path: '/calendar',
         element: (
-          <Suspense fallback={<Spinner />}>
-            <CalendarPage />
-          </Suspense>
+          <RequireAuth>
+            <Suspense fallback={<Spinner />}>
+              <CalendarPage />
+            </Suspense>
+          </RequireAuth>
         ),
       },
       {
@@ -79,6 +85,14 @@ const AppRouter = createBrowserRouter([
         element: (
           <Suspense fallback={<Spinner />}>
             <RegisterPage />
+          </Suspense>
+        ),
+      },
+      {
+        path: '/login',
+        element: (
+          <Suspense fallback={<Spinner />}>
+            <LoginPage />
           </Suspense>
         ),
       },

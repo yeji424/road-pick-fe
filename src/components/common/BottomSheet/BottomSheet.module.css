@@ -151,3 +151,15 @@
   color: var(--gray-600);
   background-color: var(--gray-100);
 }
+
+.listItemWrapper {
+  position: relative;
+}
+
+.itemOverlay {
+  position: absolute;
+  inset: 0;
+  background: transparent;
+  cursor: pointer;
+  z-index: 1;
+}
