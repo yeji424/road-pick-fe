@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom'
-import css from './DetailHeader.module.css'
-
+import css from './Detail.module.css'
+import ArrowLeftIcon from '@/assets/icons/arrowLeftIcon.svg?react'
 const DetailHeader = () => {
   const navigate = useNavigate()
   const backPage = () => {
@@ -8,12 +8,7 @@ const DetailHeader = () => {
   }
   return (
     <div className={css.head}>
-      <img
-        className={css.back}
-        onClick={backPage}
-        src="/src/assets/icons/arrowLeftIcon.svg"
-        alt="뒤로가기"
-      />
+      <ArrowLeftIcon onClick={backPage} className={css.arrowLeftIcon} />
       <p>상세 정보</p>
       <button className={css.plus}>일정 추가</button>
     </div>

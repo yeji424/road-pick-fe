@@ -1,4 +1,4 @@
-import css from './DetailImage.module.css'
+import css from './Detail.module.css'
 
 const DetailImage = ({ common }) => {
   return (

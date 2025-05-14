@@ -3,10 +3,11 @@ import React from 'react'
 import { useParams } from 'react-router-dom'
 import css from './DetailPage.module.css'
 import { useLocationTourList } from '@/hooks/useLocationTourList'
-import DetailHeader from '@/components/detail/Header/DetailHeader'
-import DetailImage from '@/components/detail/DetailImage/DetailImage'
-import DetailTitle from '@/components/detail/DetailTitle/DetailTitle'
-import DetailContent from '@/components/detail/DetailContent/DetailContent'
+import DetailHeader from '@/components/detail/DetailHeader'
+import DetailImage from '@/components/detail/DetailImage'
+import DetailTitle from '@/components/detail/DetailTitle'
+import DetailContent from '@/components/detail/DetailContent'
+import Spinner from '@/components/loading/Spinner'
 
 const DetailPage = () => {
   const { contentid, contenttypeid } = useParams() // 파라미터 정보 받아옴
@@ -16,7 +17,7 @@ const DetailPage = () => {
   const mapy = common?.mapy
   const { data: festivals, isLoading, isError } = useLocationTourList(mapx, mapy, 5000, 15)
 
-  if (isLoading || loading) return <p>로딩 중...</p>
+  if (isLoading || loading) return <Spinner />
   if (isError || error) return <p>에러 발생</p>
   if (!festivals || festivals.length === 0) return <p>페스티벌 정보가 없습니다.</p>
 
