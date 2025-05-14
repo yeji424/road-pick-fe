@@ -12,6 +12,7 @@ import DetailPage from '@/pages/DetailPage'
 import CalendarPage from '@/pages/CalendarPage'
 import MapPage from '@/pages/MapPage'
 import RegisterPage from '@/pages/RegisterPage'
+import SelectDatePage from '@/pages/SelectDatePage'
 import LoginPage from '@/pages/LoginPage'
 import { RequireAuth } from '@/hooks/requireAuth'
 
@@ -94,6 +95,14 @@ const AppRouter = createBrowserRouter([
         element: (
           <Suspense fallback={<Spinner />}>
             <RegisterPage />
+          </Suspense>
+        ),
+      },
+      {
+        path: '/selectDate',
+        element: (
+          <Suspense fallback={<Spinner />}>
+            <SelectDatePage />
           </Suspense>
         ),
       },

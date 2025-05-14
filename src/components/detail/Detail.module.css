@@ -90,7 +90,7 @@
   flex-shrink: 0;
 }
 .value {
-  color: var(--gray-700);
+  color: var(--secondary-orange-40);
   word-break: break-word;
   flex: 1;
 }
