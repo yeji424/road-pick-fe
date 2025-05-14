@@ -1,27 +1,11 @@
 import React, { useRef } from 'react'
-import { useSpring, animated } from 'react-spring'
+import { animated } from 'react-spring'
 import { useDrag } from '@use-gesture/react'
 import css from './BottomSheet.module.css'
 
-const BottomSheet = ({ children }) => {
+const BottomSheet = ({ children, snapPoints, y, api }) => {
   const sheetRef = useRef(null)
   const bodyRef = useRef(null) // 스크롤 영역 참조
-
-  // 현재 화면 높이 기준으로 snap 위치 계산
-  const screenHeight = typeof window !== 'undefined' ? window.innerHeight : 800
-
-  // 바텀시트 멈출 위치들 정의
-  const snapPoints = {
-    full: 100, // 완전히 올라온 상태 (상단 - 100px)
-    mid: screenHeight / 2, // 중간 위치
-    min: screenHeight - 50, // 최소 위치
-  }
-
-  // y값 애니메이션 상태 관리 (react-spring 사용)
-  const [{ y }, api] = useSpring(() => ({
-    y: snapPoints.min, // 초기 상태 : 가장 아래
-    config: { tension: 300, friction: 30 }, // 애니메이션 : 탄성
-  }))
 
   // useDrag : 드래그 이벤트 처리
   const bind = useDrag(

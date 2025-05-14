@@ -1,28 +1,11 @@
 import { getLocationTourList } from '@/apis/getLocationTourList'
-import { useEffect, useState } from 'react'
+import { useQuery } from '@tanstack/react-query'
 
-export const useLocationTourList = params => {
-  const [list, setList] = useState([])
-  const [loading, setLoading] = useState(false)
-  const [error, setError] = useState(null)
-
-  useEffect(() => {
-    if (!params || !params.mapX || !params.mapY || !params.contentTypeId) return
-
-    const getList = async () => {
-      try {
-        setLoading(true)
-        const data = await getLocationTourList(params)
-        setList(data)
-      } catch (err) {
-        setError(err)
-      } finally {
-        setLoading(false)
-      }
-    }
-
-    getList()
-  }, [params?.mapX, params?.mapY])
-
-  return list
+export const useLocationTourList = (mapX, mapY, radius, contentTypeId) => {
+  return useQuery({
+    queryKey: ['LocationTourList', mapX, mapY, radius, contentTypeId],
+    queryFn: () => getLocationTourList({ mapX, mapY, radius, contentTypeId }),
+    enabled: !!mapX && !!mapY, // mapX,mapY는 필수 없으면 요청 안 보냄
+    staleTime: 1000 * 60 * 5, // 5분 동안 fresh 상태 유지
+  })
 }

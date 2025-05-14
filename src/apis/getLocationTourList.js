@@ -10,12 +10,12 @@ export const getLocationTourList = async ({ mapX, mapY, radius, contentTypeId })
         MobileOS: 'ETC',
         MobileApp: 'LoadPick',
         _type: 'json',
-        contentTypeId: contentTypeId,
+        contentTypeId,
         mapX,
         mapY,
         radius,
         arrange: 'B', // 인기순
-        numOfRows: 100,
+        numOfRows: 20,
         serviceKey: SERVICE_KEY,
       },
     }

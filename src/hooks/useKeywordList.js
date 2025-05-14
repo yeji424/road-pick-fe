@@ -1,25 +1,10 @@
-import { useEffect, useState } from 'react'
 import { getKeywordTourList } from '@/apis/getKeywordTourList'
+import { useQuery } from '@tanstack/react-query'
 export const useTourList = ({ keyword, contentTypeId }) => {
-  const [list, setList] = useState([])
-  const [loading, setLoading] = useState(false)
-  const [error, setError] = useState(null)
-
-  useEffect(() => {
-    const getList = async () => {
-      try {
-        setLoading(true)
-        const data = await getKeywordTourList(keyword, contentTypeId)
-        setList(data)
-      } catch (error) {
-        setError(error)
-      } finally {
-        setLoading(false)
-      }
-    }
-
-    getList()
-  }, [keyword, contentTypeId])
-
-  return { list, loading, error }
+  return useQuery({
+    queryKey: ['tourList', keyword, contentTypeId],
+    queryFn: () => getKeywordTourList({ keyword, contentTypeId }),
+    enabled: !!keyword, // keyword 필수 없으면 요청 안 보냄
+    staleTime: 1000 * 60 * 5, // 5분 동안 fresh 상태 유지
+  })
 }

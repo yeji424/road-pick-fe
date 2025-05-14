@@ -12,23 +12,17 @@ import Spinner from '@/components/loading/Spinner'
 const DetailPage = () => {
   const { contentid, contenttypeid } = useParams() // 파라미터 정보 받아옴
   const { commonData, introData, loading, error } = useTourDetail(contentid, contenttypeid)
-  const festivals = useLocationTourList(
-    commonData && commonData.length > 0
-      ? {
-          mapX: commonData[0].mapx,
-          mapY: commonData[0].mapy,
-          radius: 5000,
-          contentTypeId: 15,
-        }
-      : null
-  )
+  const common = commonData?.[0]
+  const mapx = common?.mapx
+  const mapy = common?.mapy
+  const { data: festivals, isLoading, isError } = useLocationTourList(mapx, mapy, 5000, 15)
 
-  if (!commonData || !introData || !contentid || !contenttypeid) return <Spinner />
+  if (isLoading || loading) return <Spinner />
+  if (isError || error) return <p>에러 발생</p>
+  if (!festivals || festivals.length === 0) return <p>페스티벌 정보가 없습니다.</p>
 
   return (
     <main className={css.container}>
-      {loading && <Spinner />}
-      {error && <p>error..</p>}
       <DetailHeader />
       <DetailImage common={commonData[0]} />
       <DetailTitle common={commonData[0]} />
