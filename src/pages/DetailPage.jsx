@@ -8,6 +8,7 @@ import DetailImage from '@/components/detail/DetailImage'
 import DetailTitle from '@/components/detail/DetailTitle'
 import DetailContent from '@/components/detail/DetailContent'
 import Spinner from '@/components/loading/Spinner'
+import Header from '@/components/common/Header/Header'
 
 const DetailPage = () => {
   const { contentid, contenttypeid } = useParams() // 파라미터 정보 받아옴
@@ -23,7 +24,12 @@ const DetailPage = () => {
 
   return (
     <main className={css.container}>
-      <DetailHeader />
+      <Header
+        title="상세 정보"
+        showButton
+        buttonText="일정 추가"
+        onButtonClick={() => console.log('일정 추가 버튼 클릭됨')}
+      />
       <DetailImage common={commonData[0]} />
       <DetailTitle common={commonData[0]} />
       <p className={css.addr}>{commonData[0].addr1}</p>
