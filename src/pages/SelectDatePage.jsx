@@ -31,7 +31,6 @@ const SelectDatePage = () => {
   }
   return (
     <main className={css.maincontainer}>
-
       <Header
         showButton={true}
         buttonText="일정 추가"
