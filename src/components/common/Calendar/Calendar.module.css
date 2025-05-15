@@ -50,6 +50,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  cursor: pointer;
 }
 
 .datenumber {
@@ -91,7 +92,8 @@
   background-color: rgba(252, 92, 0, 0.301);
 }
 
-.datecell:hover {
+.datecell:hover,
+.datecell:focus {
   transition: 0.3s ease;
   background-color: rgba(252, 92, 0, 0.301);
 }
