@@ -2,7 +2,8 @@ import React from 'react'
 import { useNavigate } from 'react-router-dom'
 import css from './Header.module.css'
 import ArrowLeftIcon from '@/assets/icons/arrowLeftIcon.svg?react'
-import LogoutIcon from '@/assets/icons/LogoutIcon.svg?react'
+import LogoutIcon from '@/assets/icons/logoutIcon.svg?react'
+
 
 const Header = ({
   title,
