@@ -19,7 +19,6 @@ const MainLayout = () => {
   useEffect(() => {
     dispatch(fetchProfile())
   }, [dispatch])
-
   useEffect(() => {
     dispatch(refreshToken())
   }, [dispatch, location.pathname])
