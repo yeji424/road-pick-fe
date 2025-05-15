@@ -8,7 +8,7 @@ import {
   isInSelectedRange,
 } from './CalendarLogic'
 
-const Calendar = ({ schedules = [], SelectDate, start, end }) => {
+const Calendar = ({ schedules = [], SelectDate, isSelect = false, start, end }) => {
   const currentDate = new Date() // 현재 날짜 기준으로 잡기
   const startYear = currentDate.getFullYear()
   const startMonth = currentDate.getMonth() // 0부터 시작
@@ -55,7 +55,9 @@ const Calendar = ({ schedules = [], SelectDate, start, end }) => {
                   <div
                     key={dateString || `empty-${Math.random()}`}
                     className={`${css.datecell} ${hasSchedule ? css.hasschedule : ''}  ${inSelectedRange ? css.selectedrange : ''}`}
-                    onClick={() => SelectDate(dateString)}
+                    onClick={() => {
+                      isSelect && SelectDate(dateString)
+                    }}
                   >
                     {date && (
                       <span className={`${css.datenumber} ${isWeekEnd ? css.enddate : ''}`}>

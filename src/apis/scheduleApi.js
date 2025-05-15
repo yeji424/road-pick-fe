@@ -1,4 +1,5 @@
 import axios from 'axios'
+
 axios.defaults.withCredentials = true
 const API_URL = 'http://localhost:5000'
 
@@ -8,16 +9,17 @@ export const createSchedule = async schedule => {
 }
 
 export const getScheduleList = async () => {
-  const responce = await axios.get(`${API_URL}/scheduleList`)
+  const responce = await axios.get(`${API_URL}/schedule/list`)
   return responce.data
 }
 
 export const getScheduleDetail = async scheduleId => {
-  const responce = await axios.get(`${API_URL}/scheduleDetail/${scheduleId}`)
+  if (!scheduleId) return
+  const responce = await axios.get(`${API_URL}/schedule/detail/${scheduleId}`)
   return responce.data
 }
 
 export const deleteSchedule = async scheduleId => {
-  const responce = await axios.delete(`${API_URL}/scheduleDelete/${scheduleId}`)
+  const responce = await axios.delete(`${API_URL}/schedule/delete/${scheduleId}`)
   return responce.data
 }
