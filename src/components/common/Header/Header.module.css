@@ -1,7 +1,14 @@
 .head {
   display: flex;
   justify-content: space-between;
+  align-items: center;
   margin-bottom: 29px;
+}
+
+.rightSection {
+  display: flex;
+  align-items: center;
+  gap: 13px;
 }
 .arrowLeftIcon {
   cursor: pointer;
@@ -24,4 +31,12 @@
 .arrowLeftIcon:hover,
 .plus:hover {
   color: var(--primary-blue);
+}
+.icon {
+  cursor: pointer;
+  color: var(--secondary-orange-40);
+  transition: color 0.2s ease;
+}
+.icon:hover {
+  color: var(--secondary-orange);
 }

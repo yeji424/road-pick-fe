@@ -18,7 +18,7 @@
 }
 .info h3 {
   font-size: 19px;
-  font-weight: bold;
+  font-weight: 600;
   /* margin-bottom: 3px; */
 }
 .info p {
@@ -35,11 +35,12 @@
 }
 
 .tabs button {
+  letter-spacing: -0.02em;
   flex: 1;
   text-align: center;
   padding: 12px 0;
   font-size: 15px;
-  font-weight: 500;
+  font-weight: var(--weight-regular);
   color: var(--gray-500);
   background: none;
   border: none;
@@ -50,7 +51,7 @@
 
 .tabs .active {
   color: var(--primary-blue);
-  font-weight: bold;
+  font-weight: var(--weight-medium);
 }
 .underline {
   position: absolute;

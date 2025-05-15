@@ -6,6 +6,7 @@ import SavedList from '@/components/mypageTaps/SavedList'
 import FriendsList from '@/components/mypageTaps/FriendsList'
 import { useSelector } from 'react-redux'
 import profileImage from '@/assets/imgs/ProfileBasicImg.png'
+import LogoutIcon from '@/assets/icons/logoutIcon.svg?react'
 const MyPage = () => {
   //   // Redux store에서 user 정보만 꺼내서 화면에 표시
   const user = useSelector(state => state.auth.user)
@@ -28,6 +29,9 @@ const MyPage = () => {
         showButton
         buttonText="프로필 편집"
         onButtonClick={() => console.log('버튼 클릭됨')}
+        showIcon
+        iconSvg={<LogoutIcon />}
+        onIconClick={() => console.log('로그아웃 버튼 클릭됨')}
       />
       {/* 프로필 영역 */}
       <section className={css.profile}>
