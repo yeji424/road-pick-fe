@@ -7,6 +7,7 @@ import FriendsList from '@/components/mypageTaps/FriendsList'
 import { useSelector } from 'react-redux'
 import profileImage from '@/assets/imgs/ProfileBasicImg.png'
 import LogoutIcon from '@/assets/icons/logoutIcon.svg?react'
+import { Navigate, useNavigate } from 'react-router-dom'
 const MyPage = () => {
   //   // Redux store에서 user 정보만 꺼내서 화면에 표시
   const user = useSelector(state => state.auth.user)
@@ -18,7 +19,7 @@ const MyPage = () => {
   ]
 
   const [activeIndex, setActiveIndex] = useState(0)
-
+  const navigate = useNavigate()
   const onTabChange = index => {
     setActiveIndex(index)
   }
@@ -28,7 +29,7 @@ const MyPage = () => {
       <Header
         showButton
         buttonText="프로필 편집"
-        onButtonClick={() => console.log('버튼 클릭됨')}
+        onButtonClick={() => navigate('/profileEdit')}
         showIcon
         iconSvg={<LogoutIcon />}
         onIconClick={() => console.log('로그아웃 버튼 클릭됨')}
@@ -68,7 +69,7 @@ const MyPage = () => {
             </div>
           ))}
         </div>
-      </div>{' '}
+      </div>
     </main>
   )
 }
