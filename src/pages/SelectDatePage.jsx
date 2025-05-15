@@ -46,7 +46,13 @@ const SelectDatePage = () => {
 
       <h2>여행일정 등록</h2>
       <p>설레는 여행일정으로 달력을 채워보세요!</p>
-      <Calendar SelectDate={SelectDate} start={start} end={end} schedules={schedules} />
+      <Calendar
+        SelectDate={SelectDate}
+        start={start}
+        end={end}
+        schedules={schedules}
+        isSelect={true}
+      />
     </main>
   )
 }
