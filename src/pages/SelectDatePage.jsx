@@ -36,12 +36,7 @@ const SelectDatePage = () => {
   if (error) return <div>error...</div>
   return (
     <main className={css.maincontainer}>
-      <Header
-        showButton={true}
-        buttonText="일정 추가"
-        setIsOpen={setIsOpen}
-        onButtonClick={ModalOpen}
-      />
+      <Header showButton={true} buttonText="일정 추가" onButtonClick={ModalOpen} />
       {isOpen && <RegistModal start={start} end={end} onClose={ModalClose} />}
 
       <h2>여행일정 등록</h2>

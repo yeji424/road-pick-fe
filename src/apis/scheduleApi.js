@@ -1,6 +1,7 @@
 import axios from 'axios'
 
-axios.defaults.withCredentials = true
+axios.defaults.withCredentials = false
+
 const API_URL = 'http://localhost:5000'
 
 export const createSchedule = async schedule => {

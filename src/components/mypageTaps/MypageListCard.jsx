@@ -5,7 +5,6 @@ import MoreIcon from '@/assets/icons/moreIcon.svg?react'
 const MypageListCard = ({ thumbnail, info, renderMoreMenu }) => {
   const [open, setOpen] = useState(false)
   const menuRef = useRef(null)
-
   const handleToggle = () => {
     setOpen(prev => !prev)
   }
