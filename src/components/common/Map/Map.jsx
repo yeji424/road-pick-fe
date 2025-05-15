@@ -2,56 +2,34 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { loadKakaoMapScript } from '../../../loaders/kakaoLoader'
 import css from './Map.module.css'
-import { getTourData } from './TourApi'
 import MapModal from './MapModal'
 import { useNavigate } from 'react-router-dom'
+import ArrowLeftIcon from '@/assets/icons/arrowLeftIcon.svg?react'
 
-const Map = ({ center }) => {
+const Map = ({ center, list, contentTypeId }) => {
   const mapRef = useRef(null)
+  const markersRef = useRef([]) // 기존 마커 추적용
   const [isReady, setIsReady] = useState(false)
   const [detail, setDetail] = useState(null)
   const [modalClosing, setModalClosing] = useState(false)
   const navigate = useNavigate()
 
+  // 1) 최초 렌더링 시 한 번만: 카카오맵 스크립트 로드 + 지표 표시
   useEffect(() => {
     loadKakaoMapScript()
-      .then(async () => {
-        // 지도를 표시할 <div> 요소를 id="map"으로
+      .then(() => {
         const container = document.getElementById('map')
-        // 지도 생성 옵션
         const options = {
-          center: new window.kakao.maps.LatLng(center[0], center[1]), // 첫 위치: 서울
-          level: 8, // 초기 확대 레벨
+          center: new window.kakao.maps.LatLng(center[0], center[1]),
+          level: 8,
         }
         const map = new window.kakao.maps.Map(container, options)
         mapRef.current = map
         setIsReady(true)
 
-        // 지도 클릭 시 모달 창 닫힘
+        // 지도 클릭 시 모달 닫기
         window.kakao.maps.event.addListener(map, 'click', () => {
           setModalClosing(true)
-        })
-
-        // 관광지 데이터 받아오기
-        const data = await getTourData()
-
-        // 관광지마다 마커 찍기
-        data.forEach(item => {
-          const lat = parseFloat(item.mapy)
-          const lng = parseFloat(item.mapx)
-
-          // 유효한 좌표일 때만
-          if (!isNaN(lat) && !isNaN(lng)) {
-            const marker = new window.kakao.maps.Marker({
-              position: new window.kakao.maps.LatLng(lat, lng),
-              map: map,
-              //title: item.title, // 마커 hover 시 뜨는 제목
-            })
-            window.kakao.maps.event.addListener(marker, 'click', () => {
-              setModalClosing(false)
-              setDetail(item) // item = 관광지 데이터
-            })
-          }
         })
       })
       .catch(error => {
@@ -59,27 +37,50 @@ const Map = ({ center }) => {
       })
   }, [])
 
-  // center prop이 바뀔 때마다 지도 위치 이동
+  // 2) center 변경될 때마다 지도 중심 이동
   useEffect(() => {
     if (mapRef.current) {
       setIsReady(false)
       const moveLatLon = new window.kakao.maps.LatLng(center[0], center[1])
       mapRef.current.setCenter(moveLatLon)
       mapRef.current.setLevel(8)
-      // 여유 시간을 두어 지도가 처음 위치가 겹쳐 보이는 현상 방지
-      setTimeout(() => {
-        setIsReady(true)
-      }, 300)
+      setTimeout(() => setIsReady(true), 300)
     }
   }, [center])
+
+  // 3) list 변경 시마다 마커 갱신
+  useEffect(() => {
+    if (!isReady || !mapRef.current) return
+
+    // (3-1) 기존 마커 제거
+    markersRef.current.forEach(marker => marker.setMap(null))
+    markersRef.current = []
+
+    // (3-2) 새 마커 추가
+    list.forEach(item => {
+      const lat = parseFloat(item.mapy)
+      const lng = parseFloat(item.mapx)
+      if (!isNaN(lat) && !isNaN(lng)) {
+        const marker = new window.kakao.maps.Marker({
+          position: new window.kakao.maps.LatLng(lat, lng),
+          map: mapRef.current,
+        })
+        window.kakao.maps.event.addListener(marker, 'click', () => {
+          setModalClosing(false)
+          setDetail(item)
+        })
+        markersRef.current.push(marker)
+      }
+    })
+  }, [list, isReady])
 
   return (
     <div className={`${css.container} ${!isReady ? css.loading : ''}`}>
       <div className={css.infoBar}>
         <button className={css.backBtn} onClick={() => navigate(-1)}>
-          ←
+          <ArrowLeftIcon />
         </button>
-        <span>{detail && detail.title}</span>
+        <span>{detail?.title}</span>
       </div>
 
       <div id="map" className={css.map} style={{ visibility: isReady ? 'visible' : 'hidden' }} />
