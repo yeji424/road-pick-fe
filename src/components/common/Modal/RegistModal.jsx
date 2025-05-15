@@ -15,7 +15,6 @@ const RegistModal = ({ start, end, onClose }) => {
       userId: user._id,
       tripId: uuidv4(),
     }
-    console.log(newSchedule)
     try {
       await createSchedule(newSchedule)
       onClose()
