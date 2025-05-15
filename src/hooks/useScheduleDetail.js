@@ -13,7 +13,6 @@ export const useScheduleDetail = scheduleId => {
       try {
         setLoading(true)
         const data = await getScheduleDetail(scheduleId)
-        console.log(data)
         const formattedData = {
           ...data,
           start: formatDateToLocalString(data.startDate),
