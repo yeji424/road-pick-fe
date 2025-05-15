@@ -1,7 +1,12 @@
 // Calendar.tsx
 import React from 'react'
 import css from './Calendar.module.css'
-import generateMonth from './generateMonth'
+import {
+  generateMonth,
+  formatDateToLocalString,
+  getSchedulesForDate,
+  isInSelectedRange,
+} from './CalendarLogic'
 
 const Calendar = ({ schedules = [], SelectDate, start, end }) => {
   const currentDate = new Date() // 현재 날짜 기준으로 잡기
@@ -20,25 +25,6 @@ const Calendar = ({ schedules = [], SelectDate, start, end }) => {
       months.push({ year, month })
     }
   }
-
-  /*스케줄 날짜가 일정 범위에 포함되는지 검사하는 함수 */
-  const getSchedulesForDate = dateString => {
-    const currentDate = new Date(dateString)
-    return schedules?.filter(({ start, end }) => {
-      const startDate = new Date(start)
-      const endDate = new Date(end)
-      return currentDate >= startDate && currentDate <= endDate
-    })
-  }
-  const isInSelectedRange = (date, start, end) => {
-    if (!start || !end || !date) return false
-    const d = new Date(date)
-    const s = new Date(start)
-    const e = new Date(end)
-    return s <= d && d <= e
-  }
-
-  console.log(start, end)
   return (
     <div className={css.container}>
       {months.map(({ year, month }) => {
@@ -57,8 +43,10 @@ const Calendar = ({ schedules = [], SelectDate, start, end }) => {
                 )
               })}
               {dates.map(date => {
-                const dateString = date ? date.toISOString().split('T')[0] : null
-                const schedulesForDate = dateString ? getSchedulesForDate(dateString) : []
+                const dateString = date ? formatDateToLocalString(date) : null
+                const schedulesForDate = dateString
+                  ? getSchedulesForDate(dateString, schedules)
+                  : []
                 const inSelectedRange = isInSelectedRange(dateString, start, end)
                 const hasSchedule = schedulesForDate.length > 0
                 const dayOfWeek = date ? date.getDay() : null
