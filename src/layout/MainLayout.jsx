@@ -13,7 +13,8 @@ const MainLayout = () => {
   const isPage =
     location.pathname === '/register' ||
     location.pathname === '/login' ||
-    location.pathname === '/map'
+    location.pathname === '/map' ||
+    location.pathname === '/plan'
 
   // 앱이 마운트될 때 프로필 조회
   useEffect(() => {

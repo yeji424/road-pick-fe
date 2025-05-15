@@ -1,0 +1,67 @@
+.tripTitle {
+  margin-top: 6px;
+  font-size: var(--fs-6);
+  font-weight: 700;
+  color: var(--gray-600);
+}
+
+.tripDate {
+  margin-top: 4px;
+  font-size: var(--fs-2);
+  font-weight: 600;
+  color: var(--gray-500);
+}
+
+.description {
+  margin-top: 8px;
+  font-size: var(--fs-2);
+  font-weight: 600;
+  color: var(--gray-500);
+}
+
+.friendSection {
+  width: 100%;
+  display: flex;
+  margin-top: 16px;
+  margin-left: 12px;
+}
+
+.friendIcon {
+  width: 28px;
+  height: 28px;
+  background-color: #F0F1F5;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  border-radius: 6.67px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: -12px;
+  position: relative;
+}
+
+.userIcon {
+  width: 13px;
+  height: 13px;
+}
+
+.color1 .userIcon {
+  color: var(--secondary-orange)
+}
+.color2 .userIcon {
+  color: var(--primary-blue)
+}
+.color3 .userIcon {
+  color: var(--gray-500);
+}
+
+.addButton {
+  width: 69px;
+  height: 28px;
+  background-color: var(--secondary-orange);
+  color: white;
+  border-radius: 6.67px;
+  font-size: 10px;
+  margin-left: -8px;
+  cursor: pointer;
+  position: relative;
+}
