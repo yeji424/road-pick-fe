@@ -15,14 +15,17 @@ export const getLocationTourList = async ({ mapX, mapY, radius, contentTypeId })
         mapY,
         radius,
         arrange: 'B', // 인기순
-        numOfRows: 20,
+        numOfRows: 50,
         serviceKey: SERVICE_KEY,
       },
     }
   )
 
   const items = response.data.response.body.items.item || []
-  const filtered = items.filter(item => item.firstimage).slice(0, 10)
-  const shuffled = filtered.sort(() => Math.random() - 0.5)
-  return shuffled
+
+  return items.slice(0, 100)
 }
+
+// const filtered = items.filter(item => item.firstimage).slice(0, 10)
+// const shuffled = filtered.sort(() => Math.random() - 0.5)
+// return shuffled

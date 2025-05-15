@@ -1,5 +1,6 @@
 import DetailMap from '@/components/common/Map/DetailMap'
 import css from './Detail.module.css'
+import { useNavigate } from 'react-router-dom'
 
 const LabelRow = ({ label, children }) => (
   <div className={css.row}>
@@ -9,6 +10,13 @@ const LabelRow = ({ label, children }) => (
 )
 
 const DetailBasicInfo = ({ common, intro }) => {
+  const navigate = useNavigate()
+
+  // 지도 클릭 시 MapPage로 이동하면서 mapx/mapy 전달
+  const handleMapClick = () => {
+    navigate('/map', { state: { mapx: common.mapx, mapy: common.mapy } })
+  }
+
   return (
     <>
       <div className={css.basicinfo}>
@@ -20,7 +28,9 @@ const DetailBasicInfo = ({ common, intro }) => {
           <span dangerouslySetInnerHTML={{ __html: common.homepage }} />
         </LabelRow>
         <LabelRow label="지도" />
-        {common && <DetailMap mapy={common.mapy} mapx={common.mapx} />}
+        <div onClick={handleMapClick}>
+          {common && <DetailMap mapy={common.mapy} mapx={common.mapx} />}
+        </div>
       </div>
 
       <div className={css.basicinfo}>

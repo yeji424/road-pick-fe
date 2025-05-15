@@ -1,30 +1,19 @@
 import React from 'react'
-import css from './ListCard.module.css'
-import HeartToggle from './HeartToggle'
 import { useNavigate } from 'react-router-dom'
+import css from './ListCard.module.css'
 import StarIcon from '@/assets/icons/starIcon.svg?react'
-import { useSelector } from 'react-redux'
+import HeartToggle from '@/components/common/ListCard/HeartToggle'
 
 const ListCard = ({ firstimage, title, addr1, addr2, contentid, contenttypeid }) => {
-  const user = useSelector(state => state.auth.user)
   const navigate = useNavigate()
-  const MoveDetail = () => {
+
+  // 카드 클릭 시 상세 페이지로 이동
+  const moveDetail = () => {
     navigate(`/detail/${contenttypeid}/${contentid}`)
   }
 
-  const handleSaveClick = e => {
-    e.preventDefault()
-
-    if (!user) {
-      navigate('/login', { state: { from: window.location.pathname } })
-      return
-    }
-    // 로그인 된 경우만 아래 코드 실행(데이터베이스 저장)
-    console.log('즐겨찾기 토글:', contentid)
-  }
-
   return (
-    <div className={css.card} onClick={MoveDetail}>
+    <div className={css.card} onClick={moveDetail}>
       <div className={css.thumbnail}>
         <img src={firstimage} alt={title} />
       </div>
@@ -37,8 +26,9 @@ const ListCard = ({ firstimage, title, addr1, addr2, contentid, contenttypeid })
           {addr1} {addr2}
         </p>
       </div>
-      <div className={css.saveBtn} onClickCapture={handleSaveClick}>
-        <HeartToggle />
+
+      <div className={css.saveBtn}>
+        <HeartToggle contentid={contentid} />
       </div>
     </div>
   )
