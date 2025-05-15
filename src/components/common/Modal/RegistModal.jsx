@@ -31,6 +31,7 @@ const RegistModal = ({ start, end, onClose }) => {
           className={css.titleinput}
           onChange={e => setTitle(e.target.value)}
           placeholder="여행명을 입력해주세요"
+          required
         />
         <span>출발일:{start}</span>
         <span>마감일:{end}</span>

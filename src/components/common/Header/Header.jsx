@@ -4,6 +4,7 @@ import css from './Header.module.css'
 import ArrowLeftIcon from '@/assets/icons/arrowLeftIcon.svg?react'
 import LogoutIcon from '@/assets/icons/logoutIcon.svg?react'
 
+
 const Header = ({
   title,
   showButton = false,

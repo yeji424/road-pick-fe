@@ -106,7 +106,7 @@ const MainPage = () => {
                   <p className={css.popularTitle}>{item.title}</p>
                   <p className={css.popularAddress}>{item.addr1}</p>
                 </div>
-                <HeartToggle />
+                <HeartToggle contentid={item.contentid} />
               </div>
             </div>
           ))
@@ -130,7 +130,7 @@ const MainPage = () => {
                   <p className={css.recommendAddress}>{item.addr1}</p>
                 </div>
               </div>
-              <HeartToggle />
+              <HeartToggle contentid={item.contentid} />
             </div>
           ))
         ) : (
