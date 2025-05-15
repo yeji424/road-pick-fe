@@ -2,14 +2,14 @@ import React from 'react'
 import { useNavigate } from 'react-router-dom'
 import css from './Header.module.css'
 import ArrowLeftIcon from '@/assets/icons/arrowLeftIcon.svg?react'
-import logoutIcon from '@/assets/icons/logoutIcon.svg?react'
+import LogoutIcon from '@/assets/icons/logoutIcon.svg?react'
 const Header = ({
   title,
   showButton = false,
   buttonText = '일정 추가',
   onButtonClick,
   showIcon = false,
-  iconSvg = <logoutIcon />,
+  iconSvg = <LogoutIcon />,
   onIconClick,
 }) => {
   const navigate = useNavigate()

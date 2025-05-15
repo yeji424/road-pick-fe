@@ -3,10 +3,9 @@ import { useEffect, useState } from 'react'
 import PlusBtnIcon from '@/assets/icons/PlusBtnIcon.svg?react'
 import TripListImg from '@/assets/imgs/TripListImg.png'
 import MypageListCard from './MypageListCard'
+import { useNavigate } from 'react-route'
 import { useScheduleList } from '@/hooks/useScheduleList'
-import Spinner from '../loading/Spinner'
 import { deleteSchedule } from '@/apis/scheduleApi'
-import { useNavigate } from 'react-router-dom'
 
 // 더미
 const MyTrips = () => {
@@ -35,10 +34,9 @@ const MyTrips = () => {
   console.log(trips)
   if (loading) return <Spinner />
   if (error) return <div>error...</div>
-
   return (
     <div className={css.listContainer}>
-      <div className={css.tripCreateCard} onClick={() => navitate('/SelectDate')}>
+      <div className={css.tripCreateCard} onClick={navitate('/SelectDate')}>
         <div className={css.plusIcon}>
           <PlusBtnIcon />
         </div>
@@ -51,9 +49,9 @@ const MyTrips = () => {
       <h3 className={css.title}>다가오는 여행</h3>
       <div className={css.tripList}>
         <div className={css.listTile}>
-          {trips.map(trip => (
+          {trips.map((trip, i) => (
             <MypageListCard
-              key={trip.tripId}
+              key={i}
               thumbnail={<img src={TripListImg} alt="여행 이미지" />}
               info={
                 <>
