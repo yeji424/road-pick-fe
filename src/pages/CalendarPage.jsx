@@ -13,7 +13,7 @@ const CalendarPage = () => {
 
   useEffect(() => {
     if (!loading && schedules.length >= 0) {
-      setScheduleId(schedules[2]?.tripId)
+      setScheduleId(schedules[1]?.tripId)
     }
   }, [loading, schedules])
 
