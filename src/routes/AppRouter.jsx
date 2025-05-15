@@ -11,6 +11,7 @@ import BookMarkPage from '@/pages/BookMarkPage'
 import DetailPage from '@/pages/DetailPage'
 import CalendarPage from '@/pages/CalendarPage'
 import MapPage from '@/pages/MapPage'
+import PlanPage from '@/pages/PlanPage'
 import RegisterPage from '@/pages/RegisterPage'
 import SelectDatePage from '@/pages/SelectDatePage'
 import LoginPage from '@/pages/LoginPage'
@@ -46,6 +47,14 @@ const AppRouter = createBrowserRouter([
               <MyPage />
             </Suspense>
           </RequireAuth>
+        ),
+      },
+      {
+        path: '/plan',
+        element: (
+          <Suspense fallback={<Spinner />}>
+            <PlanPage />
+          </Suspense>
         ),
       },
       {
