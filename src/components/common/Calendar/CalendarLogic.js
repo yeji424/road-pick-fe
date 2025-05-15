@@ -25,6 +25,7 @@ export const getSchedulesForDate = (dateString, schedules) => {
     return currentDate >= startDate && currentDate <= endDate
   })
 }
+/* 해당 날짜가 start와 end 사이에 있는지 확인*/
 export const isInSelectedRange = (date, start, end) => {
   if (!start || !end || !date) return false
   const d = new Date(date)
@@ -34,8 +35,9 @@ export const isInSelectedRange = (date, start, end) => {
 }
 /*  로컬 시간 기준으로 날짜를 문자열로 변환 */
 export const formatDateToLocalString = date => {
-  const year = date.getFullYear()
-  const month = String(date.getMonth() + 1).padStart(2, '0')
-  const day = String(date.getDate()).padStart(2, '0')
+  const d = new Date(date)
+  const year = d.getFullYear()
+  const month = String(d.getMonth() + 1).padStart(2, '0')
+  const day = String(d.getDate()).padStart(2, '0')
   return `${year}-${month}-${day}`
 }

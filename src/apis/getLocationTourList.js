@@ -4,7 +4,7 @@ const SERVICE_KEY = import.meta.env.VITE_TOUR_API
 
 export const getLocationTourList = async ({ mapX, mapY, radius, contentTypeId }) => {
   const response = await axios.get(
-    'https://apis.data.go.kr/B551011/KorService1/locationBasedList1',
+    'https://apis.data.go.kr/B551011/KorService2/locationBasedList2',
     {
       params: {
         MobileOS: 'ETC',

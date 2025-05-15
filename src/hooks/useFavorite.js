@@ -18,7 +18,7 @@ export function useFavorite(contentid) {
   })
 
   // 2) 이 contentid가 찜 목록에 있는지 확인
-  const favItem = favorites.find(f => f.destination.contentid === contentid)
+  const favItem = favorites.find(f => f.destination?.contentid === contentid)
   const isFavorited = Boolean(favItem)
   const favId = favItem?._id
 

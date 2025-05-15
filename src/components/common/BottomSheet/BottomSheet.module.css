@@ -163,3 +163,73 @@
   cursor: pointer;
   z-index: 1;
 }
+
+/* ----------------------------- 플랜 영역 */
+
+.planDaySection {
+  margin-bottom: 48px;
+}
+
+.planDayHeader {
+  margin-bottom: 14px;
+  display: flex;
+  gap: 10px;
+}
+
+.planDayTitle {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--gray-700);
+}
+
+.planDayDate {
+  font-size: 10px;
+  color: var(--gray-500);
+}
+
+.plusButtons {
+  display: flex;
+  gap: 9px;
+  margin-top: 14px;
+}
+
+.locationPlus,
+.memoPlus {
+  flex: 1;
+  height: 32px;
+  font-size: var(--fs-2);
+  color: var(--gray-500);
+  border: 1px solid #D5D7DF;
+  border-radius: 7.68px;
+  cursor: pointer;
+}
+
+.iconUp {
+  transform: rotate(0deg);
+}
+
+.iconDown {
+  transform: rotate(180deg);
+}
+
+.planActivityItem {
+  height: 77px;
+  border-radius: 10px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  margin-bottom: 16px;
+  padding: 9px;
+}
+
+.activityName {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--gray-600);
+}
+
+.activityMemo {
+  margin-top: 9px;
+  font-size: 10px;
+  color: var(--gray-300);
+  white-space: pre-wrap; /* 줄바꿈 및 공백 유지 */
+  word-break: break-word; /* 단어 길면 줄바꿈 */
+}

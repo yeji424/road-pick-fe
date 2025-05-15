@@ -51,8 +51,12 @@
   justify-content: center;
   align-items: center;
   cursor: pointer;
+  transition: 0.3s;
 }
 
+.datecell:hover {
+  background-color: var(--primary-blue-40);
+}
 .datenumber {
   display: block;
   font-size: 14px;
@@ -78,22 +82,19 @@
 
 .scheduletext {
   position: absolute;
+  max-width: 100%;
   top: -10px;
   left: 50%;
   transform: translateX(-50%);
   font-size: var(--fs-2);
   white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
   color: var(--gray-700);
   z-index: 2;
 }
 
 .selectedrange {
-  transition: 0.3s ease;
-  background-color: rgba(252, 92, 0, 0.301);
-}
-
-.datecell:hover,
-.datecell:focus {
   transition: 0.3s ease;
   background-color: rgba(252, 92, 0, 0.301);
 }
