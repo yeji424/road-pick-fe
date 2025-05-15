@@ -25,5 +25,4 @@ const DetailContent = ({ common, contenttypeid, festivals, intro }) => {
     </div>
   )
 }
-
 export default DetailContent
