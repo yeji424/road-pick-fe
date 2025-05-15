@@ -7,7 +7,7 @@ import FriendsList from '@/components/mypageTaps/FriendsList'
 import { useDispatch, useSelector } from 'react-redux'
 import profileImage from '@/assets/imgs/ProfileBasicImg.png'
 import LogoutIcon from '@/assets/icons/logoutIcon.svg?react'
-import { Navigate, useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { logout } from '@/store/authSlice'
 
 const MyPage = () => {
@@ -28,7 +28,6 @@ const MyPage = () => {
   ]
 
   const [activeIndex, setActiveIndex] = useState(0)
-  const navigate = useNavigate()
   const onTabChange = index => {
     setActiveIndex(index)
   }
