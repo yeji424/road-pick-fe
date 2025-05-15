@@ -217,7 +217,20 @@
   border-radius: 10px;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
   margin-bottom: 16px;
-  padding: 9px;
+  padding: 12px;
+}
+
+.activityHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.moreIcon {
+  width: 20px;
+  height: 20px;
+  color: var(--primary-blue);
+  cursor: pointer;
 }
 
 .activityName {
