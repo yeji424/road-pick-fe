@@ -1,6 +1,7 @@
 import React from 'react'
 import css from './mypageTaps.module.css'
 import profileImage from '@/assets/imgs/ProfileBasicImg.png'
+import MypageListCard from './MypageListCard'
 
 const friends = [
   { name: '김민석', shared: '공유 일정 없음', color: 'red' },
@@ -10,18 +11,28 @@ const friends = [
 
 const FriendsList = () => {
   return (
-    <div className={css.friendsList}>
-      {friends.map((friend, index) => (
-        <div className={css.friendCard} key={index}>
-          <div className={`${css.profile} ${css[friend.color]}`}>
-            <img src={profileImage} alt="프로필 이미지" />
-          </div>
-          <div className={css.info}>
-            <p className={css.name}>{friend.name}</p>
-            <p className={css.shared}>{friend.shared}</p>
-          </div>
-          <div className={css.more}>⋯</div>
-        </div>
+    <div className={css.listTile}>
+      {friends.map((friend, i) => (
+        <MypageListCard
+          key={i}
+          thumbnail={
+            <div className={`${css.profile} ${css[friend.color]}`}>
+              <img src={profileImage} alt="프로필 이미지" />
+            </div>
+          }
+          info={
+            <>
+              <h4>{friend.name}</h4>
+              <p>{friend.shared}</p>
+            </>
+          }
+          renderMoreMenu={() => (
+            <>
+              <button onClick={() => console.log(`${friend.name} 차단`)}>친구 삭제</button>
+              <button onClick={() => console.log(`${friend.name} 공유 중단`)}>공유 중단</button>
+            </>
+          )}
+        />
       ))}
     </div>
   )

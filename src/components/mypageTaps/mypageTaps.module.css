@@ -1,3 +1,4 @@
+/* 내 여행 : 여행 일정 만들기 */
 .tripCreateCard {
   display: flex;
   align-items: center;
@@ -25,11 +26,12 @@
   align-items: center;
 }
 .title {
-  letter-spacing: -0.03em;
+  letter-spacing: -0.02em;
   font-size: 18px;
   font-weight: 600;
   margin-bottom: 12px;
 }
+/* 리스트 없을 때 */
 .empty {
   position: relative;
   letter-spacing: -0.02em;
@@ -49,7 +51,7 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.1); /* 어두운 오버레이 */
+  background-color: rgba(0, 0, 0, 0.1);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -57,8 +59,6 @@
   pointer-events: none;
   transition: opacity 0.3s ease;
 }
-
-/* 아이콘 애니메이션 */
 .emptyOverlay .plusIcon {
   width: 40px;
   height: 40px;
@@ -66,24 +66,21 @@
   opacity: 0;
   transition: all 0.3s ease;
 }
-
-/* 호버 시 활성화 */
 .empty:hover .emptyOverlay {
   opacity: 1;
   pointer-events: auto;
 }
-
 .empty:hover .plusIcon {
   transform: scale(1.2);
   opacity: 1;
 }
-/* friendsList 관련 */
-.friendsList {
+/* 내여행, 친구목록 리스트 관련 */
+.listTile {
   display: flex;
   flex-direction: column;
   gap: 10px;
 }
-.friendCard {
+.listCard {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -95,7 +92,7 @@
     transform 0.2s ease,
     box-shadow 0.2s ease;
 }
-.friendCard:hover {
+.listCard:hover {
   transform: translateY(-3px);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
 }
@@ -116,22 +113,56 @@
   flex-grow: 1;
   margin-left: 12px;
 }
-
-.name {
+.info h4 {
   font-weight: 600;
   font-size: 16px;
   margin-bottom: 2px;
   letter-spacing: var(--letter-spacing-title);
 }
-.shared {
+.info p {
   line-height: 1.5;
   letter-spacing: var(--letter-spacing-title);
   font-size: 12px;
   color: var(--gray-500);
   white-space: pre-line;
 }
-
 .more {
   font-size: 20px;
   color: var(--gray-400);
+  color: var(--primary-blue);
+}
+.more:hover,
+.more:active {
+  color: var(--secondary-orange);
+}
+
+.moreMenu {
+  position: absolute;
+  top: 100% - 70px;
+  right: 3px;
+  background: var(--background-color);
+  border-radius: 6px;
+  padding: 8px 0;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  z-index: 10;
+}
+
+.moreMenu button {
+  background: none;
+  border: none;
+  padding: 8px 16px;
+  width: 100%;
+  text-align: left;
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: var(--weight-demilight);
+  letter-spacing: -0.03em;
+}
+
+.moreMenu button:hover {
+  background-color: var(--background-color-80);
+  color: var(--secondary-orange);
+}
+.listContainer {
+  padding-bottom: 100px;
 }
