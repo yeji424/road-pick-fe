@@ -1,24 +1,27 @@
 import Calendar from '@/components/common/Calendar/Calendar'
 import css from './CalendarPage.module.css'
-import React from 'react'
-const schedules = [
-  {
-    title: '강원도 여행',
-    start: '2025-05-02',
-    end: '2025-05-04',
-  },
-  {
-    title: '도쿄 여행',
-    start: '2025-05-16',
-    end: '2025-05-18',
-  },
-  {
-    title: '제주도 여행',
-    start: '2025-06-16',
-    end: '2025-06-18',
-  },
-]
+import React, { useEffect, useState } from 'react'
+
+import { useScheduleList } from '@/hooks/useScheduleList'
+import Spinner from '@/components/loading/Spinner'
+import { useScheduleDetail } from '@/hooks/useScheduleDetail'
+
 const CalendarPage = () => {
+  const { schedules, loading, error } = useScheduleList()
+  const [scheduleId, setScheduleId] = useState(null)
+  const { schedule, loading: detailLoading, error: detailError } = useScheduleDetail(scheduleId)
+
+  useEffect(() => {
+    if (!loading && schedules.length >= 0) {
+      setScheduleId(schedules[2]?.tripId)
+    }
+  }, [loading, schedules])
+
+  console.log(schedule)
+  if (!scheduleId) return <div>일정 ID 없음</div>
+  if (loading || detailLoading) return <Spinner />
+  if (error || detailError) return <div>error...</div>
+
   return (
     <main className={css.maincontainer}>
       <h2>여행일정</h2>
