@@ -8,7 +8,6 @@ const Header = ({ title, showButton = false, buttonText = '일정 추가', onBut
   const backPage = () => {
     navigate(-1)
   }
-
   return (
     <div className={css.head}>
       <ArrowLeftIcon onClick={backPage} className={css.arrowLeftIcon} />
