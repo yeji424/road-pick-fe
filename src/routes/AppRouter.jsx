@@ -51,7 +51,7 @@ const AppRouter = createBrowserRouter([
         ),
       },
       {
-        path: '/plan',
+        path: '/plan/:tripId',
         element: (
           <Suspense fallback={<Spinner />}>
             <PlanPage />
