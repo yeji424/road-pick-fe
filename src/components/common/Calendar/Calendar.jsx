@@ -7,8 +7,10 @@ import {
   getSchedulesForDate,
   isInSelectedRange,
 } from './CalendarLogic'
+import { useNavigate } from 'react-router-dom'
 
 const Calendar = ({ schedules = [], SelectDate, isSelect = false, start, end }) => {
+  const navigate = useNavigate()
   const currentDate = new Date() // 현재 날짜 기준으로 잡기
   const startYear = currentDate.getFullYear()
   const startMonth = currentDate.getMonth() // 0부터 시작
@@ -25,6 +27,11 @@ const Calendar = ({ schedules = [], SelectDate, isSelect = false, start, end }) 
       months.push({ year, month })
     }
   }
+
+  const MovePlanPage = tripId => {
+    navigate(`/plan/${tripId}`)
+  }
+
   return (
     <div className={css.container}>
       {months.map(({ year, month }) => {
@@ -67,7 +74,14 @@ const Calendar = ({ schedules = [], SelectDate, isSelect = false, start, end }) 
                     {schedulesForDate.map((day, index) => {
                       const isStart = day.start === dateString
                       return (
-                        <div key={index} className={`${css.schedulebar} `}>
+                        <div
+                          key={index}
+                          className={`${css.schedulebar} `}
+                          onClick={e => {
+                            e.stopPropagation()
+                            MovePlanPage(day.tripId)
+                          }}
+                        >
                           {isStart && (
                             <span className={`${css.scheduletext} ${css.start}`}>{day.title}</span>
                           )}
