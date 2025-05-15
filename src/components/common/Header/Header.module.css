@@ -1,7 +1,7 @@
 .head {
   display: flex;
   justify-content: space-between;
-  margin-bottom: 21px;
+  margin-bottom: 29px;
 }
 .arrowLeftIcon {
   cursor: pointer;
