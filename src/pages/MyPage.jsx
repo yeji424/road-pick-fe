@@ -7,11 +7,11 @@ import FriendsList from '@/components/mypageTaps/FriendsList'
 import { useDispatch, useSelector } from 'react-redux'
 import profileImage from '@/assets/imgs/ProfileBasicImg.png'
 import LogoutIcon from '@/assets/icons/logoutIcon.svg?react'
-import { useNavigate } from 'react-router-dom'
+import { Navigate, useNavigate } from 'react-router-dom'
 import { logout } from '@/store/authSlice'
 
 const MyPage = () => {
-  //   // Redux store에서 user 정보만 꺼내서 화면에 표시
+  // Redux store에서 user 정보만 꺼내서 화면에 표시
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const user = useSelector(state => state.auth.user)
@@ -40,7 +40,7 @@ const MyPage = () => {
         onButtonClick={() => navigate('/profileEdit')}
         showIcon
         iconSvg={<LogoutIcon />}
-        onIconClick={() => console.log('로그아웃 버튼 클릭됨')}
+        onIconClick={handleLogout}
       />
       {/* 프로필 영역 */}
       <section className={css.profile}>
@@ -52,9 +52,6 @@ const MyPage = () => {
           <p>일정을 생성하고 계획해보세요!</p>
         </div>
       </section>
-      <p className={css.logoutText} onClick={handleLogout}>
-        로그아웃
-      </p>
       {/* 탭 영역 */}
       <div className={css.tabs}>
         {tabs.map((tab, index) => (
