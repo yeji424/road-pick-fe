@@ -4,13 +4,22 @@ import Header from '@/components/common/Header/Header'
 import MyTrips from '@/components/mypageTaps/MyTrips'
 import SavedList from '@/components/mypageTaps/SavedList'
 import FriendsList from '@/components/mypageTaps/FriendsList'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import profileImage from '@/assets/imgs/ProfileBasicImg.png'
 import LogoutIcon from '@/assets/icons/logoutIcon.svg?react'
 import { Navigate, useNavigate } from 'react-router-dom'
+import { logout } from '@/store/authSlice'
+
 const MyPage = () => {
   //   // Redux store에서 user 정보만 꺼내서 화면에 표시
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
   const user = useSelector(state => state.auth.user)
+
+  const handleLogout = () => {
+    dispatch(logout())
+    navigate('/')
+  }
 
   const tabs = [
     { key: 'myTrips', label: '내 여행', component: <MyTrips /> },
@@ -44,6 +53,9 @@ const MyPage = () => {
           <p>일정을 생성하고 계획해보세요!</p>
         </div>
       </section>
+      <p className={css.logoutText} onClick={handleLogout}>
+        로그아웃
+      </p>
       {/* 탭 영역 */}
       <div className={css.tabs}>
         {tabs.map((tab, index) => (

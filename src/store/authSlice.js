@@ -3,6 +3,7 @@ import {
   login as apiLogin,
   fetchProfile as apiFetchProfile,
   refreshToken as apiRefreshToken,
+  logout as apiLogout,
 } from '@/apis/authApi'
 // ── ① 로그인 + 프로필 조회 Thunk
 export const login = createAsyncThunk(
@@ -19,6 +20,16 @@ export const login = createAsyncThunk(
     }
   }
 )
+
+// ── 로그아웃 Thunk
+export const logout = createAsyncThunk('auth/logout', async (_, { rejectWithValue }) => {
+  try {
+    await apiLogout() //  실제 API 호출
+    return null // payload가 필요 없으므로 null 반환
+  } catch (err) {
+    return rejectWithValue(err.message)
+  }
+})
 
 // ── (기존) 프로필만 조회하는 Thunk
 export const fetchProfile = createAsyncThunk(
@@ -55,15 +66,13 @@ const authSlice = createSlice({
     error: null, // 에러 메시지
   },
   reducers: {
-    logout(state) {
-      state.user = null
-      state.status = 'idle'
+    resetError(state) {
       state.error = null
     },
   },
   extraReducers: builder => {
     builder
-      // ── 로그인 Thunk
+      // ── 로그인
       .addCase(login.pending, state => {
         state.status = 'loading'
         state.error = null
@@ -77,7 +86,22 @@ const authSlice = createSlice({
         state.error = action.payload
       })
 
-      // ── 프로필 조회 Thunk
+      // ── 로그아웃
+      .addCase(logout.pending, state => {
+        state.status = 'loading'
+        state.error = null
+      })
+      .addCase(logout.fulfilled, state => {
+        state.status = 'idle' // 로그인 전 상태로 초기화
+        state.user = null // 사용자 정보 제거
+        state.error = null
+      })
+      .addCase(logout.rejected, (state, action) => {
+        state.status = 'failed'
+        state.error = action.payload
+      })
+
+      // ── 프로필 조회
       .addCase(fetchProfile.pending, state => {
         state.status = 'loading'
         state.error = null
@@ -90,8 +114,21 @@ const authSlice = createSlice({
         state.status = 'failed'
         state.error = action.payload
       })
+
+      // ── 토큰 갱신
+      .addCase(refreshToken.pending, state => {
+        state.status = 'loading'
+        state.error = null
+      })
+      .addCase(refreshToken.fulfilled, state => {
+        state.status = 'succeeded'
+      })
+      .addCase(refreshToken.rejected, (state, action) => {
+        state.status = 'failed'
+        state.error = action.payload
+      })
   },
 })
 
-export const { logout } = authSlice.actions
+export const { resetError } = authSlice.actions
 export default authSlice.reducer
