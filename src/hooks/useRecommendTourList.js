@@ -10,7 +10,7 @@ export const useRecommendTourList = ({ areaCode, sigunguCode }) => {
     const fetchRecommendations = async () => {
       try {
         setLoading(true)
-        const data = await getTourList({ areaCode, sigunguCode })
+        const data = await getTourList({ areaCode, sigunguCode, contentTypeId: 12 })
         setRecommendations(data)
       } catch (err) {
         setError(err)

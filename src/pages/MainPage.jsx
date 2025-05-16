@@ -104,18 +104,17 @@ const MainPage = () => {
       <div className={css.popularWrapper}>
         {populars.length > 0 ? (
           populars.map((item, idx) => (
-
             <div
               key={idx}
               className={css.popularItem}
               onClick={() => handleMoveDetail(item.contenttypeid, item.contentid)}
             >
               <div className={css.popularImage}>
-              <img
-                src={item.firstimage || 'https://via.placeholder.com/225x152'}
-                alt={item.title}
-                className={css.popularImage}
-              />
+                <img
+                  src={item.firstimage || 'https://via.placeholder.com/225x152'}
+                  alt={item.title}
+                  className={css.popularImage}
+                />
               </div>
               <div className={css.popularContent}>
                 <div className={css.popularTextWrapper}>
