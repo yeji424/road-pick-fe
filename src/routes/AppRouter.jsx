@@ -3,6 +3,7 @@ import Spinner from '@/components/loading/Spinner'
 import MainLayout from '@/layout/MainLayout'
 import MainPage from '@/pages/MainPage'
 import SearchPage from '@/pages/SearchPage'
+import SearchPopularPage from '@/pages/SearchPopularPage'
 import NotFoundPage from '@/pages/NotFoundPage'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import MyPage from '@/pages/MyPage'
@@ -37,6 +38,14 @@ const AppRouter = createBrowserRouter([
         element: (
           <Suspense fallback={<Spinner />}>
             <SearchPage />
+          </Suspense>
+        ),
+      },
+      {
+        path: '/searchPopular',
+        element: (
+          <Suspense fallback={<Spinner />}>
+            <SearchPopularPage />
           </Suspense>
         ),
       },

@@ -52,7 +52,7 @@
   color: var(--gray-500);
 }
 .selected {
-  background-color: var(--primary-blue);
+  background-color: var(--primary-blue-60);
   color: var(--background-color);
   border: none;
 }
