@@ -3,7 +3,7 @@ import css from './BottomSheet.module.css'
 import ListCard from '@/components/common/ListCard/ListCard'
 import SortDropdown from './SortDropdown'
 
-const BottomSheetContent = ({ list, setContentTypeId, onItemClick }) => {
+const BottomSheetContent = ({ list, contentTypeId, setContentTypeId, onItemClick }) => {
   const [sortBy, setSortBy] = useState('name')
 
   if (!list || list.length === 0) return <div>데이터 불러오는 중..</div>
@@ -11,16 +11,22 @@ const BottomSheetContent = ({ list, setContentTypeId, onItemClick }) => {
   return (
     <div className={css.contentWrapper}>
       <div className={css.tabWrapper}>
-        <button className={css.tabButton} onClick={() => setContentTypeId(12)}>
+        <button
+          className={`${css.tabButton} ${contentTypeId === 15 ? '' : css.active}`}
+          onClick={() => setContentTypeId(12)}
+        >
           관광지
         </button>
-        <button className={css.tabButton} onClick={() => setContentTypeId(15)}>
+        <button
+          className={`${css.tabButton} ${contentTypeId === 15 ? css.active : ''}`}
+          onClick={() => setContentTypeId(15)}
+        >
           축제/행사
         </button>
       </div>
 
       <div className={css.headerRow}>
-        <h2 className={css.title}>서울 유명 관광지</h2>
+        <h2 className={css.title}>주변 검색</h2>
         <SortDropdown sortBy={sortBy} onChange={setSortBy} />
       </div>
 

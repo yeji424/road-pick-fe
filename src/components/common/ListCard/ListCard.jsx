@@ -28,7 +28,12 @@ const ListCard = ({ firstimage, title, addr1, addr2, contentid, contenttypeid, m
         </p>
       </div>
 
-      <div className={css.saveBtn}>
+      <div
+        className={css.saveBtn}
+        onClick={e => {
+          e.stopPropagation()
+        }}
+      >
         <HeartToggle
           contentid={contentid}
           contenttypeid={contenttypeid}
