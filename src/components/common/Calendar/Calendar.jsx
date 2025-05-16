@@ -9,7 +9,6 @@ import {
 } from './CalendarLogic'
 import { useNavigate } from 'react-router-dom'
 
-
 const Calendar = ({
   schedules = [],
   SelectDate,
@@ -95,24 +94,13 @@ const Calendar = ({
                       return (
                         <div
                           key={index}
-//민석님
-                          className={`${css.schedulebar} `}
+                          className={`${css.schedulebar} ${isStart ? css.startdate : ''} ${isEnd ? css.enddate : ''}`}
                           onClick={e => {
                             e.stopPropagation()
                             MovePlanPage(day.tripId)
                           }}
                         >
-                          {isStart && (
-                            <span className={`${css.scheduletext} ${css.start}`}>{day.title}</span>
-                          )}
-//민석님 끝
-
-// 예지님
-                           className={`${css.schedulebar} ${isStart ? css.startdate : ''} ${isEnd ? css.enddate : ''}`}
-                         >
-                           {isStart && <span className={`${css.scheduletext}`}>{day.title}</span>}
-
-//예지님 끝
+                          {isStart && <span className={`${css.scheduletext}`}>{day.title}</span>}
                         </div>
                       )
                     })}
