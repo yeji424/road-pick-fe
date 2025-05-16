@@ -43,7 +43,7 @@ export async function fetchProfile() {
       withCredentials: true,
     })
     return res.data
-  } catch (err) {
+  } catch {
     throw new Error('프로필 조회 실패')
   }
 }
