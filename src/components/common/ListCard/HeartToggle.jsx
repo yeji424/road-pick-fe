@@ -16,7 +16,17 @@ import { useFavorite } from '@/hooks/useFavorite'
  *   mapy?: number
  * }} props
  */
-const HeartToggle = ({ contentid, contenttypeid, firstimage, title, addr1, addr2, mapx, mapy }) => {
+const HeartToggle = ({
+  contentid,
+  contenttypeid,
+  firstimage,
+  title,
+  addr1,
+  addr2,
+  mapx,
+  mapy,
+  className,
+}) => {
   const user = useSelector(state => state.auth.user)
   const navigate = useNavigate()
 
@@ -44,6 +54,7 @@ const HeartToggle = ({ contentid, contenttypeid, firstimage, title, addr1, addr2
   return (
     <SaveIcon
       onClick={handleClick} // 수정된 부분: 기존 onClickCapture/prop 제거
+      className={className}
       style={{
         cursor: 'pointer',
         fill: isFavorited ? '#719EFF' : 'none', // isFavorited에 따라 색상 자동 반영
