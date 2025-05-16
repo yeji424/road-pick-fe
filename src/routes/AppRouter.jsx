@@ -17,6 +17,7 @@ import SelectDatePage from '@/pages/SelectDatePage'
 import LoginPage from '@/pages/LoginPage'
 import { RequireAuth } from '@/hooks/requireAuth'
 import ProfileEditPage from '@/pages/ProfileEditPage'
+import SaveListPage from '@/pages/SaveListPage'
 
 const AppRouter = createBrowserRouter([
   {
@@ -119,6 +120,14 @@ const AppRouter = createBrowserRouter([
         element: (
           <Suspense fallback={<Spinner />}>
             <LoginPage />
+          </Suspense>
+        ),
+      },
+      {
+        path: '/saveList',
+        element: (
+          <Suspense fallback={<Spinner />}>
+            <SaveListPage />
           </Suspense>
         ),
       },
