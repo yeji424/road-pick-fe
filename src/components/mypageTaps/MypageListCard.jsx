@@ -10,7 +10,7 @@ const MypageListCard = ({ thumbnail, info, renderMoreMenu, trip }) => {
   const handleToggle = () => {
     setOpen(prev => !prev)
   }
-  console.log(trip)
+
   const MovePlanPage = () => {
     navigate(`/plan/${trip.tripId}`)
   }

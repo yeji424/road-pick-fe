@@ -25,8 +25,10 @@ export const getScheduleDetailByDate = async (tripId, visitDate) => {
 }
 
 // 일정 삭제
-export const deleteScheduleDetail = async detailId => {
-  const response = await axios.delete(`${API_URL}/scheduledetail/${detailId}`)
+export const deleteScheduleDetail = async (detailId, tripId, visitDate) => {
+  const response = await axios.delete(
+    `${API_URL}/scheduledetail/${detailId}/${tripId}/${visitDate}`
+  )
   return response.data
 }
 

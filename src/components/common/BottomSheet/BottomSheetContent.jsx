@@ -5,7 +5,7 @@ import SortDropdown from './SortDropdown'
 
 const BottomSheetContent = ({ list, contentTypeId, setContentTypeId, onItemClick }) => {
   const [sortBy, setSortBy] = useState('name')
-
+  
   if (!list || list.length === 0) return <div>데이터 불러오는 중..</div>
 
   return (

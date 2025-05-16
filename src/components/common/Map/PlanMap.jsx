@@ -5,6 +5,7 @@ import css from './DetailMap.module.css'
 
 const MultiPlaceMap = ({ places }) => {
   const mapRef = useRef(null)
+  console.log(places)
   useEffect(() => {
     if (!places || places.length === 0) return
 

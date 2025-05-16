@@ -204,7 +204,7 @@
   height: 32px;
   font-size: var(--fs-2);
   color: var(--gray-500);
-  border: 1px solid #D5D7DF;
+  border: 1px solid #d5d7df;
   border-radius: 7.68px;
   cursor: pointer;
 }
@@ -250,4 +250,42 @@
   color: var(--gray-300);
   white-space: pre-wrap; /* 줄바꿈 및 공백 유지 */
   word-break: break-word; /* 단어 길면 줄바꿈 */
+}
+
+.more {
+  font-size: 20px;
+  color: var(--gray-400);
+  color: var(--primary-blue);
+}
+.more:hover,
+.more:active {
+  color: var(--secondary-orange);
+}
+
+.moreMenu {
+  position: absolute;
+  top: 100% - 70px;
+  right: 3px;
+  background: var(--background-color);
+  border-radius: 6px;
+  padding: 2px 0;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  z-index: 10;
+}
+
+.moreMenu button {
+  background: none;
+  border: none;
+  padding: 2px 8px;
+  width: 100%;
+  text-align: left;
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: var(--weight-demilight);
+  letter-spacing: -0.03em;
+}
+
+.moreMenu button:hover {
+  background-color: var(--background-color-80);
+  color: var(--secondary-orange);
 }
