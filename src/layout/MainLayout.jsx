@@ -4,11 +4,13 @@ import { Outlet, useLocation } from 'react-router-dom'
 import Navbar from '@/components/common/Navbar/Navbar'
 import Footer from '@/components/common/Footer/Footer'
 import Spinner from '@/components/loading/Spinner'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { fetchProfile, refreshToken } from '@/store/authSlice'
 const MainLayout = () => {
   const dispatch = useDispatch()
   const location = useLocation()
+  const user = useSelector(state => state.auth.user)
+
   const isMapPage = location.pathname === '/map'
   const isPage =
     location.pathname === '/register' ||
@@ -16,13 +18,15 @@ const MainLayout = () => {
     location.pathname === '/map' ||
     location.pathname === '/plan'
 
-  // 앱이 마운트될 때 프로필 조회
   useEffect(() => {
     dispatch(fetchProfile())
   }, [dispatch])
+
   useEffect(() => {
-    dispatch(refreshToken())
-  }, [dispatch, location.pathname])
+    if (user) {
+      dispatch(refreshToken())
+    }
+  }, [dispatch, location.pathname, user])
 
   return (
     <div className={`${isMapPage ? 'mapPage' : ''}`}>
