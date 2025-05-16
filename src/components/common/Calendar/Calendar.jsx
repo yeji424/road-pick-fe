@@ -8,7 +8,14 @@ import {
   isInSelectedRange,
 } from './CalendarLogic'
 
-const Calendar = ({ schedules = [], SelectDate, isSelect = false, start, end }) => {
+const Calendar = ({
+  schedules = [],
+  SelectDate,
+  isSelect = false,
+  start,
+  end,
+  showStartEndLabel = false,
+}) => {
   const currentDate = new Date() // 현재 날짜 기준으로 잡기
   const startYear = currentDate.getFullYear()
   const startMonth = currentDate.getMonth() // 0부터 시작
@@ -54,7 +61,11 @@ const Calendar = ({ schedules = [], SelectDate, isSelect = false, start, end }) 
                 return (
                   <div
                     key={dateString || `empty-${Math.random()}`}
-                    className={`${css.datecell} ${hasSchedule ? css.hasschedule : ''}  ${inSelectedRange ? css.selectedrange : ''}`}
+                    className={`${css.datecell} 
+              ${hasSchedule ? css.hasschedule : ''}  
+              ${inSelectedRange ? css.selectedrange : ''}  
+              ${start === dateString ? css.startdate : ''} 
+              ${end === dateString ? css.enddate : ''}`}
                     onClick={() => {
                       isSelect && SelectDate(dateString)
                     }}
@@ -64,13 +75,21 @@ const Calendar = ({ schedules = [], SelectDate, isSelect = false, start, end }) 
                         {date.getDate()}
                       </span>
                     )}
+                    {showStartEndLabel && dateString === start && (
+                      <span className={css.datelabel}>시작일</span>
+                    )}
+                    {showStartEndLabel && dateString === end && (
+                      <span className={css.datelabel}>종료일</span>
+                    )}
                     {schedulesForDate.map((day, index) => {
                       const isStart = day.start === dateString
+                      const isEnd = day.end === dateString
                       return (
-                        <div key={index} className={`${css.schedulebar} `}>
-                          {isStart && (
-                            <span className={`${css.scheduletext} ${css.start}`}>{day.title}</span>
-                          )}
+                        <div
+                          key={index}
+                          className={`${css.schedulebar} ${isStart ? css.startdate : ''} ${isEnd ? css.enddate : ''}`}
+                        >
+                          {isStart && <span className={`${css.scheduletext}`}>{day.title}</span>}
                         </div>
                       )
                     })}

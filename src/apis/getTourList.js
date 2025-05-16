@@ -11,7 +11,7 @@ export const getTourList = async ({ areaCode, contentTypeId }) => {
       contentTypeId,
       areaCode,
       arrange: 'B', // 인기순
-      numOfRows: 20,
+      numOfRows: 5,
       serviceKey: SERVICE_KEY,
     },
   })

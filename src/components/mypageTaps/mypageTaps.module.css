@@ -100,7 +100,7 @@
 .profile {
   width: 68px;
   height: 68px;
-  border-radius: 12px;
+  border-radius: 17px;
   background-color: var(--gray-200);
   flex-shrink: 0;
   overflow: hidden;
@@ -108,7 +108,7 @@
 .profile img {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: fill;
 }
 .info {
   flex-grow: 1;
