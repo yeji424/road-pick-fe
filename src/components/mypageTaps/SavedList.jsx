@@ -1,9 +1,8 @@
 import React from 'react'
 import { useFavoritesList } from '@/hooks/useFavorite'
 import Spinner from '@/components/loading/Spinner'
-// 📌 ListCard 컴포넌트 import 추가
 import ListCard from '@/components/common/ListCard/ListCard'
-import css from './SavedList.module.css'
+import css from './mypageTaps.module.css'
 
 const SavedList = () => {
   const { favorites, isLoading, isError } = useFavoritesList() // 찜 목록 훅 호출
@@ -21,7 +20,7 @@ const SavedList = () => {
       {favorites.length === 0 ? (
         <p className={css.empty}>아직 찜한 항목이 없습니다.</p>
       ) : (
-        <ul className={css.list}>
+        <ul className={css.savelist}>
           {favorites.map(fav => {
             // destination이 없을 경우에도 안전하게 처리하기 위해 fallback 객체 생성
             const dest = fav.destination ?? {

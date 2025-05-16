@@ -21,7 +21,7 @@
   font-size: 25px;
   color: var(--gray-600);
   letter-spacing: -0.03em;
-  font-weight: 600;
+  font-weight: var(--weight-semibold);
   /* border: red solid 1px; */
 }
 .saveBtn {
@@ -84,13 +84,16 @@
 }
 .label {
   width: 70px;
-  /* padding-right: 10px; */
-  font-weight: 500;
-  color: var(--gray-400);
+  font-size: 14px;
+  font-weight: var(--weight-regular);
+  color: var(--secondary-orange-40);
+
   flex-shrink: 0;
 }
 .value {
-  color: var(--secondary-orange-40);
+  font-size: 14px;
+  color: var(--gray-500);
+  font-weight: var(--weight-regular);
   word-break: break-word;
   flex: 1;
 }
@@ -99,4 +102,3 @@
   border-bottom: 0.1px solid #eaeaea;
   margin: 4px 0 12px;
 }
-

@@ -71,8 +71,11 @@ const MyPage = () => {
       {/* 탭 별 컨텐츠 랜딩 영역 */}
       <div className={css.sliderContainer}>
         <div className={css.slider} style={{ transform: `translateX(-${activeIndex * 100}%)` }}>
-          {tabs.map(tab => (
-            <div className={css.slide} key={tab.key}>
+          {tabs.map((tab, index) => (
+            <div
+              className={`${css.slide} ${activeIndex === index ? css.active : ''}`}
+              key={tab.key}
+            >
               {tab.component}
             </div>
           ))}
