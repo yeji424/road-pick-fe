@@ -14,7 +14,14 @@ const DetailBasicInfo = ({ common, intro }) => {
 
   // 지도 클릭 시 MapPage로 이동하면서 mapx/mapy 전달
   const handleMapClick = () => {
-    navigate('/map', { state: { mapx: common.mapx, mapy: common.mapy } })
+    navigate('/map', {
+      state: {
+        mapx: common.mapx,
+        mapy: common.mapy,
+        contentTypeId: common.contenttypeid,
+        contentId: common.contentid,
+      },
+    })
   }
 
   return (

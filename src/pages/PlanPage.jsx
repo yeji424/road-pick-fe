@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import { useSpring } from 'react-spring'
 import Header from '@/components/common/Header/Header'
 import css from './PlanPage.module.css'
@@ -21,6 +21,7 @@ const PlanPage = () => {
   const { tripId } = useParams()
   const { schedule, loading, error } = useScheduleDetail(tripId)
   const [activitiesByDate, setActivitiesByDate] = useState({})
+
 
   const snapPoints = {
     full: 100, // 최상단
@@ -95,6 +96,9 @@ const PlanPage = () => {
   }, [schedule])
 
   if (loading || isLoading) return <Spinner />
+    
+  if (!tripId) return <div>일정 ID 없음</div>
+
   if (error) return <div>error...</div>
 
   return (

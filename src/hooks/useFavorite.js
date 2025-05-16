@@ -1,5 +1,6 @@
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
 import { getFavorites, addFavorite, removeFavorite } from '@/apis/favoriteApi'
+import { useSelector } from 'react-redux'
 
 /**
  * @param {{
@@ -15,12 +16,15 @@ import { getFavorites, addFavorite, removeFavorite } from '@/apis/favoriteApi'
  */
 export function useFavorite(item) {
   const qc = useQueryClient()
+  const user = useSelector(state => state.auth.user)
+  const isLoggedIn = Boolean(user)
 
   // 1) 찜 목록 조회
   const { data: favorites = [] } = useQuery({
     queryKey: ['favorites'],
     queryFn: getFavorites,
     staleTime: 1000 * 60 * 5,
+    enabled: isLoggedIn,
   })
 
   // 2) 이 contentid가 찜 목록에 있는지 확인
@@ -45,11 +49,11 @@ export function useFavorite(item) {
   // 4) 토글 핸들러
   const toggle = e => {
     e.stopPropagation()
-    if (!isFavorited) {
-      addMut.mutate()
-    } else {
-      removeMut.mutate()
+    if (!isLoggedIn) {
+      return
     }
+    if (!isFavorited) addMut.mutate()
+    else removeMut.mutate()
   }
 
   return { isFavorited, toggle }

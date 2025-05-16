@@ -39,7 +39,7 @@ const ProfileEditPage = () => {
       <section className={css.profileSection}>
         <div className={css.profileImageWrap}>
           <img src={profileImage} alt="프로필 이미지" className={css.profileImage} />
-          <span className={css.editIcon}>편집</span>
+          {/* <span className={css.editIcon}>편집</span> */}
         </div>
 
         <div className={css.nameWrap}>
