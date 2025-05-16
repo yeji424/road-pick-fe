@@ -14,7 +14,7 @@ const BottomSheetContent = ({ list, contentTypeId, setContentTypeId, onItemClick
     <div className={css.contentWrapper}>
       <div className={css.tabWrapper}>
         <button
-          className={`${css.tabButton} ${contentTypeId === 12 ? css.active : ''}`}
+          className={`${css.tabButton} ${contentTypeId === 15 ? '' : css.active}`}
           onClick={() => setContentTypeId(12)}
         >
           관광지
@@ -28,7 +28,7 @@ const BottomSheetContent = ({ list, contentTypeId, setContentTypeId, onItemClick
       </div>
 
       <div className={css.headerRow}>
-        <h2 className={css.title}>{titleText}</h2>
+        <h2 className={css.title}>주변 검색</h2>
         <SortDropdown sortBy={sortBy} onChange={setSortBy} />
       </div>
 

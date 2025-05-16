@@ -3,12 +3,15 @@ import { loadKakaoMapScript } from '@/loaders/kakaoLoader'
 import css from './Map.module.css'
 import MapModal from './MapModal'
 import { useNavigate } from 'react-router-dom'
+import { useTransition, animated } from 'react-spring'
 
 // SVG 아이콘 URL 임포트
+import arrowLeftUrl from '@/assets/icons/arrowLeftIcon.svg'
+import refreshArrowUrl from '@/assets/icons/refresh.svg'
 import markerDefaultUrl from '@/assets/icons/markerDefault.svg'
 import markerSelectedUrl from '@/assets/icons/markerSelected.svg'
 
-const Map = ({ center, list, onMarkerClick, detail, onCloseModal }) => {
+const Map = ({ center, list, onMarkerClick, detail, onCloseModal, onReSearch }) => {
   const mapContainerRef = useRef(null)
   const mapInstanceRef = useRef(null)
   const markersRef = useRef([])
@@ -17,6 +20,15 @@ const Map = ({ center, list, onMarkerClick, detail, onCloseModal }) => {
   const [modalClosing, setModalClosing] = useState(false)
   const navigate = useNavigate()
 
+  const showReBtn = !detail
+
+  const transitions = useTransition(showReBtn, {
+    from: { opacity: 0, transform: 'translateY(-10px)' },
+    enter: { opacity: 1, transform: 'translateY(0px)' },
+    leave: { opacity: 0, transform: 'translateY(-10px)' },
+    config: { tension: 250, friction: 20 },
+  })
+
   // 1) 지도 스크립트 로드 & 인스턴스 생성
   useEffect(() => {
     loadKakaoMapScript()
@@ -24,7 +36,7 @@ const Map = ({ center, list, onMarkerClick, detail, onCloseModal }) => {
         const kakao = window.kakao
         const map = new kakao.maps.Map(mapContainerRef.current, {
           center: new kakao.maps.LatLng(center[0], center[1]),
-          level: 6,
+          level: 2,
         })
         mapInstanceRef.current = map
         setIsReady(true)
@@ -43,7 +55,7 @@ const Map = ({ center, list, onMarkerClick, detail, onCloseModal }) => {
     const kakao = window.kakao
     const moveLatLon = new kakao.maps.LatLng(center[0], center[1])
     mapInstanceRef.current.setCenter(moveLatLon)
-    mapInstanceRef.current.setLevel(8)
+    mapInstanceRef.current.setLevel(2)
     setTimeout(() => setIsReady(true), 300)
   }, [center])
 
@@ -53,7 +65,6 @@ const Map = ({ center, list, onMarkerClick, detail, onCloseModal }) => {
 
     const kakao = window.kakao
 
-    // ★수정: MarkerImage 생성 시점을 이곳으로 이동
     const markerSize = new kakao.maps.Size(30, 35)
     const markerOffset = new kakao.maps.Point(12, 34)
     const defaultMarkerImage = new kakao.maps.MarkerImage(markerDefaultUrl, markerSize, {
@@ -73,7 +84,6 @@ const Map = ({ center, list, onMarkerClick, detail, onCloseModal }) => {
       const lng = parseFloat(item.mapx)
       if (isNaN(lat) || isNaN(lng)) return
 
-      // ★수정: 선택된 detail과 비교해 이미지 분기
       const image =
         detail && String(item.contentid) === String(detail.contentid)
           ? selectedMarkerImage
@@ -98,10 +108,28 @@ const Map = ({ center, list, onMarkerClick, detail, onCloseModal }) => {
     <div className={`${css.container} ${!isReady ? css.loading : ''}`}>
       <div className={css.infoBar}>
         <button className={css.backBtn} onClick={() => navigate(-1)}>
-          ←
+          <img src={arrowLeftUrl} alt="뒤로가기" className={css.backIcon} />
         </button>
         <span>{detail?.title}</span>
       </div>
+
+      {transitions((styles, item) =>
+        item ? (
+          <animated.div style={styles} className={css.researchBtnWrapper}>
+            <button
+              className={css.researchBtn}
+              onClick={() => {
+                if (!mapInstanceRef.current) return
+                const c = mapInstanceRef.current.getCenter()
+                onReSearch([c.getLat(), c.getLng()])
+              }}
+            >
+              <img src={refreshArrowUrl} alt="refresh" className={css.refreshIcon} />
+              <span>이 지역 재검색</span>
+            </button>
+          </animated.div>
+        ) : null
+      )}
 
       <div
         ref={mapContainerRef}
