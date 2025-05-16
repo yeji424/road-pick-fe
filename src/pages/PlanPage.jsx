@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import { useSpring } from 'react-spring'
 import Header from '@/components/common/Header/Header'
 import css from './PlanPage.module.css'
@@ -16,7 +16,7 @@ const PlanPage = () => {
   const { tripId } = useParams()
   const { schedule, loading, error } = useScheduleDetail(tripId)
   console.log(schedule)
-  if (!tripId) return <div>일정 ID 없음</div>
+
   const snapPoints = {
     full: 100, // 최상단
     mid: screenHeight * 0.6, // 중간
@@ -27,6 +27,8 @@ const PlanPage = () => {
     y: snapPoints.min, // 초기 바텀시트 위치
     config: { tension: 300, friction: 30 },
   }))
+
+  if (!tripId) return <div>일정 ID 없음</div>
 
   if (loading) return <Spinner />
   if (error) return <div>error...</div>

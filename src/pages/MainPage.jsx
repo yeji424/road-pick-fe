@@ -65,6 +65,10 @@ const MainPage = () => {
     setSelectedCity(city)
   }
 
+  const handleMoveDetail = (contenttypeid, contentid) => {
+    navigate(`/detail/${contenttypeid}/${contentid}`)
+  }
+
   return (
     <main className={css.wrapper}>
       <h2 className={`${css.title} fadeInText`}>
@@ -89,6 +93,8 @@ const MainPage = () => {
           </button>
         ))}
       </div>
+
+      {/* 유명 관광지 */}
       <div className={css.selectedInfoWrapper}>
         <h3 className={css.selectedInfoText}>{selectedCity} 유명 관광지</h3>
         <button className={css.viewAllButton} onClick={() => navigate('/list')}>
@@ -98,29 +104,37 @@ const MainPage = () => {
       <div className={css.popularWrapper}>
         {populars.length > 0 ? (
           populars.map((item, idx) => (
-            <div key={idx} className={css.popularItem}>
+
+            <div
+              key={idx}
+              className={css.popularItem}
+              onClick={() => handleMoveDetail(item.contenttypeid, item.contentid)}
+            >
               <div className={css.popularImage}>
-                <img
-                  src={item.firstimage || 'https://via.placeholder.com/225x152'}
-                  alt={item.title}
-                />
+              <img
+                src={item.firstimage || 'https://via.placeholder.com/225x152'}
+                alt={item.title}
+                className={css.popularImage}
+              />
               </div>
               <div className={css.popularContent}>
                 <div className={css.popularTextWrapper}>
                   <p className={css.popularTitle}>{item.title}</p>
                   <p className={css.popularAddress}>{item.addr1}</p>
                 </div>
-                <HeartToggle
-                  className={css.saveBtn}
-                  contentid={item.contentid}
-                  contenttypeid={item.contenttypeid}
-                  firstimage={item.firstimage}
-                  title={item.title}
-                  addr1={item.addr1}
-                  addr2={item.addr2}
-                  mapx={item.mapx}
-                  mapy={item.mapy}
-                />
+
+                <div onClick={e => e.stopPropagation()}>
+                  <HeartToggle
+                    contentid={item.contentid}
+                    contenttypeid={item.contenttypeid}
+                    firstimage={item.firstimage}
+                    title={item.title}
+                    addr1={item.addr1}
+                    addr2={item.addr2}
+                    mapx={item.mapx}
+                    mapy={item.mapy}
+                  />
+                </div>
               </div>
             </div>
           ))

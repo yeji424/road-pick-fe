@@ -51,11 +51,11 @@
 .rating {
   font-size: 9px;
   margin-bottom: 20px;
-  font-weight: var(--weight-demilight);
   letter-spacing: -0.04em;
 }
 .location {
   font-size: var(--fs-2);
+  font-weight: 600;
   color: var(--gray-300);
   margin: 4px 0;
 }

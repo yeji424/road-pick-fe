@@ -1,5 +1,4 @@
 import React, { useRef } from 'react'
-import { animated } from 'react-spring'
 import { useDrag } from '@use-gesture/react'
 import css from './BottomSheet.module.css'
 
