@@ -18,6 +18,7 @@ import SelectDatePage from '@/pages/SelectDatePage'
 import LoginPage from '@/pages/LoginPage'
 import { RequireAuth } from '@/hooks/requireAuth'
 import ProfileEditPage from '@/pages/ProfileEditPage'
+import FirstLoadingPage from '@/pages/FirstLoadingPage'
 
 const AppRouter = createBrowserRouter([
   {
@@ -136,6 +137,14 @@ const AppRouter = createBrowserRouter([
         element: (
           <Suspense fallback={<Spinner />}>
             <ProfileEditPage />
+          </Suspense>
+        ),
+      },
+      {
+        path: '/firstLoading',
+        element: (
+          <Suspense fallback={<Spinner />}>
+            <FirstLoadingPage />
           </Suspense>
         ),
       },

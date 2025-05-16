@@ -55,6 +55,35 @@
   cursor: pointer;
   transition: 0.3s;
 }
+/* hover 효과 켜기 */
+.hoverable:hover::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: -2px;
+  right: -2px;
+  padding: 15px 0;
+  background-color: rgba(255, 158, 134, 0.3);
+  transform: translateY(-50%);
+  z-index: 0;
+  border-radius: 50px;
+}
+/* hover 효과 끄기 */
+.nohover:hover::before {
+  content: '';
+  opacity: 0;
+  pointer-events: none;
+}
+/* 커서 기본 */
+.defaultCursor {
+  cursor: default;
+}
+
+/* 커서 포인터 */
+.pointer {
+  cursor: pointer;
+}
+
 /* 날짜 숫자 */
 .datenumber {
   display: block;
@@ -98,8 +127,40 @@
 /* 일정 bar */
 .schedulebar {
   display: block;
+  height: 100%;
+  z-index: 1;
 }
-.scheduletext {
+/* 말풍선 툴팁 */
+.tooltip {
+  position: absolute;
+  bottom: 110%;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: var(--primary-blue-40);
+  color: var(--background-color);
+  /* border: 1px solid var(--primary-blue); */
+  padding: 8px 12px;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: var(--weight-medium);
+  letter-spacing: -0.01em;
+  white-space: nowrap;
+  z-index: 20;
+  box-shadow:
+    0 2px 6px rgba(0, 0, 0, 0.12),
+    0 4px 12px rgba(0, 0, 0, 0.08);
+  opacity: 0;
+  pointer-events: none;
+  transition:
+    opacity 0.25s ease,
+    transform 0.25s ease;
+}
+
+/* 보여줄 때만 opacity ON */
+.tooltip[data-visible='true'] {
+  opacity: 1;
+}
+/* .scheduletext {
   position: absolute;
   max-width: 100%;
   bottom: -6px;
@@ -112,7 +173,7 @@
   text-overflow: ellipsis;
   color: var(--secondary-orange-60);
   z-index: 2;
-}
+} */
 /* 선택 범위 효과 */
 .selectedrange {
   transition: 0.3s ease;
@@ -123,12 +184,18 @@
 }
 /* 시작일/종료일 텍스트 라벨 */
 .datelabel {
-  border: 1px solid red;
   position: absolute;
-  top: -6px;
-  font-size: 13px;
-  background-color: var(--secondary-orange);
-  color: var(--background-color);
-  padding: 1px 4px;
-  border-radius: 10px;
+  top: -12px;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 4px 8px;
+  font-size: 12px;
+  font-weight: var(--weight-medium);
+  letter-spacing: -0.01em;
+  color: var(--primary-blue);
+  background-color: var(--background-color);
+  border-radius: 999px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.06);
+  white-space: nowrap;
+  z-index: 2;
 }

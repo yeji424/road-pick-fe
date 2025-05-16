@@ -12,9 +12,11 @@ const CalendarPage = () => {
 
   return (
     <main className={css.container}>
-      <h2>여행일정</h2>
-      <p className={css.description}>여행일정을 한 눈에 확인하세요!</p>
-      <Calendar schedules={schedules} />
+      <div className={`${css.title} fadeInText`}>
+        <h2>여행일정</h2>
+        <p className={css.description}>여행일정을 한 눈에 확인하세요!</p>
+      </div>
+      <Calendar schedules={schedules} enableHover={false} />
     </main>
   )
 }

@@ -39,8 +39,9 @@
 .icon {
   cursor: pointer;
   color: var(--secondary-orange-40);
-  transition: color 0.2s ease;
+  transition: 0.2s ease;
 }
 .icon:hover {
+  transform: scale(1.15);
   color: var(--secondary-orange);
 }

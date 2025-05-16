@@ -16,6 +16,7 @@ const Calendar = ({
   start,
   end,
   showStartEndLabel = false,
+  enableHover = true,
 }) => {
   const navigate = useNavigate()
   const currentDate = new Date() // 현재 날짜 기준으로 잡기
@@ -24,6 +25,7 @@ const Calendar = ({
   const days = ['일', '월', '화', '수', '목', '금', '토']
   const endYear = startYear + 1 // 내년
   const months = []
+  const [hoveredDate, setHoveredDate] = React.useState(null)
 
   // 올해부터 내년까지 월은 0부터 시작
   for (let year = startYear; year <= endYear; year++) {
@@ -63,16 +65,25 @@ const Calendar = ({
                   : []
                 const inSelectedRange = isInSelectedRange(dateString, start, end)
                 const hasSchedule = schedulesForDate.length > 0
+                const hoverClass = enableHover || hasSchedule ? css.hoverable : css.nohover
+                const cursorClass = hasSchedule
+                  ? css.pointer
+                  : isSelect
+                    ? css.pointer
+                    : css.defaultCursor
+
                 const dayOfWeek = date ? date.getDay() : null
                 const isWeekEnd = dayOfWeek === 0 || dayOfWeek === 6
                 return (
                   <div
                     key={dateString || `empty-${Math.random()}`}
-                    className={`${css.datecell} 
-              ${hasSchedule ? css.hasschedule : ''}  
-              ${inSelectedRange ? css.selectedrange : ''}  
-              ${start === dateString ? css.startdate : ''} 
-              ${end === dateString ? css.enddate : ''}`}
+                    onMouseEnter={() => setHoveredDate(dateString)}
+                    onMouseLeave={() => setHoveredDate(null)}
+                    className={`${css.datecell} ${hoverClass} ${cursorClass} 
+                ${hasSchedule ? css.hasschedule : ''}  
+                ${inSelectedRange ? css.selectedrange : ''}  
+                ${start === dateString ? css.startdate : ''} 
+                ${end === dateString ? css.enddate : ''}`}
                     onClick={() => {
                       isSelect && SelectDate(dateString)
                     }}
@@ -91,6 +102,9 @@ const Calendar = ({
                     {schedulesForDate.map((day, index) => {
                       const isStart = day.start === dateString
                       const isEnd = day.end === dateString
+                      const shouldShowTooltip =
+                        hoveredDate && hoveredDate >= day.start && hoveredDate <= day.end
+
                       return (
                         <div
                           key={index}
@@ -100,7 +114,13 @@ const Calendar = ({
                             MovePlanPage(day.tripId)
                           }}
                         >
-                          {isStart && <span className={`${css.scheduletext}`}>{day.title}</span>}
+                          {isStart && (
+                            <>
+                              <div className={css.tooltip} data-visible={shouldShowTooltip}>
+                                {day.title}
+                              </div>
+                            </>
+                          )}
                         </div>
                       )
                     })}

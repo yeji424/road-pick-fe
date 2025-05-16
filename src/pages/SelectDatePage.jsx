@@ -61,8 +61,10 @@ const SelectDatePage = () => {
         buttonTextClassName={buttonEffect ? css.grow : ''}
       />
       {isOpen && <RegistModal start={start} end={end} onClose={ModalClose} />}
-      <h2>여행일정 등록</h2>
-      <p className={css.description}>설레는 여행일정으로 달력을 채워보세요!</p>
+      <div className={`${css.title} fadeInText`}>
+        <h2>여행일정 등록</h2>
+        <p className={css.description}>설레는 여행일정으로 달력을 채워보세요!</p>
+      </div>
       <Calendar
         SelectDate={SelectDate}
         start={start}

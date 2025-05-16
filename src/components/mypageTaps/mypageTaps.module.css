@@ -167,3 +167,11 @@
 .listContainer {
   padding-bottom: 100px;
 }
+.savelist {
+  display: flex;
+  flex-direction: column;
+  gap: 21px;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
