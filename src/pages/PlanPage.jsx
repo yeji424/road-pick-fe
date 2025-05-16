@@ -12,7 +12,6 @@ import MultiPlaceMap from '@/components/common/Map/PlanMap'
 import { formatDateToLocalString } from '@/components/common/Calendar/CalendarLogic'
 import { deleteScheduleDetail, getScheduleDetailByDate } from '@/apis/schedulsDetailApi'
 import { generateDateRange } from '@/components/common/BottomSheet/generateDateRange'
-import { useTourDetail } from '@/hooks/useTourDetail'
 import { useTourDetailCommons } from '@/hooks/useDetailsCommon'
 
 const PlanPage = () => {
