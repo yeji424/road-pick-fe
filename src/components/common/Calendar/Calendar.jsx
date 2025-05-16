@@ -9,7 +9,15 @@ import {
 } from './CalendarLogic'
 import { useNavigate } from 'react-router-dom'
 
-const Calendar = ({ schedules = [], SelectDate, isSelect = false, start, end }) => {
+
+const Calendar = ({
+  schedules = [],
+  SelectDate,
+  isSelect = false,
+  start,
+  end,
+  showStartEndLabel = false,
+}) => {
   const navigate = useNavigate()
   const currentDate = new Date() // 현재 날짜 기준으로 잡기
   const startYear = currentDate.getFullYear()
@@ -61,7 +69,11 @@ const Calendar = ({ schedules = [], SelectDate, isSelect = false, start, end }) 
                 return (
                   <div
                     key={dateString || `empty-${Math.random()}`}
-                    className={`${css.datecell} ${hasSchedule ? css.hasschedule : ''}  ${inSelectedRange ? css.selectedrange : ''}`}
+                    className={`${css.datecell} 
+              ${hasSchedule ? css.hasschedule : ''}  
+              ${inSelectedRange ? css.selectedrange : ''}  
+              ${start === dateString ? css.startdate : ''} 
+              ${end === dateString ? css.enddate : ''}`}
                     onClick={() => {
                       isSelect && SelectDate(dateString)
                     }}
@@ -71,11 +83,19 @@ const Calendar = ({ schedules = [], SelectDate, isSelect = false, start, end }) 
                         {date.getDate()}
                       </span>
                     )}
+                    {showStartEndLabel && dateString === start && (
+                      <span className={css.datelabel}>시작일</span>
+                    )}
+                    {showStartEndLabel && dateString === end && (
+                      <span className={css.datelabel}>종료일</span>
+                    )}
                     {schedulesForDate.map((day, index) => {
                       const isStart = day.start === dateString
+                      const isEnd = day.end === dateString
                       return (
                         <div
                           key={index}
+//민석님
                           className={`${css.schedulebar} `}
                           onClick={e => {
                             e.stopPropagation()
@@ -85,6 +105,14 @@ const Calendar = ({ schedules = [], SelectDate, isSelect = false, start, end }) 
                           {isStart && (
                             <span className={`${css.scheduletext} ${css.start}`}>{day.title}</span>
                           )}
+//민석님 끝
+
+// 예지님
+                           className={`${css.schedulebar} ${isStart ? css.startdate : ''} ${isEnd ? css.enddate : ''}`}
+                         >
+                           {isStart && <span className={`${css.scheduletext}`}>{day.title}</span>}
+
+//예지님 끝
                         </div>
                       )
                     })}

@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import css from './Header.module.css'
 import ArrowLeftIcon from '@/assets/icons/arrowLeftIcon.svg?react'
 import LogoutIcon from '@/assets/icons/logoutIcon.svg?react'
+
 const Header = ({
   title,
   showButton = false,
@@ -11,6 +12,7 @@ const Header = ({
   showIcon = false,
   iconSvg = <LogoutIcon />,
   onIconClick,
+  buttonTextClassName = '',
 }) => {
   const navigate = useNavigate()
   const backPage = () => {
@@ -23,7 +25,7 @@ const Header = ({
       <div className={css.rightSection}>
         {showButton && (
           <button className={css.plus} onClick={onButtonClick}>
-            {buttonText}
+            <span className={buttonTextClassName}>{buttonText}</span>
           </button>
         )}
         {showIcon && (

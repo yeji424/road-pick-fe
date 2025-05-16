@@ -1,17 +1,18 @@
-.maincontainer > h2 {
-  color: var(--gray-600);
-  margin: var(--fs-5);
+.container h2 {
+  color: var(--gray-700);
+  margin-bottom: 12px;
   font-weight: var(--weight-semibold);
   font-size: 26px;
+  letter-spacing: var(--letter-spacing-title);
 }
 
-.maincontainer p {
-  margin: var(--fs-5);
+.description {
   font-size: 15px;
   color: var(--gray-500);
+  letter-spacing: var(--letter-spacing-description);
+  margin-bottom: 29px;
 }
 
-.maincontainer {
-  margin-top: 69px;
+.container {
   margin-bottom: 34px;
 }

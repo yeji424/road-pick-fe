@@ -5,12 +5,33 @@ import { useNavigate } from 'react-router-dom'
 import { useFavorite } from '@/hooks/useFavorite'
 
 /**
- * @param {{ contentid: number|string }} props
+ * @param {{
+ *   contentid: number|string,
+ *   contenttypeid?: number,
+ *   firstimage?: string,
+ *   title?: string,
+ *   addr1?: string,
+ *   addr2?: string,
+ *   mapx?: number,
+ *   mapy?: number
+ * }} props
  */
-const HeartToggle = ({ contentid }) => {
+const HeartToggle = ({ contentid, contenttypeid, firstimage, title, addr1, addr2, mapx, mapy }) => {
   const user = useSelector(state => state.auth.user)
   const navigate = useNavigate()
-  const { isFavorited, toggle } = useFavorite(contentid)
+
+  const item = {
+    contentid,
+    contenttypeid,
+    firstimage,
+    title,
+    addr1,
+    addr2,
+    mapx,
+    mapy,
+  }
+  const { isFavorited, toggle } = useFavorite(item)
+
   // 로그인 체크 포함 클릭 핸들러
   const handleClick = e => {
     if (!user) {

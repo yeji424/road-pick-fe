@@ -11,9 +11,9 @@ const CalendarPage = () => {
   if (error) return <div>error...</div>
 
   return (
-    <main className={css.maincontainer}>
+    <main className={css.container}>
       <h2>여행일정</h2>
-      <p>설레는 여행일정으로 달력을 채워보세요!</p>
+      <p className={css.description}>여행일정을 한 눈에 확인하세요!</p>
       <Calendar schedules={schedules} />
     </main>
   )

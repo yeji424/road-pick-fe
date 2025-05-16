@@ -106,7 +106,16 @@ const MainPage = () => {
                   <p className={css.popularTitle}>{item.title}</p>
                   <p className={css.popularAddress}>{item.addr1}</p>
                 </div>
-                <HeartToggle contentid={item.contentid} />
+                <HeartToggle
+                  contentid={item.contentid}
+                  contenttypeid={item.contenttypeid}
+                  firstimage={item.firstimage}
+                  title={item.title}
+                  addr1={item.addr1}
+                  addr2={item.addr2}
+                  mapx={item.mapx}
+                  mapy={item.mapy}
+                />
               </div>
             </div>
           ))
@@ -130,7 +139,16 @@ const MainPage = () => {
                   <p className={css.recommendAddress}>{item.addr1}</p>
                 </div>
               </div>
-              <HeartToggle contentid={item.contentid} />
+              <HeartToggle
+                contentid={item.contentid}
+                contenttypeid={item.contenttypeid}
+                firstimage={item.firstimage}
+                title={item.title}
+                addr1={item.addr1}
+                addr2={item.addr2}
+                mapx={item.mapx}
+                mapy={item.mapy}
+              />
             </div>
           ))
         ) : (

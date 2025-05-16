@@ -4,12 +4,13 @@ import css from './ListCard.module.css'
 import StarIcon from '@/assets/icons/starIcon.svg?react'
 import HeartToggle from '@/components/common/ListCard/HeartToggle'
 
-const ListCard = ({ firstimage, title, addr1, addr2, contentid, contenttypeid }) => {
+const ListCard = ({ firstimage, title, addr1, addr2, contentid, contenttypeid, mapx, mapy }) => {
   const navigate = useNavigate()
 
   // 카드 클릭 시 상세 페이지로 이동
   const moveDetail = () => {
     navigate(`/detail/${contenttypeid}/${contentid}`)
+    console.log(firstimage)
   }
 
   return (
@@ -28,7 +29,16 @@ const ListCard = ({ firstimage, title, addr1, addr2, contentid, contenttypeid })
       </div>
 
       <div className={css.saveBtn}>
-        <HeartToggle contentid={contentid} />
+        <HeartToggle
+          contentid={contentid}
+          contenttypeid={contenttypeid}
+          firstimage={firstimage}
+          title={title}
+          addr1={addr1}
+          addr2={addr2}
+          mapx={mapx}
+          mapy={mapy}
+        />
       </div>
     </div>
   )
