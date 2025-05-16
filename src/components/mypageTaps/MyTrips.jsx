@@ -1,25 +1,41 @@
 import css from './mypageTaps.module.css'
+import { useEffect, useState } from 'react'
 import PlusBtnIcon from '@/assets/icons/PlusBtnIcon.svg?react'
 import TripListImg from '@/assets/imgs/TripListImg.png'
 import MypageListCard from './MypageListCard'
+import { useScheduleList } from '@/hooks/useScheduleList'
+import { deleteSchedule } from '@/apis/scheduleApi'
 import { useNavigate } from 'react-router-dom'
+import Spinner from '../loading/Spinner'
 
 // 더미
 const MyTrips = () => {
-  const trips = [
-    // { name: '강원도 여행', date: '2025.05.11 - 05.15', countryCnt: '2' },
-    // { name: '서울 나들이', date: '2025.05.21', countryCnt: '1' },
-    // { name: '부산 2박 3일', date: '2025.06.07 - 06.09', countryCnt: '1' },
-    // { name: '강원도 여행', date: '2025.05.11 - 05.15', countryCnt: '2' },
-    // { name: '서울 나들이', date: '2025.05.21', countryCnt: '1' },
-    // { name: '부산 2박 3일', date: '2025.06.07 - 06.09', countryCnt: '1' },
-  ]
-
+  const { schedules, loading, error } = useScheduleList()
+  const [trips, setTrips] = useState([])
   const navigate = useNavigate()
+  useEffect(() => {
+    // schedules가 바뀔 때마다 로컬 상태에도 반영
+    if (schedules) {
+      setTrips(schedules)
+    }
+  }, [schedules])
 
+  const handleDelete = async scheduleId => {
+    if (!scheduleId) return
+    try {
+      console.log(scheduleId)
+      const response = await deleteSchedule(scheduleId)
+      setTrips(prevTrips => prevTrips.filter(trip => trip.tripId !== scheduleId))
+      console.log('삭제 성공:', response.data)
+    } catch (err) {
+      console.error('삭제 실패:', err.response?.data || err.message)
+    }
+  }
   const handleGoToCreateTrip = () => {
     navigate('/selectDate')
   }
+  if (loading) return <Spinner />
+  if (error) return <div>error...</div>
   return (
     <div className={css.listContainer}>
       <div className={css.tripCreateCard} onClick={handleGoToCreateTrip}>
@@ -44,24 +60,22 @@ const MyTrips = () => {
           <h3 className={css.title}>다가오는 여행</h3>
           <div className={css.tripList}>
             <div className={css.listTile}>
-              {trips.map((trip, i) => (
+              {trips.map(trip => (
                 <MypageListCard
-                  key={i}
+                  key={trip.tripId}
+                  trip={trip}
                   thumbnail={<img src={TripListImg} alt="여행 이미지" />}
                   info={
                     <>
-                      <h4>{trip.name}</h4>
-                      <p>{trip.date}</p>
+                      <h4>{trip.title}</h4>
+                      <p>
+                        {trip.start}~{trip.end}
+                      </p>
                       <p>{trip.countryCnt}개 도시</p>
                     </>
                   }
                   renderMoreMenu={() => (
-                    <>
-                      <button onClick={() => console.log(`${trip.name} 삭제`)}>일정 삭제</button>
-                      <button onClick={() => console.log(`${trip.name} 순서 변경`)}>
-                        순서 변경
-                      </button>
-                    </>
+                    <button onClick={() => handleDelete(trip.tripId)}>일정 삭제</button>
                   )}
                 />
               ))}
