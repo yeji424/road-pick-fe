@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import css from './BottomSheet.module.css'
 import ArrowUpIcon from '@/assets/icons/arrowUpIcon.svg?react'
+import MoreIcon from '@/assets/icons/moreIcon.svg?react'
 
 const BottomSheetPlan = () => {
   const plans = [
@@ -11,7 +12,7 @@ const BottomSheetPlan = () => {
         { name: '경복궁 관람', memo: '입장 시간 확인' },
         {
           name: '북촌 한옥마을 산책',
-          memo: '두줄일 경우 보여주려고 길게게게ㅔㅔㅔㅔㅔㅔㅔㅔㅔㅔㅔㅔㅔㅔㅔㅔㅔㅔㅔㅔㅔㅔㅔㅔㅔㅔㅔㅔㅔㅔㅔ',
+          memo: '두줄일 경우 보여주려고 길게게게ㅔㅔㅔㅔㅔㅔㅔㅔㅔㅔㅔㅔㅔㅔㅔㅔㅔㅔㅔㅔㅔㅔㅔㅔㅔㅔㅔㅔㅔㅔㅔㅔㅔㅔㅔㅔㅔㅔ',
         },
       ],
     },
@@ -59,7 +60,10 @@ const PlanDayBlock = ({ day, date, activities }) => {
         <ul className={css.planActivitiesList}>
           {activities.map(({ name, memo }, idx) => (
             <li key={idx} className={css.planActivityItem}>
-              <div className={css.activityName}>{name}</div>
+              <div className={css.activityHeader}>
+                <div className={css.activityName}>{name}</div>
+                <MoreIcon className={css.moreIcon} />
+              </div>
               <div className={css.activityMemo}>{memo}</div>
             </li>
           ))}

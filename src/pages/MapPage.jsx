@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useLocation } from 'react-router-dom'
 import Map from '@/components/common/Map/Map'
 import BottomSheet from '@/components/common/BottomSheet/BottomSheet'
@@ -16,24 +16,26 @@ const MapPage = () => {
   const initMapx = location.state?.mapx
   const initMapy = location.state?.mapy
 
-  // (1) 지도 중심 관리: state 기반으로 초기값 설정
   const [center, setCenter] = useState([
     initMapy ? Number(initMapy) : DEFAULT_CITY.lat,
     initMapx ? Number(initMapx) : DEFAULT_CITY.lng,
   ])
-  const [contentTypeId, setContentTypeId] = useState(12)
+  const [debouncedCenter, setDebouncedCenter] = useState(center)
+  useEffect(() => {
+    const handler = setTimeout(() => setDebouncedCenter(center), 500)
+    return () => clearTimeout(handler)
+  }, [center])
 
+  const [contentTypeId, setContentTypeId] = useState(12)
+  // (2) 선택된 관광지 상세 관리
+  const [selectedDetail, setSelectedDetail] = useState(null)
+
+  // 위치 기반 관광지 조회 (반경 200km)
   const {
     data: list,
     isLoading,
     isError,
-  } = useLocationTourList(
-    // ← 변경
-    center[1],
-    center[0],
-    RADIUS,
-    contentTypeId
-  )
+  } = useLocationTourList(debouncedCenter[1], debouncedCenter[0], RADIUS, contentTypeId)
 
   const screenHeight = typeof window !== 'undefined' ? window.innerHeight : 800
   const snapPoints = {
@@ -47,10 +49,19 @@ const MapPage = () => {
     config: { tension: 300, friction: 30 },
   }))
 
-  // 리스트 항목 클릭 시 중심 이동
-  const handleItemClick = (lat, lng) => {
-    setCenter([lat, lng])
+  // (3) 리스트 클릭 → 맵 포커싱 + 모달 오픈
+  const handleItemClick = item => {
+    setCenter([Number(item.mapy), Number(item.mapx)])
+    setSelectedDetail(item)
     api.start({ y: snapPoints.min })
+  }
+  // (4) 마커 클릭 → 모달 오픈
+  const handleMarkerClick = item => {
+    setSelectedDetail(item)
+    api.start({ y: snapPoints.min })
+  }
+  const handleCloseModal = () => {
+    setSelectedDetail(null)
   }
 
   if (isLoading)
@@ -64,11 +75,16 @@ const MapPage = () => {
 
   return (
     <div className={css.fullPage}>
-      {/*Map 컴포넌트에 list 전달 */}
-      <Map center={center} list={list} contentTypeId={contentTypeId} />
+      <Map
+        center={center}
+        list={list}
+        contentTypeId={contentTypeId}
+        onMarkerClick={handleMarkerClick}
+        detail={selectedDetail}
+        onCloseModal={handleCloseModal}
+      />
 
       <BottomSheet snapPoints={snapPoints} y={y} api={api}>
-        {/* 탭·리스트 컴포넌트에 contentTypeId도 전달 */}
         <BottomSheetContent
           list={list}
           contentTypeId={contentTypeId}

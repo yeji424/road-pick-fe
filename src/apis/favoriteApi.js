@@ -2,13 +2,22 @@ import axios from 'axios'
 const API_URL = import.meta.env.VITE_API_URL
 
 /**
- * 찜 추가: contentid만 넘김
- * @param {number|string} contentid
+ * 찜 추가: destination 객체 전체를 넘김
+ * @param {{
+ *   contentid: number|string,
+ *   contenttypeid?: number,
+ *   firstimage?: string,
+ *   title?: string,
+ *   addr1?: string,
+ *   addr2?: string,
+ *   mapx?: number,
+ *   mapy?: number
+ * }} data
  */
-export async function addFavorite(contentid) {
+export async function addFavorite(data) {
   const res = await axios.post(
     `${API_URL}/favorites`,
-    { contentid }, // 🚀 body에 destination 대신 contentid만
+    data, // 🚀 전체 destination 정보
     { withCredentials: true }
   )
   return res.data.favorite
