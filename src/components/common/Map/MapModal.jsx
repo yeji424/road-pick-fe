@@ -26,7 +26,8 @@ const MapModal = ({ detail, isClosing, onCloseComplete }) => {
       <ListCard
         firstimage={detail.firstimage}
         title={detail.title}
-        location={detail.addr1}
+        addr1={detail.addr1}
+        addr2={detail.addr2}
         withPet={detail.withPet ?? false}
         rating={detail.readcount ?? 0}
         reviewCnt={detail.readcount ?? 0}

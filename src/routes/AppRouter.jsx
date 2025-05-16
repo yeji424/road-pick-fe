@@ -3,6 +3,7 @@ import Spinner from '@/components/loading/Spinner'
 import MainLayout from '@/layout/MainLayout'
 import MainPage from '@/pages/MainPage'
 import SearchPage from '@/pages/SearchPage'
+import SearchPopularPage from '@/pages/SearchPopularPage'
 import NotFoundPage from '@/pages/NotFoundPage'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import MyPage from '@/pages/MyPage'
@@ -18,6 +19,7 @@ import LoginPage from '@/pages/LoginPage'
 import { RequireAuth } from '@/hooks/requireAuth'
 import ProfileEditPage from '@/pages/ProfileEditPage'
 import SaveListPage from '@/pages/SaveListPage'
+import FirstLoadingPage from '@/pages/FirstLoadingPage'
 
 const AppRouter = createBrowserRouter([
   {
@@ -38,6 +40,14 @@ const AppRouter = createBrowserRouter([
         element: (
           <Suspense fallback={<Spinner />}>
             <SearchPage />
+          </Suspense>
+        ),
+      },
+      {
+        path: '/searchPopular',
+        element: (
+          <Suspense fallback={<Spinner />}>
+            <SearchPopularPage />
           </Suspense>
         ),
       },
@@ -136,6 +146,14 @@ const AppRouter = createBrowserRouter([
         element: (
           <Suspense fallback={<Spinner />}>
             <ProfileEditPage />
+          </Suspense>
+        ),
+      },
+      {
+        path: '/firstLoading',
+        element: (
+          <Suspense fallback={<Spinner />}>
+            <FirstLoadingPage />
           </Suspense>
         ),
       },

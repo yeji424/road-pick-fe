@@ -1,18 +1,19 @@
 .title {
   font-size: var(--fs-7);
-  font-weight: 700;
+  font-weight: var(--weight-semibold);
   color: var(--gray-700);
+  line-height: 37px;
 }
-
 .description {
   margin-top: 13px;
+  line-height: 20px;
   font-size: var(--fs-3);
-  font-weight: 600;
+  font-weight: var(--weight-medium);
   color: var(--gray-400);
+  letter-spacing: -0.01em;
 }
-
 .cityWrapper {
-  margin-top: 24px;
+  padding-top: 25px;
   width: 100%;
   display: flex;
   flex-direction: row;
@@ -20,57 +21,70 @@
   white-space: nowrap;
   gap: 6px;
   scroll-behavior: smooth;
+  padding-bottom: 5px;
 }
-
 .cityWrapper::-webkit-scrollbar {
   display: none;
 }
-
 .cityButton {
   flex: 0 0 auto;
   width: 78px;
   height: 38px;
   border-radius: 8px;
-  border: 1px solid var(--gray-400);
-  background-color: white;
+  background-color: var(--background-color);
+  font-family: var(--font-body);
   color: var(--gray-400);
-  font-size: 13px;
-  font-weight: 600;
+  font-size: 14px;
+  font-weight: var(--weight-semibold);
   cursor: pointer;
   white-space: nowrap;
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
+  border: none;
+  box-shadow: 0 0 0 0.5px var(--gray-200);
 }
-
+.cityButton:hover {
+  transform: translateY(-1px);
+  box-shadow:
+    0 2px 6px rgba(0, 0, 0, 0.08),
+    0 0 0 1px var(--gray-300);
+  color: var(--gray-500);
+}
 .selected {
-  background-color: var(--primary-blue);
-  color: white;
+  background-color: var(--primary-blue-60);
+  color: var(--background-color);
   border: none;
 }
-
 .selectedInfoWrapper {
   width: 100%;
   margin-top: 30px;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  letter-spacing: -0.02em;
 }
-
 .selectedInfoText {
   font-size: var(--fs-5);
   font-weight: 700;
   color: var(--gray-700);
+  letter-spacing: -0.02em;
 }
-
 .viewAllButton {
   font-size: var(--fs-2);
   color: var(--gray-400);
   background: none;
   border: none;
   cursor: pointer;
+  letter-spacing: -0.02em;
+  transition: transform 0.3s ease;
 }
-
+.viewAllButton:hover {
+  color: var(--primary-blue);
+}
 .popularWrapper {
   width: 100%;
-  margin-top: 18px;
+  padding-top: 18px;
   display: flex;
   overflow-x: auto;
   scroll-behavior: smooth;
@@ -79,17 +93,43 @@
 }
 
 .popularWrapper::-webkit-scrollbar {
-  display: none; /* 스크롤바 숨김 */
+  display: none;
 }
-
 .popularItem {
   position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
   margin-right: 17px;
+  transition: transform 0.3s ease;
+  cursor: pointer;
 }
 
+.popularItem:hover .popularImage img {
+  transform: scale(1.07);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
+}
+
+.popularItem:hover .popularContent {
+  transform: translateY(-10px);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+}
+.popularImage {
+  width: 225px;
+  height: 152px;
+  overflow: hidden;
+  border-radius: 13px;
+  position: relative;
+  transition: box-shadow 0.3s ease;
+}
+.popularImage img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
+}
 .popularContent {
   display: flex;
   position: absolute;
@@ -97,103 +137,114 @@
   width: 196px;
   gap: 3px;
   border-radius: 10px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-  padding: 10px;
   background-color: white;
+  padding: 10px 12px;
   justify-content: space-between;
   align-items: center;
   z-index: 1;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease,
+    background-color 0.3s ease;
 }
-
-.popularImage {
-  width: 225px;
-  height: 152px;
-  object-fit: cover;
-  border-radius: 13px;
-}
-
 .popularTextWrapper {
   display: flex;
   flex-direction: column;
   flex: 1;
   min-width: 0;
+  padding-right: 8px;
 }
-
 .popularTitle {
-  font-size: var(--fs-4);
-  color: var(--gray-600);
-  font-weight: 700;
+  font-size: 17px;
+  color: var(--gray-700);
+  font-weight: var(--weight-semibold);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
-
 .popularAddress {
-  margin-top: 2px;
-  font-size: 10px;
-  color: var(--gray-300);
-  font-weight: 600;
+  margin-top: 3px;
+  font-size: 11px;
+  color: var(--gray-400);
+  font-weight: var(--weight-medium);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
-
-.recommendTitleText {
+.saveBtn {
+  width: 20px !important;
+  height: 20px !important;
+  align-self: flex-start;
+  margin-top: 2px;
+  flex-shrink: 0;
+}
+.recommendTitle {
   font-size: var(--fs-5);
   color: var(--gray-700);
-  font-weight: 700;
+  font-weight: var(--weight-semibold);
+  padding-bottom: 18px;
 }
-
 .recommendWrapper {
   width: 100%;
-  margin-top: 18px;
-}
-
-.recommendItem {
-  position: relative;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 2px;
-  padding-bottom: 10px;
-}
-
-.recommendContent {
-  display: flex;
-  align-items: center;
-  gap: 17px;
-}
-
-.recommendImage {
-  width: 81.32px;
-  height: 75.76px;
-  object-fit: cover;
-  border-radius: 8px;
-}
-
-.recommendTextWrapper {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  gap: 10px;
 }
-
-.recommendTitle {
-  font-size: 20px;
-  color: var(--gray-600);
-  font-weight: 700;
+.loginLink {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+  cursor: pointer;
 }
-
-.recommendAddress {
-  margin-top: 5px;
-  font-size: var(--fs-2);
-  color: var(--gray-300);
-  font-weight: 600;
-}
-
-.eventBannerSection {
-  margin-top: 30px;
-  font-size: var(--fs-5);
+.loginPrompt {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  background-color: var(--background-color);
+  border-radius: 10px;
+  padding: 45px 0 30px;
   color: var(--gray-700);
-  font-weight: 700;
-  margin-bottom: 34px;
+  font-weight: var(--weight-semibold);
+  transition:
+    background-color 0.3s ease,
+    color 0.3s ease;
+}
+.loginLink:hover .loginPrompt,
+.loginLink:focus-visible .loginPrompt {
+  color: var(--secondary-orange-40);
+  background-color: var(--background-color-80);
+}
+.loginIcon {
+  background-color: var(--secondary-orange-40);
+  border-radius: 50px;
+  padding: 17px;
+  height: 70px;
+  width: 70px;
+  color: var(--background-color);
+  transition:
+    background-color 0.3s ease,
+    transform 0.3s ease;
+}
+.loginLink:hover .loginIcon,
+.loginLink:focus-visible .loginIcon {
+  background-color: var(--secondary-orange);
+  transform: scale(1.05);
+}
+.arrowLine {
+  transition: transform 0.3s ease;
+  transform-origin: left center;
+}
+.loginLink:hover .arrowLine,
+.loginLink:focus-visible .arrowLine {
+  transform: translateX(3px);
+}
+.loginWord {
+  color: var(--secondary-orange-40);
+  transition: color 0.3s ease;
+}
+.loginLink:hover .loginWord,
+.loginLink:focus-visible .loginWord {
+  color: var(--secondary-orange);
 }

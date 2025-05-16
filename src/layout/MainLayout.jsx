@@ -16,7 +16,8 @@ const MainLayout = () => {
     location.pathname === '/register' ||
     location.pathname === '/login' ||
     location.pathname === '/map' ||
-    location.pathname === '/plan'
+    location.pathname === '/plan' ||
+    location.pathname === '/firstloading'
 
   useEffect(() => {
     dispatch(fetchProfile())

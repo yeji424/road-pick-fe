@@ -8,7 +8,6 @@ import { deleteSchedule } from '@/apis/scheduleApi'
 import { useNavigate } from 'react-router-dom'
 import Spinner from '../loading/Spinner'
 
-// 더미
 const MyTrips = () => {
   const { schedules, loading, error } = useScheduleList()
   const [trips, setTrips] = useState([])

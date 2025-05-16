@@ -39,6 +39,7 @@ const ListCard = ({
           {addr1} {addr2}
         </p>
       </div>
+
       {!isFavorite && (
         <div className={css.saveBtn}>
           <HeartToggle
@@ -53,6 +54,7 @@ const ListCard = ({
           />
         </div>
       )}
+
     </div>
   )
 }

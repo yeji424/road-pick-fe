@@ -1,35 +1,30 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { useLocation } from 'react-router-dom'
 import css from './SearchPage.module.css'
 import SortDropdown from '../components/common/BottomSheet/SortDropDown'
 import Header from '@/components/common/Header/Header'
 import Spinner from '@/components/loading/Spinner'
 import ListCard from '@/components/common/ListCard/ListCard'
-import { useTourList } from '@/hooks/useKeywordList'
+import { usePopularTourList } from '@/hooks/usePopularTourList'
 
-const SearchPage = () => {
+const SearchPopularPage = () => {
   const [contentTypeId, setContentTypeId] = useState(12)
-  const [searchTerm, setSearchTerm] = useState('')
-  const [sortBy, setSortBy] = useState('name')
+  const [sortBy, setSortBy] = useState('name') // 기본값 임의 설정
   const location = useLocation()
+  const query = new URLSearchParams(location.search)
+  const areaCode = query.get('areaCode')
+  const sigunguCode = query.get('sigunguCode') || undefined
+  const title = query.get('title') || '유명 관광지 전체 보기'
 
-  useEffect(() => {
-    const params = new URLSearchParams(location.search)
-    const keyword = params.get('keyword')
-    if (keyword) {
-      setSearchTerm(keyword)
-    }
-  }, [location])
-
-  const {
-    data: searchResults,
-    isLoading,
-    isError,
-  } = useTourList({ keyword: searchTerm, contentTypeId })
+  const { populars, loading, error } = usePopularTourList({
+    areaCode: areaCode ? Number(areaCode) : undefined,
+    sigunguCode: sigunguCode ? Number(sigunguCode) : undefined,
+    contentTypeId,
+  })
 
   return (
-    <main>
-      <Header title={`"${searchTerm}" 검색 결과`} />
+    <main className={css.wrapper}>
+      <Header title={title} />
 
       <div className={css.tabWrapper}>
         <button
@@ -50,12 +45,12 @@ const SearchPage = () => {
         <SortDropdown sortBy={sortBy} onChange={setSortBy} />
       </div>
 
-      {isLoading && <Spinner />}
-      {isError && <div>오류 발생: {isError.message}</div>}
-      {!isLoading && searchResults?.length === 0 && <div>검색 결과가 없습니다.</div>}
+      {loading && <Spinner />}
+      {error && <div>오류 발생: {error.message}</div>}
+      {!loading && populars.length === 0 && <div>유명 관광지가 없습니다.</div>}
 
-      <div>
-        {searchResults?.map((item, idx) => (
+      <div className={css.listWrapper}>
+        {populars.map((item, idx) => (
           <ListCard
             key={idx}
             firstimage={item.firstimage || 'https://via.placeholder.com/225x152'}
@@ -64,6 +59,8 @@ const SearchPage = () => {
             addr2={item.addr2}
             contentid={item.contentid}
             contenttypeid={item.contenttypeid}
+            mapx={item.mapx}
+            mapy={item.mapy}
           />
         ))}
       </div>
@@ -71,4 +68,4 @@ const SearchPage = () => {
   )
 }
 
-export default SearchPage
+export default SearchPopularPage
