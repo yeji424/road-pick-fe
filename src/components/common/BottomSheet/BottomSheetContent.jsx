@@ -8,6 +8,8 @@ const BottomSheetContent = ({ list, contentTypeId, setContentTypeId, onItemClick
 
   if (!list || list.length === 0) return <div>데이터 불러오는 중..</div>
 
+  const titleText = contentTypeId === 12 ? ' 근처 유명 관광지' : ' 근처 유명 축제/행사'
+
   return (
     <div className={css.contentWrapper}>
       <div className={css.tabWrapper}>
@@ -34,7 +36,6 @@ const BottomSheetContent = ({ list, contentTypeId, setContentTypeId, onItemClick
         {list.map(item => (
           <div key={item.contentid} className={css.listItemWrapper}>
             <ListCard {...item} />
-            {/* 클릭 시 item 전체를 전달 */}
             <div className={css.itemOverlay} onClick={() => onItemClick(item)} />
           </div>
         ))}

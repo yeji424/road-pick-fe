@@ -68,9 +68,10 @@
 }
 
 .headerRow {
+  margin-bottom: 30px;
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  justify-content: flex-end;
 }
 
 .title {
