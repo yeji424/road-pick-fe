@@ -5,11 +5,10 @@ import SortDropdown from './SortDropdown'
 
 const BottomSheetContent = ({ list, setContentTypeId, onItemClick }) => {
   const [sortBy, setSortBy] = useState('name')
-  if (list.length === 0 || !list) return <div>데이터 불러오는중..</div>
+  if (!list || list.length === 0) return <div>데이터 불러오는 중..</div>
 
   return (
     <div className={css.contentWrapper}>
-      {/* 카테고리 탭 */}
       <div className={css.tabWrapper}>
         <button className={css.tabButton} onClick={() => setContentTypeId(12)}>
           관광지
@@ -19,18 +18,17 @@ const BottomSheetContent = ({ list, setContentTypeId, onItemClick }) => {
         </button>
       </div>
 
-      {/* 타이틀 + 정렬 */}
       <div className={css.headerRow}>
         <h2 className={css.title}>서울 유명 관광지</h2>
         <SortDropdown sortBy={sortBy} onChange={setSortBy} />
       </div>
 
-      {/* 리스트 영역 */}
       <div className={css.listWrapper}>
         {list.map(item => (
           <div key={item.contentid} className={css.listItemWrapper}>
             <ListCard {...item} />
-            <div className={css.itemOverlay} onClick={() => onItemClick(item.mapy, item.mapx)} />
+            {/* 클릭 시 item 전체를 전달 */}
+            <div className={css.itemOverlay} onClick={() => onItemClick(item)} />
           </div>
         ))}
       </div>
