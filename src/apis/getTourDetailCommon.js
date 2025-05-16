@@ -3,7 +3,7 @@ import axios from 'axios'
 const SERVICE_KEY = import.meta.env.VITE_TOUR_API
 
 export const getTourDetailCommon = async (contentId, contentTypeId) => {
-  const response = await axios.get('https://apis.data.go.kr/B551011/KorService2/detailCommon2', {
+  const response = await axios.get('https://apis.data.go.kr/B551011/KorService1/detailCommon1', {
     params: {
       MobileOS: 'ETC',
       MobileApp: 'LoadPick',
