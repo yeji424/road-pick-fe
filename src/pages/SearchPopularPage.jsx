@@ -49,7 +49,7 @@ const SearchPopularPage = () => {
       {error && <div>오류 발생: {error.message}</div>}
       {!loading && populars.length === 0 && <div>유명 관광지가 없습니다.</div>}
 
-      <div className={css.listWrapper}>
+      <div className={css.cardListWrapper}>
         {populars.map((item, idx) => (
           <ListCard
             key={idx}

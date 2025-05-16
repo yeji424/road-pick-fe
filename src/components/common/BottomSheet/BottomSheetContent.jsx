@@ -1,11 +1,8 @@
-import React, { useState } from 'react'
+import React from 'react'
 import css from './BottomSheet.module.css'
 import ListCard from '@/components/common/ListCard/ListCard'
-import SortDropdown from './SortDropdown'
 
 const BottomSheetContent = ({ list, contentTypeId, setContentTypeId, onItemClick }) => {
-  const [sortBy, setSortBy] = useState('name')
-  
   if (!list || list.length === 0) return <div>데이터 불러오는 중..</div>
 
   return (
@@ -25,16 +22,10 @@ const BottomSheetContent = ({ list, contentTypeId, setContentTypeId, onItemClick
         </button>
       </div>
 
-      <div className={css.headerRow}>
-        <h2 className={css.title}>주변 검색</h2>
-        <SortDropdown sortBy={sortBy} onChange={setSortBy} />
-      </div>
-
       <div className={css.listWrapper}>
         {list.map(item => (
           <div key={item.contentid} className={css.listItemWrapper}>
             <ListCard {...item} />
-            {/* 클릭 시 item 전체를 전달 */}
             <div className={css.itemOverlay} onClick={() => onItemClick(item)} />
           </div>
         ))}

@@ -65,14 +65,12 @@ const BottomSheet = ({ children, snapPoints, y, api }) => {
         ref={sheetRef}
         {...bind()}
         className={css.sheet}
-        style={{
-          // height: screenHeight,
-          transform: y.to(py => `translateY(${py}px)`),
-        }}
+        style={{ height: y.to(val => `calc(100vh - ${val}px)`) }}
       >
         <div className={css.handleContainer}>
-          <div className={css.handleBar} />
+          <div className={css.handleBar}></div>
         </div>
+
         <div className={css.sheetBody} ref={bodyRef}>
           {children}
         </div>

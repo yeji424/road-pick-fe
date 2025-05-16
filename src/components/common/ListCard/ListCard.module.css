@@ -49,21 +49,24 @@
 }
 
 .rating {
-  font-size: 12px;
+  font-size: 9px;
   margin-bottom: 20px;
   letter-spacing: -0.04em;
 }
+.starIcon {
+  margin-top: 0.9px;
+  display: inline-block;
+  vertical-align: middle;
+}
 .location {
-  font-size: var(--fs-3);
-  font-weight: var(--weight-regular);
+  font-size: var(--fs-2);
+  font-weight: 600;
   color: var(--gray-300);
   margin: 4px 0;
 }
 
 .saveBtn {
   position: absolute;
-  top: 12px;
-  right: 12px;
-  z-index: 9999;
-  padding: 10px;
+  top: 1px;
+  right: 0;
 }
