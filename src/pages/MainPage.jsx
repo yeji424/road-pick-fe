@@ -62,6 +62,10 @@ const MainPage = () => {
     setSelectedCity(city)
   }
 
+  const handleMoveDetail = (contenttypeid, contentid) => {
+    navigate(`/detail/${contenttypeid}/${contentid}`)
+  }
+
   return (
     <main className={css.wrapper}>
       <h2 className={css.title}>
@@ -86,6 +90,8 @@ const MainPage = () => {
           </button>
         ))}
       </div>
+
+      {/* 유명 관광지 */}
       <div className={css.selectedInfoWrapper}>
         <p className={css.selectedInfoText}>{selectedCity} 유명 관광지</p>
         <button className={css.viewAllButton} onClick={() => navigate('/list')}>
@@ -95,7 +101,11 @@ const MainPage = () => {
       <div className={css.popularWrapper}>
         {populars.length > 0 ? (
           populars.map((item, idx) => (
-            <div key={idx} className={css.popularItem}>
+            <div
+              key={idx}
+              className={css.popularItem}
+              onClick={() => handleMoveDetail(item.contenttypeid, item.contentid)}
+            >
               <img
                 src={item.firstimage || 'https://via.placeholder.com/225x152'}
                 alt={item.title}
@@ -106,6 +116,48 @@ const MainPage = () => {
                   <p className={css.popularTitle}>{item.title}</p>
                   <p className={css.popularAddress}>{item.addr1}</p>
                 </div>
+                <div onClick={e => e.stopPropagation()}>
+                  <HeartToggle
+                    contentid={item.contentid}
+                    contenttypeid={item.contenttypeid}
+                    firstimage={item.firstimage}
+                    title={item.title}
+                    addr1={item.addr1}
+                    addr2={item.addr2}
+                    mapx={item.mapx}
+                    mapy={item.mapy}
+                  />
+                </div>
+              </div>
+            </div>
+          ))
+        ) : (
+          <div>유명 관광지가 없습니다.</div>
+        )}
+      </div>
+
+      {/* 추천 관광지 */}
+      <p className={css.recommendTitleText}>OO님께 추천해요!</p>
+      <div className={css.recommendWrapper}>
+        {recommendations.length > 0 ? (
+          recommendations.map((item, idx) => (
+            <div
+              key={idx}
+              className={css.recommendItem}
+              onClick={() => handleMoveDetail(item.contenttypeid, item.contentid)}
+            >
+              <div className={css.recommendContent}>
+                <img
+                  src={item.firstimage || 'https://via.placeholder.com/225x152'}
+                  alt={item.title}
+                  className={css.recommendImage}
+                />
+                <div className={css.recommendTextWrapper}>
+                  <p className={css.recommendTitle}>{item.title}</p>
+                  <p className={css.recommendAddress}>{item.addr1}</p>
+                </div>
+              </div>
+              <div onClick={e => e.stopPropagation()}>
                 <HeartToggle
                   contentid={item.contentid}
                   contenttypeid={item.contenttypeid}
@@ -120,41 +172,11 @@ const MainPage = () => {
             </div>
           ))
         ) : (
-          <div>유명 관광지가 없습니다.</div>
-        )}
-      </div>
-      <p className={css.recommendTitleText}>OO님께 추천해요!</p>
-      <div className={css.recommendWrapper}>
-        {recommendations.length > 0 ? (
-          recommendations.map((item, idx) => (
-            <div key={idx} className={css.recommendItem}>
-              <div className={css.recommendContent}>
-                <img
-                  src={item.firstimage || 'https://via.placeholder.com/225x152'}
-                  alt={item.title}
-                  className={css.recommendImage}
-                />
-                <div className={css.recommendTextWrapper}>
-                  <p className={css.recommendTitle}>{item.title}</p>
-                  <p className={css.recommendAddress}>{item.addr1}</p>
-                </div>
-              </div>
-              <HeartToggle
-                contentid={item.contentid}
-                contenttypeid={item.contenttypeid}
-                firstimage={item.firstimage}
-                title={item.title}
-                addr1={item.addr1}
-                addr2={item.addr2}
-                mapx={item.mapx}
-                mapy={item.mapy}
-              />
-            </div>
-          ))
-        ) : (
           <div>추천 관광지가 없습니다.</div>
         )}
       </div>
+
+      {/* 이벤트 배너 */}
       <div className={css.eventBannerSection}>
         <p className={css.eventBannerTitle}>여름 오기 전, 깜짝 이벤트!</p>
         <div className={css.eventBannerBox}>이벤트 배너</div>
