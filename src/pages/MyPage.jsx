@@ -15,7 +15,13 @@ const MyPage = () => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const user = useSelector(state => state.auth.user)
+  const [activeIndex, setActiveIndex] = useState(0)
+  const [prevIndex, setPrevIndex] = useState(0)
 
+  const onTabChange = index => {
+    setPrevIndex(activeIndex)
+    setActiveIndex(index)
+  }
   const handleLogout = () => {
     dispatch(logout())
     navigate('/')
@@ -26,11 +32,6 @@ const MyPage = () => {
     { key: 'saved', label: '저장 목록', component: <SavedList /> },
     { key: 'friends', label: '친구 목록', component: <FriendsList /> },
   ]
-
-  const [activeIndex, setActiveIndex] = useState(0)
-  const onTabChange = index => {
-    setActiveIndex(index)
-  }
 
   return (
     <main>
@@ -71,14 +72,24 @@ const MyPage = () => {
       {/* 탭 별 컨텐츠 랜딩 영역 */}
       <div className={css.sliderContainer}>
         <div className={css.slider} style={{ transform: `translateX(-${activeIndex * 100}%)` }}>
-          {tabs.map((tab, index) => (
-            <div
-              className={`${css.slide} ${activeIndex === index ? css.active : ''}`}
-              key={tab.key}
-            >
-              {tab.component}
-            </div>
-          ))}
+          {tabs.map((tab, index) => {
+            const isActive = activeIndex === index
+            const isPrev = prevIndex === index
+            const direction = activeIndex > prevIndex ? 'left' : 'right'
+
+            return (
+              <div
+                key={tab.key}
+                className={`
+        ${css.slide}
+        ${isActive ? css.active : ''}
+        ${isPrev ? (direction === 'left' ? css.exitLeft : css.exitRight) : ''}
+      `}
+              >
+                {tab.component}
+              </div>
+            )
+          })}
         </div>
       </div>
     </main>
