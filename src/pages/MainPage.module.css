@@ -22,6 +22,25 @@
   gap: 6px;
   scroll-behavior: smooth;
   padding-bottom: 5px;
+  width: calc(100% + 36px);
+  margin-left: -18px;
+  padding-left: 18px;
+  padding-right: 18px;
+}
+.cityWrapper::after,
+.popularWrapper:after {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 20px;
+  height: 100%;
+  background: linear-gradient(to left, var(--background-color), transparent);
+  pointer-events: none;
+  z-index: 1;
+}
+.cityWrapper > button:last-child {
+  margin-right: 20px;
 }
 .cityWrapper::-webkit-scrollbar {
   display: none;
@@ -90,6 +109,10 @@
   scroll-behavior: smooth;
   cursor: grab;
   padding-bottom: 85px;
+  width: calc(100% + 36px);
+  margin-left: -18px;
+  padding-left: 18px;
+  padding-right: 18px;
 }
 
 .popularWrapper::-webkit-scrollbar {

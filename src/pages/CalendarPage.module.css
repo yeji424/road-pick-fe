@@ -16,3 +16,7 @@
 .container {
   margin-bottom: 34px;
 }
+.calendarArea {
+  width: calc(100% + 36px);
+  margin-left: -18px;
+}

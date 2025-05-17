@@ -16,7 +16,9 @@ const CalendarPage = () => {
         <h2>여행일정</h2>
         <p className={css.description}>여행일정을 한 눈에 확인하세요!</p>
       </div>
-      <Calendar schedules={schedules} enableHover={false} />
+      <div className={css.calendarArea}>
+        <Calendar schedules={schedules} enableHover={false} />
+      </div>
     </main>
   )
 }

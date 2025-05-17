@@ -65,14 +65,16 @@ const SelectDatePage = () => {
         <h2>여행일정 등록</h2>
         <p className={css.description}>설레는 여행일정으로 달력을 채워보세요!</p>
       </div>
-      <Calendar
-        SelectDate={SelectDate}
-        start={start}
-        end={end}
-        schedules={schedules}
-        isSelect={true}
-        showStartEndLabel={true}
-      />
+      <div className={css.calendarArea}>
+        <Calendar
+          SelectDate={SelectDate}
+          start={start}
+          end={end}
+          schedules={schedules}
+          isSelect={true}
+          showStartEndLabel={true}
+        />
+      </div>
     </main>
   )
 }

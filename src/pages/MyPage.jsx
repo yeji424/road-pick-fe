@@ -66,8 +66,8 @@ const MyPage = () => {
         <div
           className={css.underline}
           style={{ transform: `translateX(${activeIndex * 100}%)`, width: `${100 / tabs.length}%` }}
-        />{' '}
-      </div>{' '}
+        />
+      </div>
       {/* 탭 별 컨텐츠 랜딩 영역 */}
       <div className={css.sliderContainer}>
         <div className={css.slider} style={{ transform: `translateX(-${activeIndex * 100}%)` }}>

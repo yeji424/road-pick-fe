@@ -16,6 +16,10 @@
 .container {
   margin-bottom: 34px;
 }
+.calendarArea {
+  width: calc(100% + 36px);
+  margin-left: -18px;
+}
 .grow {
   animation: textGrow 0.5s ease-in-out;
 }
