@@ -1,14 +1,15 @@
 .title {
   font-size: var(--fs-7);
-  font-weight: var(--weight-semibold);
+  font-weight: var(--weight-medium);
   color: var(--gray-700);
   line-height: 37px;
+  letter-spacing: -0.01em;
 }
 .description {
   margin-top: 13px;
   line-height: 20px;
   font-size: var(--fs-3);
-  font-weight: var(--weight-medium);
+  font-weight: var(--weight-regular);
   color: var(--gray-400);
   letter-spacing: -0.01em;
 }
@@ -22,6 +23,25 @@
   gap: 6px;
   scroll-behavior: smooth;
   padding-bottom: 5px;
+  width: calc(100% + 36px);
+  margin-left: -18px;
+  padding-left: 18px;
+  padding-right: 18px;
+}
+.cityWrapper::after,
+.popularWrapper:after {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 20px;
+  height: 100%;
+  background: linear-gradient(to left, var(--background-color), transparent);
+  pointer-events: none;
+  z-index: 1;
+}
+.cityWrapper > button:last-child {
+  margin-right: 20px;
 }
 .cityWrapper::-webkit-scrollbar {
   display: none;
@@ -34,8 +54,8 @@
   background-color: var(--background-color);
   font-family: var(--font-body);
   color: var(--gray-400);
-  font-size: 14px;
-  font-weight: var(--weight-semibold);
+  font-size: 13px;
+  font-weight: var(--weight-regular);
   cursor: pointer;
   white-space: nowrap;
   transition:
@@ -66,17 +86,17 @@
 }
 .selectedInfoText {
   font-size: var(--fs-5);
-  font-weight: 700;
+  font-weight: var(--weight-medium);
   color: var(--gray-700);
   letter-spacing: -0.02em;
 }
 .viewAllButton {
-  font-size: var(--fs-2);
+  font-size: 11px;
   color: var(--gray-400);
   background: none;
   border: none;
   cursor: pointer;
-  letter-spacing: -0.02em;
+  letter-spacing: var(--letter-spacing-title);
   transition: transform 0.3s ease;
 }
 .viewAllButton:hover {
@@ -90,6 +110,10 @@
   scroll-behavior: smooth;
   cursor: grab;
   padding-bottom: 85px;
+  width: calc(100% + 36px);
+  margin-left: -18px;
+  padding-left: 18px;
+  padding-right: 18px;
 }
 
 .popularWrapper::-webkit-scrollbar {
@@ -156,18 +180,23 @@
   padding-right: 8px;
 }
 .popularTitle {
-  font-size: 17px;
+  width: 90%;
+  /* border: 1px red solid; */
+  font-size: 18px;
+  letter-spacing: var(--letter-spacing-title);
   color: var(--gray-700);
-  font-weight: var(--weight-semibold);
+  font-weight: var(--weight-medium);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
 .popularAddress {
+  width: 90%;
   margin-top: 3px;
   font-size: 11px;
   color: var(--gray-400);
-  font-weight: var(--weight-medium);
+  font-weight: var(--weight-regular);
+  letter-spacing: var(--letter-spacing-description);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -175,14 +204,16 @@
 .saveBtn {
   width: 20px !important;
   height: 20px !important;
-  align-self: flex-start;
+  position: absolute;
+  top: 10px;
+  right: 12px;
   margin-top: 2px;
   flex-shrink: 0;
 }
 .recommendTitle {
   font-size: var(--fs-5);
   color: var(--gray-700);
-  font-weight: var(--weight-semibold);
+  font-weight: var(--weight-medium);
   padding-bottom: 18px;
 }
 .recommendWrapper {

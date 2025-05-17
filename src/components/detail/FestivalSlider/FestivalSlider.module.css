@@ -1,7 +1,15 @@
 .festival {
   padding: var(--fs-6) 0;
 }
-
+.divider {
+  border: none;
+  border-bottom: 0.1px solid #eaeaea;
+  margin: 4px 0 12px;
+}
 .festival h3 {
-  font-size: var(--fs-4);
+  font-size: 19px;
+  letter-spacing: -0.03em;
+  font-weight: var(--weight-medium);
+  color: var(--gray-600);
+  margin-bottom: 5px;
 }
