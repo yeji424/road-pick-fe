@@ -2,7 +2,7 @@
   width: 100%;
   max-width: 430px;
   /* margin: 0 auto; */
-  border: 1px red solid;
+  /* border: 1px red solid; */
 }
 
 .title {
@@ -90,6 +90,7 @@
   margin-bottom: 32px;
   font-weight: var(--weight-demilight);
   cursor: pointer;
+  transition: color 0.3s ease;
 }
 .forgot:hover {
   color: var(--secondary-orange);
