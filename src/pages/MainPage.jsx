@@ -138,6 +138,7 @@ const MainPage = () => {
                     addr2={item.addr2}
                     mapx={item.mapx}
                     mapy={item.mapy}
+                    className={css.saveBtn}
                   />
                 </div>
               </div>
