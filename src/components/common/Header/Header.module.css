@@ -26,11 +26,17 @@
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
-  font-size: var(--fs-5);
-  font-weight: 600;
-  color: var(--gray-700);
+  font-size: 17px;
+  font-weight: var(--weight-regular);
+  color: var(--gray-600);
   letter-spacing: -0.03em;
   margin: 0;
+}
+.head span {
+  font-size: 14px;
+  font-family: sans-serif;
+  letter-spacing: var(--letter-spacing-title);
+  font-weight: var(--weight-regular);
 }
 .arrowLeftIcon:hover,
 .plus:hover {

@@ -91,12 +91,12 @@
   letter-spacing: -0.02em;
 }
 .viewAllButton {
-  font-size: var(--fs-2);
+  font-size: 11px;
   color: var(--gray-400);
   background: none;
   border: none;
   cursor: pointer;
-  letter-spacing: -0.02em;
+  letter-spacing: var(--letter-spacing-title);
   transition: transform 0.3s ease;
 }
 .viewAllButton:hover {

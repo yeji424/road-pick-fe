@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { useSpring } from 'react-spring'
 import Header from '@/components/common/Header/Header'
 import css from './PlanPage.module.css'
@@ -12,7 +12,6 @@ import MultiPlaceMap from '@/components/common/Map/PlanMap'
 import { formatDateToLocalString } from '@/components/common/Calendar/CalendarLogic'
 import { deleteScheduleDetail, getScheduleDetailByDate } from '@/apis/schedulsDetailApi'
 import { generateDateRange } from '@/components/common/BottomSheet/generateDateRange'
-import { useTourDetail } from '@/hooks/useTourDetail'
 import { useTourDetailCommons } from '@/hooks/useDetailsCommon'
 
 const PlanPage = () => {
@@ -21,7 +20,6 @@ const PlanPage = () => {
   const { tripId } = useParams()
   const { schedule, loading, error } = useScheduleDetail(tripId)
   const [activitiesByDate, setActivitiesByDate] = useState({})
-
 
   const snapPoints = {
     full: 100, // 최상단
@@ -96,7 +94,7 @@ const PlanPage = () => {
   }, [schedule])
 
   if (loading || isLoading) return <Spinner />
-    
+
   if (!tripId) return <div>일정 ID 없음</div>
 
   if (error) return <div>error...</div>
