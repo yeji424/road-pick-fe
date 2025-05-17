@@ -1,7 +1,9 @@
 import React, { useState } from 'react'
-import css from './RegisterPage.module.css'
+import css from './LoginPage.module.css'
 import { register } from '@/apis/authApi'
 import { useNavigate } from 'react-router-dom'
+import GoogleIcon from '@/assets/icons/googleIcon.svg?react'
+import KakaoIcon from '@/assets/icons/kakaoIcon.svg?react'
 
 const RegisterPage = () => {
   const navigate = useNavigate()
@@ -95,7 +97,7 @@ const RegisterPage = () => {
 
   return (
     <div className={css.wrapper}>
-      <h2 className={css.title}>회원가입</h2>
+      <h2 className={`${css.title} ${css.registerTitle}`}>회원가입</h2>
       <form className={css.form} onSubmit={handleSubmit}>
         {/* 이메일 */}
         <div className={css.inputWrap}>
@@ -160,6 +162,7 @@ const RegisterPage = () => {
           </div>
           {errors.confirmPassword && <p className={css.error}>{errors.confirmPassword}</p>}
         </div>
+        <p className={css.forgot}> </p>
 
         <button className={css.submit} type="submit" disabled={!isFormValid()}>
           회원가입
@@ -169,8 +172,12 @@ const RegisterPage = () => {
 
       <p className={css.alt}>3초만에 로그인하기</p>
       <div className={css.snsButtons}>
-        <button className={css.snsBtn}>🔵 </button>
-        <button className={css.snsBtn}>🟡 </button>
+        <button className={css.snsBtn}>
+          <GoogleIcon />
+        </button>
+        <button className={css.snsBtn}>
+          <KakaoIcon />
+        </button>
       </div>
     </div>
   )
