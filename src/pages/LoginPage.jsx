@@ -4,6 +4,9 @@ import { useNavigate } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import css from './LoginPage.module.css'
 import { login as loginThunk } from '@/store/authSlice' // ← authSlice의 Thunk import
+import CheckIcon from '@/assets/icons/checkIcon.svg?react'
+import GoogleIcon from '@/assets/icons/googleIcon.svg?react'
+import KakaoIcon from '@/assets/icons/kakaoIcon.svg?react'
 
 const LoginPage = () => {
   const navigate = useNavigate()
@@ -94,7 +97,12 @@ const LoginPage = () => {
         <p className={css.forgot}>비밀번호를 잊어버리셨나요?</p>
 
         {/* 로그인 버튼 */}
-        <button className={css.submit} type="submit" disabled={!isFormValid()}>
+        <button
+          className={`${css.submit} ${loginMsg ? css.error : ''}`}
+          type="submit"
+          disabled={!isFormValid()}
+        >
+          {' '}
           로그인
         </button>
         {loginMsg && <p className={css.error}>{loginMsg}</p>}
@@ -103,8 +111,12 @@ const LoginPage = () => {
       {/* SNS 로그인 */}
       <p className={css.alt}>3초만에 로그인하기</p>
       <div className={css.snsButtons}>
-        <button className={css.snsBtn}>🔴</button>
-        <button className={css.snsBtn}>🟡</button>
+        <button className={css.snsBtn}>
+          <GoogleIcon />
+        </button>
+        <button className={css.snsBtn}>
+          <KakaoIcon />
+        </button>
       </div>
 
       {/* 회원가입 이동 */}
