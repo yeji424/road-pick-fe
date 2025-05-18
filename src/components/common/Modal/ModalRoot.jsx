@@ -1,5 +1,6 @@
 import { useModal } from '@/hooks/useModal'
 import RegisterModal from './RegisterModal'
+import LogoutModal from './LogoutModal'
 
 export default function ModalRoot() {
   const { modalName, modalProps, closeModal } = useModal()
@@ -9,8 +10,8 @@ export default function ModalRoot() {
   switch (modalName) {
     case 'registerComplete':
       return <RegisterModal onClose={closeModal} {...modalProps} />
-    // case "other":
-    //   return <OtherModal onClose={closeModal} {...modalProps} />;
+    case 'logout':
+      return <LogoutModal onClose={closeModal} {...modalProps} />
     default:
       return null
   }

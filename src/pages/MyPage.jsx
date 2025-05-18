@@ -4,15 +4,15 @@ import Header from '@/components/common/Header/Header'
 import MyTrips from '@/components/mypageTaps/MyTrips'
 import SavedList from '@/components/mypageTaps/SavedList'
 import FriendsList from '@/components/mypageTaps/FriendsList'
-import { useDispatch, useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 import profileImage from '@/assets/imgs/ProfileBasicImg.png'
 import LogoutIcon from '@/assets/icons/logoutIcon.svg?react'
 import { Navigate, useNavigate } from 'react-router-dom'
-import { logout } from '@/store/authSlice'
+
+import { useModal } from '@/hooks/useModal'
 
 const MyPage = () => {
   // Redux store에서 user 정보만 꺼내서 화면에 표시
-  const dispatch = useDispatch()
   const navigate = useNavigate()
   const user = useSelector(state => state.auth.user)
   const [activeIndex, setActiveIndex] = useState(0)
@@ -23,8 +23,7 @@ const MyPage = () => {
     setActiveIndex(index)
   }
   const handleLogout = () => {
-    dispatch(logout())
-    navigate('/')
+    openModal('logout')
   }
 
   const tabs = [
@@ -32,7 +31,7 @@ const MyPage = () => {
     { key: 'saved', label: '저장 목록', component: <SavedList /> },
     { key: 'friends', label: '친구 목록', component: <FriendsList /> },
   ]
-
+  const { openModal } = useModal()
   return (
     <main>
       <Header

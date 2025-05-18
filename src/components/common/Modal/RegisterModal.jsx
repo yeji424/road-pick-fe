@@ -20,7 +20,7 @@ const RegisterModal = ({ onClose }) => {
           <img src={registerImg} alt="회원가입 완료" />
         </div>
         <p className={css.text}>회원가입이 완료되었습니다!</p>
-        <button className={css.successBtn} onClick={handleLoginClick}>
+        <button className={css.loginBtn} onClick={handleLoginClick}>
           로그인하기
         </button>
       </div>
