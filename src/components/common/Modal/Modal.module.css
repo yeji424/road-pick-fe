@@ -67,6 +67,7 @@
   color: var(--background-color);
   padding: 10px 15px;
   border-radius: 6px;
+  font-weight: var(--weight-regular);
   border: none;
   cursor: pointer;
   transition:
@@ -140,4 +141,38 @@
 .successBtn:hover {
   background-color: var(--primary-blue);
   transform: scale(1.05);
+}
+.modal .title {
+  font-size: 20px;
+  font-weight: var(--weight-medium);
+}
+.modal h4 {
+  /* border: 1px solid red; */
+  text-align: start;
+  font-size: 18px;
+  font-weight: var(--weight-regular);
+  margin-bottom: 17px;
+}
+.image {
+  max-height: 150px;
+  border-radius: 8px;
+  overflow: hidden;
+  margin: auto;
+  margin-bottom: 27px;
+}
+
+.image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: inherit;
+  display: block;
+}
+.description {
+  text-align: start;
+  font-weight: var(--weight-demilight);
+  font-size: 14px;
+  color: var(--gray-500);
+  margin-bottom: 27px;
+  letter-spacing: var(--letter-spacing-title);
 }

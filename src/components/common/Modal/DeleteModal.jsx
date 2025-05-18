@@ -13,12 +13,22 @@ const DeleteModal = ({ onClose, onConfirm, title, image, description }) => {
   return (
     <div className={css.backdrop} onClick={onClose}>
       <div className={css.modal} onClick={e => e.stopPropagation()}>
-        <button className={css.closeIcon} onClick={onClose}>
+        {/* <button className={css.closeIcon} onClick={onClose}>
           ✕
-        </button>
-        <h3>{title || `을(를)목록에서 삭제하시겠습니까?`}</h3>
-        {image && <img src={image || noImage} alt={title} className={css.imagePreview} />}
-        {description && <p>{description}</p>}
+        </button> */}
+        <div className={css.image}>
+          {image && <img src={image || noImage} alt={title} className={css.imagePreview} />}
+        </div>
+        <h4>
+          {title ? (
+            <>
+              <span className={css.title}>"{title}"</span>를(을) 저장 목록에서 삭제하시겠습니까?
+            </>
+          ) : (
+            '해당 관광지를(을) 저장 목록에서 삭제하시겠습니까?'
+          )}
+        </h4>
+        {description && <p className={css.description}>{description}</p>}
         <div className={css.btnArea}>
           <button className={css.closeBtn} onClick={handleCLoseClick}>
             닫기

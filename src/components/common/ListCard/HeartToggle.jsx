@@ -55,7 +55,7 @@ const HeartToggle = ({
       openModal('delete', {
         title,
         image: firstimage,
-        description: '이 장소를 저장 목록에서 삭제하시겠습니까?',
+        description: '저장 목록에서 삭제된 항목은 장소 추가에 사용할 수 없습니다.',
         onConfirm: () => toggle(e), // 찜 해제
       })
     } else {
