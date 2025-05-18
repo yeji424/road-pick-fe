@@ -4,10 +4,14 @@ import React from 'react'
 
 import { useScheduleList } from '@/hooks/useScheduleList'
 import Spinner from '@/components/loading/Spinner'
+import { useSelector } from 'react-redux'
 
 const CalendarPage = () => {
-  const { schedules, loading, error } = useScheduleList()
-  if (loading) return <Spinner />
+  const user = useSelector(state => state.auth.user)
+
+  const userId = user?._id
+  const { data: schedules, loading, error } = useScheduleList(userId)
+  if (!user || loading || !schedules) return <Spinner />
   if (error) return <div>error...</div>
 
   return (
