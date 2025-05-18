@@ -78,7 +78,7 @@ body {
   width: 100%;
   min-height: calc(100vh - 73px);
   font-family: var(--font-body);
-  font-weight: var(--weight-medium);
+  font-weight: var(--weight-regular);
   font-style: normal;
   font-optical-sizing: auto;
   letter-spacing: var(--letter-spacing-description);
