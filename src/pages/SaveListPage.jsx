@@ -64,7 +64,6 @@ const SaveListPage = () => {
   return (
     <main>
       <Header title="저장 목록" />
-      <h2>저장 관광지</h2>
       {favorites.length === 0 ? (
         <p className={css.empty}>아직 찜한 항목이 없습니다.</p>
       ) : (

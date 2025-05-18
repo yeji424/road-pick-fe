@@ -11,6 +11,7 @@
   display: flex;
   flex-direction: column;
   max-height: 100vh;
+  min-height: 0;
 }
 
 .handleContainer {
@@ -57,7 +58,7 @@
   flex: 1;
   border-radius: 8px;
   font-size: var(--fs-4);
-  font-weight: 600;
+  font-weight: var(--weight-medium);
   color: var(--gray-400);
   cursor: pointer;
 }
@@ -100,6 +101,7 @@
   flex: 1;
   overflow-y: auto;
   padding: 0 18px 34px;
+  min-height: 0;
 }
 
 /* ----------------------------- 드롭다운 정렬 영역 */

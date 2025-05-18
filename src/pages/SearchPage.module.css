@@ -29,3 +29,10 @@
   align-items: center;
   justify-content: flex-end;
 }
+
+.cardListWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 16px; /* 카드 간 간격 */
+  padding: 16px; /* 양쪽 여백 */
+}

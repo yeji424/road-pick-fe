@@ -54,7 +54,7 @@ const SearchPage = () => {
       {isError && <div>오류 발생: {isError.message}</div>}
       {!isLoading && searchResults?.length === 0 && <div>검색 결과가 없습니다.</div>}
 
-      <div>
+      <div className={css.cardListWrapper}>
         {searchResults?.map((item, idx) => (
           <ListCard
             key={idx}
@@ -64,6 +64,8 @@ const SearchPage = () => {
             addr2={item.addr2}
             contentid={item.contentid}
             contenttypeid={item.contenttypeid}
+            mapx={item.mapx}
+            mapy={item.mapy}
           />
         ))}
       </div>

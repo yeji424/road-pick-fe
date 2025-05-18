@@ -12,15 +12,17 @@ import MultiPlaceMap from '@/components/common/Map/PlanMap'
 import { formatDateToLocalString } from '@/components/common/Calendar/CalendarLogic'
 import { deleteScheduleDetail, getScheduleDetailList } from '@/apis/schedulsDetailApi'
 
+
+
 const PlanPage = () => {
   // 현재 화면 높이 기준으로 snap 위치 계산
   const screenHeight = typeof window !== 'undefined' ? window.innerHeight : 800
   const { tripId } = useParams()
   const location = useLocation()
   const { title } = location.state
-
   const { data: schedule, loading, error } = useScheduleDetail(tripId)
   const [activitiesByDate, setActivitiesByDate] = useState({})
+
   const snapPoints = {
     full: 0, // 최상단
     mid: screenHeight * 0.6, // 중간

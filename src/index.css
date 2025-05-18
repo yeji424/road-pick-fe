@@ -3,7 +3,7 @@
 /* CSS 리셋 */
 @import url('https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css');
 /* FONT : Noto Sans KR */
-@import url('https://fonts.googleapis.com/css2?family=Nanum+Myeongjo&family=Noto+Sans+KR:wght@200&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Nanum+Myeongjo&family=Noto+Sans+KR:wght@300;400;500;600&display=swap');
 
 /* 기본 스타일 */
 * {
@@ -34,6 +34,7 @@
   --gray-400: #9a9da4; /*gray50*/
   --gray-300: #a5a8af; /*gray*/
   --gray-200: #d5d7df; /*LightGray60*/
+  --gray-250: #f0f1f5; /*LightGray*/
   --gray-100: #fafafa; /*LightGray10*/
 
   --danger: #e94e4e;
@@ -60,6 +61,7 @@
   /* 자간 및 높이 */
 
   --letter-spacing-title: -0.03em;
+  --letter-spacing-description2: -0.02em;
   --letter-spacing-description: -0.01em;
   --line-height: 1.5;
 
@@ -76,7 +78,9 @@ body {
   width: 100%;
   min-height: calc(100vh - 73px);
   font-family: var(--font-body);
-  font-weight: var(--weight-regular);
+  font-weight: var(--weight-medium);
+  font-style: normal;
+  font-optical-sizing: auto;
   letter-spacing: var(--letter-spacing-description);
   line-height: var(--line-height);
   font-size: var(--fs-3);
@@ -84,7 +88,6 @@ body {
   overflow-x: hidden;
   margin-bottom: 20px;
 }
-
 #root {
   max-width: 600px;
   width: 100%;
@@ -97,6 +100,20 @@ body {
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   padding: 69px 18px 34px 18px;
 }
+html,
+body,
+#root {
+  scrollbar-width: none !important; /* Firefox */
+  -ms-overflow-style: none !important; /* IE */
+}
+html::-webkit-scrollbar,
+body::-webkit-scrollbar,
+#root::-webkit-scrollbar {
+  display: none !important;
+  width: 0 !important;
+  height: 0 !important;
+  background: transparent !important;
+}
 main {
   flex: 1;
 }
@@ -104,6 +121,7 @@ main h2 {
   font-size: var(--fs-6);
 }
 footer {
+  width: 100%;
   position: fixed;
   bottom: 0;
   left: 0;
@@ -111,10 +129,10 @@ footer {
   justify-content: center;
   align-items: center;
   height: 25px;
-  /* border: red solid 1px; */
   font-size: var(--fs-2);
   color: var(--primary-blue);
   text-align: center;
+  font-weight: var(--weight-regular);
 }
 button {
   border: none;
