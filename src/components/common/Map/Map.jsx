@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useEffect, useLayoutEffect, useRef, useState } from 'react'
 import { loadKakaoMapScript } from '@/loaders/kakaoLoader'
 import css from './Map.module.css'
 import MapModal from './MapModal'
@@ -30,19 +30,23 @@ const Map = ({ center, list, onMarkerClick, detail, onCloseModal, onReSearch }) 
   })
 
   // 1) 지도 스크립트 로드 & 인스턴스 생성
-  useEffect(() => {
+  useLayoutEffect(() => {
     loadKakaoMapScript()
       .then(() => {
-        const kakao = window.kakao
-        const map = new kakao.maps.Map(mapContainerRef.current, {
-          center: new kakao.maps.LatLng(center[0], center[1]),
-          level: 2,
-        })
-        mapInstanceRef.current = map
-        setIsReady(true)
+        requestAnimationFrame(() => {
+          if (!mapContainerRef.current) return
 
-        kakao.maps.event.addListener(map, 'click', () => {
-          setModalClosing(true)
+          const kakao = window.kakao
+          const map = new kakao.maps.Map(mapContainerRef.current, {
+            center: new kakao.maps.LatLng(center[0], center[1]),
+            level: 2,
+          })
+          mapInstanceRef.current = map
+          setIsReady(true)
+
+          kakao.maps.event.addListener(map, 'click', () => {
+            setModalClosing(true)
+          })
         })
       })
       .catch(console.error)
