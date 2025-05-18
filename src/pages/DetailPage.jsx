@@ -19,16 +19,10 @@ const DetailPage = () => {
 
   if (isLoading || loading) return <Spinner />
   if (isError || error) return <p>에러 발생</p>
-  if (!festivals || festivals.length === 0) return <p>페스티벌 정보가 없습니다.</p>
 
   return (
     <main className={css.container}>
-      <Header
-        title="상세 정보"
-        showButton
-        buttonText="일정 추가"
-        onButtonClick={() => console.log('일정 추가 버튼 클릭됨')}
-      />
+      <Header title="상세 정보" />
       <DetailImage common={commonData[0]} />
       <DetailTitle common={commonData[0]} />
       <p className={css.addr}>{commonData[0].addr1}</p>

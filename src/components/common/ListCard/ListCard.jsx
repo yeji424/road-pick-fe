@@ -54,7 +54,6 @@ const ListCard = ({
           />
         </div>
       )}
-
     </div>
   )
 }
