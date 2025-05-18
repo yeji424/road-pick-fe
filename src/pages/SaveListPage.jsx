@@ -3,33 +3,49 @@ import { useFavoritesList } from '@/hooks/useFavorite'
 import css from './SaveListPage.module.css'
 import Spinner from '@/components/loading/Spinner'
 import ListCard from '@/components/common/ListCard/ListCard'
-import { useLocation } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 import { formatDateToLocalString } from '@/components/common/Calendar/CalendarLogic'
 import { createScheduleDetail } from '@/apis/schedulsDetailApi'
+import { useState } from 'react'
+import PlanModal from '@/components/common/Modal/PlanModal'
 const SaveListPage = () => {
   const { favorites, isLoading, isError } = useFavoritesList() // 찜 목록 훅 호출
+  const [isOpen, setIsOpen] = useState(false)
+  const [selectedDest, setSelectedDest] = useState(null)
+  const navigate = useNavigate()
   const location = useLocation()
   const date = location.state?.date
   const tripId = location.state?.tripId
   const day = location.state?.day
-
+  const title = location.state?.title
   if (isLoading) return <Spinner />
   if (isError) return <div className={css.error}>찜 목록을 불러오는 중 오류가 발생했습니다.</div>
 
-  const CreateShedule = async (e, fav) => {
-    e.stopPropagation()
+  const ModalOpen = dest => {
+    setSelectedDest(dest)
+    setIsOpen(true)
+  }
 
-    const dest = fav.destination ?? {
-      contentid: fav.destination.contentid,
-      contenttypeid: fav.destination.contenttypeid,
-      firstimage: fav.destination.firstimage,
-      title: fav.destination.title,
-      addr1: fav.destination.addr1,
-      addr2: fav.destination.addr2,
-      mapx: fav.destination.mapx,
-      mapy: fav.destination.mapy,
+  const ModalClose = () => {
+    setIsOpen(false)
+  }
+  const CreateShedule = async (e, fav, cheked) => {
+    e.stopPropagation()
+    if (!fav) {
+      return
     }
-    console.log(dest)
+    const dest = fav.destination
+      ? fav.destination
+      : {
+          contentid: fav.contentid,
+          contenttypeid: fav.contenttypeid,
+          firstimage: fav.firstimage,
+          title: fav.title,
+          addr1: fav.addr1,
+          addr2: fav.addr2,
+          mapx: fav.mapx,
+          mapy: fav.mapy,
+        }
     const newDetail = {
       trip: tripId,
       destination: dest,
@@ -38,6 +54,9 @@ const SaveListPage = () => {
     }
     try {
       await createScheduleDetail(newDetail)
+      if (cheked) {
+        navigate(-1)
+      } else ModalClose()
     } catch (error) {
       console.log(error)
     }
@@ -64,7 +83,7 @@ const SaveListPage = () => {
             }
 
             return (
-              <li key={fav._id} className={css.item} onClick={e => CreateShedule(e, fav)}>
+              <li key={fav._id} className={css.item} onClick={() => ModalOpen(dest)}>
                 {/* ListCard에 destination 정보 전체를 props로 전달 */}
                 <ListCard
                   contentid={dest.contentid}
@@ -81,6 +100,14 @@ const SaveListPage = () => {
             )
           })}
         </ul>
+      )}
+      {isOpen && (
+        <PlanModal
+          CreateShedule={CreateShedule}
+          ModalClose={ModalClose}
+          dest={selectedDest}
+          title={title}
+        />
       )}
     </main>
   )
