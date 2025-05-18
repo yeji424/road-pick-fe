@@ -5,12 +5,15 @@ import Header from '@/components/common/Header/Header'
 import RegistModal from '@/components/common/Modal/RegistModal'
 import { useScheduleList } from '@/hooks/useScheduleList'
 import Spinner from '@/components/loading/Spinner'
+import { useSelector } from 'react-redux'
 
 const SelectDatePage = () => {
   const [start, setStart] = useState('')
+  const user = useSelector(state => state.auth.user)
+  const userId = user._id
   const [end, setEnd] = useState('')
   const [isOpen, setIsOpen] = useState(false)
-  const { schedules, loading, error } = useScheduleList()
+  const { data: schedules, loading, error } = useScheduleList(userId)
   const ModalOpen = () => {
     setIsOpen(true)
   }
@@ -43,7 +46,7 @@ const SelectDatePage = () => {
     }
   }, [buttonEffect])
 
-  if (loading) return <Spinner />
+  if (loading || !schedules) return <Spinner />
   if (error) {
     return (
       <div className={css.error}>
