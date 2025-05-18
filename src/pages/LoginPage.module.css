@@ -1,6 +1,7 @@
 .wrapper {
   width: 100%;
   max-width: 430px;
+  margin: 0 auto;
   /* margin: 0 auto; */
   /* border: 1px red solid; */
 }
@@ -41,13 +42,13 @@
 }
 
 .inputGroup {
+  position: relative;
   max-height: 65px;
   display: flex;
   flex-direction: column;
   border: 1px solid var(--gray-300);
   padding: 10px 20px;
   border-radius: 10px;
-  /* border: 1px solid red; */
   gap: 2px;
   transition:
     border 0.3s ease,
@@ -68,6 +69,7 @@
   color: var(--gray-600);
   border: none;
   outline: none;
+  padding-right: 40px;
 }
 
 .inputGroup:focus-within {
@@ -105,7 +107,6 @@
   font-size: 16px;
   cursor: pointer;
   transition: background-color 0.3s ease;
-  margin-bottom: 47px;
 }
 .submit:hover:enabled {
   background-color: var(--primary-blue);
@@ -115,7 +116,6 @@
   color: var(--gray-400);
   font-weight: var(--weight-regular);
   cursor: not-allowed;
-  margin-bottom: 47px;
 }
 
 .alt {
@@ -124,6 +124,7 @@
   font-size: 14px;
   letter-spacing: var(--letter-spacing-description2);
   margin-bottom: 18px;
+  margin-top: 18px;
 }
 
 .snsButtons {
@@ -177,4 +178,18 @@
 
 .submit.error {
   animation: shake 0.3s;
+}
+
+.toggleBtn {
+  position: absolute;
+  top: 50%;
+  right: 20px;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }

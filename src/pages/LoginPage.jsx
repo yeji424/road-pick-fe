@@ -1,16 +1,21 @@
-// src/pages/LoginPage.jsx
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import css from './LoginPage.module.css'
-import { login as loginThunk } from '@/store/authSlice' // ← authSlice의 Thunk import
-import CheckIcon from '@/assets/icons/checkIcon.svg?react'
+import { validatePassword, validateEmail } from '@/utils/features'
+import { login as loginThunk } from '@/store/authSlice'
 import GoogleIcon from '@/assets/icons/googleIcon.svg?react'
 import KakaoIcon from '@/assets/icons/kakaoIcon.svg?react'
+import EyeOpenIcon from '@/assets/icons/eye-open.svg?react'
+import EyeCloseIcon from '@/assets/icons/eye-close.svg?react'
 
 const LoginPage = () => {
   const navigate = useNavigate()
-  const dispatch = useDispatch() // dispatch 준비
+  const dispatch = useDispatch()
+
+  // 비밀번호 표시 토글 state
+  const [showPassword, setShowPassword] = useState(false)
+  const togglePassword = () => setShowPassword(prev => !prev)
 
   // 1) 상태 관리
   const [form, setForm] = useState({ email: '', password: '' })
@@ -21,12 +26,16 @@ const LoginPage = () => {
   const validate = (name, value) => {
     switch (name) {
       case 'email':
-        if (!value.includes('@')) return '올바른 이메일 형식을 입력하세요.'
+        if (!validateEmail(value)) return '올바른 이메일 형식을 입력하세요.'
         return ''
+
       case 'password':
         if (!value) return '비밀번호를 입력하세요.'
-        if (value.length < 6) return '비밀번호는 6자 이상이어야 합니다.'
+        if (!validatePassword(value)) {
+          return '비밀번호는 영문자와 특수문자를 포함한 8자 이상이어야 합니다.'
+        }
         return ''
+
       default:
         return ''
     }
@@ -49,11 +58,10 @@ const LoginPage = () => {
     if (!isFormValid()) return
 
     try {
-      // ── login Thunk dispatch: 토큰 발급 + 프로필 조회 → state.auth.user에 저장
       await dispatch(loginThunk({ email: form.email, password: form.password })).unwrap()
-      navigate('/') // 로그인+프로필 완료 후 홈으로 이동
-    } catch (err) {
-      setLoginMsg(err.message)
+      navigate('/')
+    } catch {
+      setLoginMsg('아이디 또는 비밀번호가 틀렸습니다.')
     }
   }
 
@@ -61,7 +69,7 @@ const LoginPage = () => {
     <div className={css.wrapper}>
       <h2 className={css.title}>로그인</h2>
       <form className={css.form} onSubmit={handleSubmit}>
-        {/* 이메일 입력 */}
+        {/* 이메일 */}
         <div className={css.inputWrap}>
           <div className={css.inputGroup}>
             <label htmlFor="email">이메일</label>
@@ -77,18 +85,26 @@ const LoginPage = () => {
           {errors.email && <p className={css.error}>{errors.email}</p>}
         </div>
 
-        {/* 비밀번호 입력 */}
+        {/* 비밀번호 */}
         <div className={css.inputWrap}>
           <div className={css.inputGroup}>
             <label htmlFor="password">비밀번호</label>
             <input
-              type="password"
+              type={showPassword ? 'text' : 'password'}
               id="password"
               name="password"
               value={form.password}
               onChange={handleChange}
               required
             />
+            <button
+              type="button"
+              className={css.toggleBtn}
+              onClick={togglePassword}
+              aria-label={showPassword ? '비밀번호 숨기기' : '비밀번호 보기'}
+            >
+              {showPassword ? <EyeOpenIcon /> : <EyeCloseIcon />}
+            </button>
           </div>
           {errors.password && <p className={css.error}>{errors.password}</p>}
         </div>
@@ -102,7 +118,6 @@ const LoginPage = () => {
           type="submit"
           disabled={!isFormValid()}
         >
-          {' '}
           로그인
         </button>
         {loginMsg && <p className={css.error}>{loginMsg}</p>}

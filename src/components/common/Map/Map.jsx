@@ -65,14 +65,20 @@ const Map = ({ center, list, onMarkerClick, detail, onCloseModal, onReSearch }) 
 
     const kakao = window.kakao
 
-    const markerSize = new kakao.maps.Size(30, 35)
-    const markerOffset = new kakao.maps.Point(12, 34)
-    const defaultMarkerImage = new kakao.maps.MarkerImage(markerDefaultUrl, markerSize, {
-      offset: markerOffset,
+    const defaultMarkerSize = new kakao.maps.Size(30, 35)
+    const defaultMarkerOffset = new kakao.maps.Point(12, 34)
+    const defaultMarkerImage = new kakao.maps.MarkerImage(markerDefaultUrl, defaultMarkerSize, {
+      offset: defaultMarkerOffset,
     })
-    const selectedMarkerImage = new kakao.maps.MarkerImage(markerSelectedUrl, markerSize, {
-      offset: markerOffset,
+
+    const selectedMarkerSize = new kakao.maps.Size(36, 42)
+    const selectedMarkerOffset = new kakao.maps.Point(18, 42)
+    const selectedMarkerImage = new kakao.maps.MarkerImage(markerSelectedUrl, selectedMarkerSize, {
+      offset: selectedMarkerOffset,
     })
+
+    const defaultZIndex = 1
+    const selectedZIndex = 2
 
     // 기존 마커 전부 제거
     markersRef.current.forEach(m => m.setMap(null))
@@ -84,16 +90,20 @@ const Map = ({ center, list, onMarkerClick, detail, onCloseModal, onReSearch }) 
       const lng = parseFloat(item.mapx)
       if (isNaN(lat) || isNaN(lng)) return
 
-      const image =
-        detail && String(item.contentid) === String(detail.contentid)
-          ? selectedMarkerImage
-          : defaultMarkerImage
+      const isSelected = detail && String(item.contentid) === String(detail.contentid)
+      const image = isSelected ? selectedMarkerImage : defaultMarkerImage
+      const zIndex = isSelected ? selectedZIndex : defaultZIndex
 
       const marker = new kakao.maps.Marker({
         position: new kakao.maps.LatLng(lat, lng),
         image,
         map: mapInstanceRef.current,
+        zIndex, //
       })
+
+      if (isSelected) {
+        marker.setZIndex(selectedZIndex)
+      }
 
       kakao.maps.event.addListener(marker, 'click', () => {
         setModalClosing(false)

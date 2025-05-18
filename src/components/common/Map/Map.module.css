@@ -43,6 +43,11 @@
   transform: translateX(-50%);
   font-weight: 600;
   font-size: var(--fs-4);
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .researchBtnWrapper {
@@ -66,4 +71,8 @@
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
   cursor: pointer;
   border: none;
+}
+
+.markerImg {
+  transition: transform 0.3s ease;
 }

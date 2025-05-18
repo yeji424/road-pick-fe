@@ -4,6 +4,7 @@ import { register } from '@/apis/authApi'
 import { useNavigate } from 'react-router-dom'
 import GoogleIcon from '@/assets/icons/googleIcon.svg?react'
 import KakaoIcon from '@/assets/icons/kakaoIcon.svg?react'
+import { validateEmail, validatePassword } from '@/utils/features'
 
 const RegisterPage = () => {
   const navigate = useNavigate()
@@ -26,17 +27,26 @@ const RegisterPage = () => {
   const validate = (name, value) => {
     switch (name) {
       case 'email':
-        if (!value.includes('@')) return '올바른 이메일 형식을 입력하세요.'
+        // util의 validateEmail 사용
+        if (!validateEmail(value)) return '올바른 이메일 형식을 입력하세요.'
         return ''
+
       case 'username':
         if (value.length < 2) return '닉네임은 2자 이상이어야 합니다.'
         return ''
+
       case 'password':
-        if (value.length < 6) return '비밀번호는 6자 이상이어야 합니다.'
+        if (!value) return '비밀번호를 입력하세요.'
+        // util의 validatePassword 사용
+        if (!validatePassword(value)) {
+          return '비밀번호는 영문자와 특수문자를 포함한 8자 이상이어야 합니다.'
+        }
         return ''
+
       case 'confirmPassword':
         if (value !== form.password) return '비밀번호가 일치하지 않습니다.'
         return ''
+
       default:
         return ''
     }

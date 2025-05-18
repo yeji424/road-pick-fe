@@ -15,7 +15,7 @@ export const getLocationTourList = async ({ mapX, mapY, radius, contentTypeId })
         mapY,
         radius,
         arrange: 'B', // 인기순
-        numOfRows: 100,
+        numOfRows: 200,
         serviceKey: SERVICE_KEY,
       },
     }

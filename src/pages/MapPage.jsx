@@ -35,7 +35,7 @@ const MapPage = () => {
   }, [center])
 
   // (4) 탭(관광지/축제) 관리
-  const [contentTypeId, setContentTypeId] = useState(initType === undefined ? null : initType)
+  const [contentTypeId, setContentTypeId] = useState(initType === undefined ? 12 : initType)
 
   // (5) 선택된 아이템 상세 관리
   const [selectedDetail, setSelectedDetail] = useState(null)

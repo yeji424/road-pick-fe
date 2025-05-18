@@ -22,9 +22,13 @@ const MyPage = () => {
     setPrevIndex(activeIndex)
     setActiveIndex(index)
   }
-  const handleLogout = () => {
-    dispatch(logout())
-    navigate('/')
+  const handleLogout = async () => {
+    try {
+      await dispatch(logout()).unwrap()
+      window.location.href = '/'
+    } catch (err) {
+      console.error('로그아웃 에러:', err)
+    }
   }
 
   const tabs = [
