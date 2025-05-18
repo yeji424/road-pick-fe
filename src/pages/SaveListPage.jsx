@@ -8,6 +8,9 @@ import { formatDateToLocalString } from '@/components/common/Calendar/CalendarLo
 import { createScheduleDetail } from '@/apis/schedulsDetailApi'
 // import { useState } from 'react'
 import { useModal } from '@/hooks/useModal'
+import { useState } from 'react'
+import AlertModal from '@/components/common/Modal/AlertModal'
+import PlusBtnIcon from '@/assets/icons/PlusBtnIcon.svg?react'
 
 const SaveListPage = () => {
   const { favorites, isLoading, isError } = useFavoritesList() // 찜 목록 훅 호출
@@ -18,6 +21,7 @@ const SaveListPage = () => {
   const day = location.state?.day
   const title = location.state?.title
   const { openModal, closeModal } = useModal()
+  const [alertMessage, setAlertMessage] = useState('')
 
   if (isLoading) return <Spinner />
   if (isError) return <div className={css.error}>찜 목록을 불러오는 중 오류가 발생했습니다.</div>
@@ -55,9 +59,12 @@ const SaveListPage = () => {
     try {
       await createScheduleDetail(newDetail)
       if (checked) {
-        navigate(-1)
+        navigate(`/plan/${tripId}`, {
+          state: { alertMessage: '일정이 추가되었습니다.', title },
+        })
       }
       closeModal()
+      setAlertMessage('일정이 추가되었습니다.')
     } catch (error) {
       console.error(error)
     }
@@ -83,24 +90,30 @@ const SaveListPage = () => {
             }
 
             return (
-              <li key={fav._id} className={css.item} onClick={() => handleOpenModal(dest)}>
-                {/* ListCard에 destination 정보 전체를 props로 전달 */}
-                <ListCard
-                  contentid={dest.contentid}
-                  contenttypeid={dest.contenttypeid}
-                  firstimage={dest.firstimage}
-                  title={dest.title}
-                  addr1={dest.addr1}
-                  addr2={dest.addr2}
-                  mapx={dest.mapx}
-                  mapy={dest.mapy}
-                  isFavorite="true"
-                />
+              <li key={fav._id} className={css.item}>
+                <div className={css.cardWrapper} onClick={() => handleOpenModal(dest)}>
+                  {/* ListCard에 destination 정보 전체를 props로 전달 */}
+                  <ListCard
+                    contentid={dest.contentid}
+                    contenttypeid={dest.contenttypeid}
+                    firstimage={dest.firstimage}
+                    title={dest.title}
+                    addr1={dest.addr1}
+                    addr2={dest.addr2}
+                    mapx={dest.mapx}
+                    mapy={dest.mapy}
+                    isFavorite="true"
+                  />
+                  <div className={css.emptyOverlay}>
+                    <PlusBtnIcon className={css.plusIcon} />
+                  </div>
+                </div>
               </li>
             )
           })}
         </ul>
       )}
+      <AlertModal message={alertMessage} onClose={() => setAlertMessage('')} />
     </main>
   )
 }

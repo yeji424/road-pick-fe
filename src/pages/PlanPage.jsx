@@ -11,8 +11,7 @@ import { useScheduleDetail } from '@/hooks/useScheduleDetail'
 import MultiPlaceMap from '@/components/common/Map/PlanMap'
 import { formatDateToLocalString } from '@/components/common/Calendar/CalendarLogic'
 import { deleteScheduleDetail, getScheduleDetailList } from '@/apis/schedulsDetailApi'
-
-
+import AlertModal from '@/components/common/Modal/AlertModal'
 
 const PlanPage = () => {
   // 현재 화면 높이 기준으로 snap 위치 계산
@@ -22,6 +21,13 @@ const PlanPage = () => {
   const { title } = location.state
   const { data: schedule, loading, error } = useScheduleDetail(tripId)
   const [activitiesByDate, setActivitiesByDate] = useState({})
+  const [alertMessage, setAlertMessage] = useState('')
+  useEffect(() => {
+    if (location.state?.alertMessage) {
+      setAlertMessage(location.state.alertMessage)
+      // window.history.replaceState({}, document.title) // 메세지 초기화: 증복 방지
+    }
+  }, [location.state])
 
   const snapPoints = {
     full: 0, // 최상단
@@ -141,8 +147,10 @@ const PlanPage = () => {
           fetchDetailPlan={fetchAllDetailPlans}
           handleDeleteActivity={handleDeleteActivity}
           title={title}
+          onAddSuccess={() => setAlertMessage('일정이 추가되었습니다.')}
         />
       </BottomSheet>
+      {alertMessage && <AlertModal message={alertMessage} onClose={() => setAlertMessage('')} />}
     </main>
   )
 }
