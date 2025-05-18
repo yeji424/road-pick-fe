@@ -7,8 +7,8 @@ export const createSchedule = async schedule => {
   return responce.data
 }
 
-export const getScheduleList = async () => {
-  const responce = await axios.get(`${API_URL}/schedule/list`)
+export const getScheduleList = async userId => {
+  const responce = await axios.get(`${API_URL}/schedule/list/${userId}`)
   return responce.data
 }
 

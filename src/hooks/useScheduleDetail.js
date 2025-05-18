@@ -1,32 +1,18 @@
+import { useQuery } from '@tanstack/react-query'
 import { getScheduleDetail } from '@/apis/scheduleApi'
 import { formatDateToLocalString } from '@/components/common/Calendar/CalendarLogic'
-import { useEffect, useState } from 'react'
 
 export const useScheduleDetail = scheduleId => {
-  const [schedule, setSchedule] = useState([])
-  const [loading, setLoading] = useState(false)
-  const [error, setError] = useState(null)
-
-  useEffect(() => {
-    if (!scheduleId) return
-    const fetchSheduleDetail = async () => {
-      try {
-        setLoading(true)
-        const data = await getScheduleDetail(scheduleId)
-        const formattedData = {
-          ...data,
-          start: formatDateToLocalString(data.startDate),
-          end: formatDateToLocalString(data.endDate),
-        }
-        setSchedule(formattedData)
-      } catch (err) {
-        setError(err)
-      } finally {
-        setLoading(false)
-      }
-    }
-    fetchSheduleDetail()
-  }, [scheduleId])
-
-  return { schedule, loading, error }
+  return useQuery({
+    queryKey: ['scheduleDetail', scheduleId],
+    queryFn: () => getScheduleDetail(scheduleId),
+    enabled: !!scheduleId,
+    staleTime: 1000 * 60 * 5, // 5분 동안은 fresh 상태
+    cacheTime: 1000 * 60 * 10, // 캐시 유지
+    select: data => ({
+      ...data,
+      start: formatDateToLocalString(data.startDate),
+      end: formatDateToLocalString(data.endDate),
+    }),
+  })
 }

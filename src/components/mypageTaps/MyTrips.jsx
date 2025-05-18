@@ -7,9 +7,11 @@ import { useScheduleList } from '@/hooks/useScheduleList'
 import { deleteSchedule } from '@/apis/scheduleApi'
 import { useNavigate } from 'react-router-dom'
 import Spinner from '../loading/Spinner'
+import { useSelector } from 'react-redux'
 
 const MyTrips = () => {
-  const { schedules, loading, error } = useScheduleList()
+  const user = useSelector(state => state.auth.user)
+  const { data: schedules, loading, error } = useScheduleList(user._id)
   const [trips, setTrips] = useState([])
   const navigate = useNavigate()
   useEffect(() => {
@@ -22,7 +24,6 @@ const MyTrips = () => {
   const handleDelete = async scheduleId => {
     if (!scheduleId) return
     try {
-      console.log(scheduleId)
       const response = await deleteSchedule(scheduleId)
       setTrips(prevTrips => prevTrips.filter(trip => trip.tripId !== scheduleId))
       console.log('삭제 성공:', response.data)
@@ -33,7 +34,7 @@ const MyTrips = () => {
   const handleGoToCreateTrip = () => {
     navigate('/selectDate')
   }
-  if (loading) return <Spinner />
+  if (loading || !schedules) return <Spinner />
   if (error) return <div>error...</div>
   return (
     <div className={css.listContainer}>

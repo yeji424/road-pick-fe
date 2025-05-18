@@ -37,8 +37,8 @@ const Calendar = ({
     }
   }
 
-  const MovePlanPage = tripId => {
-    navigate(`/plan/${tripId}`)
+  const MovePlanPage = (tripId, title) => {
+    navigate(`/plan/${tripId}`, { state: { title: title } })
   }
 
   return (
@@ -111,7 +111,7 @@ const Calendar = ({
                           className={`${css.schedulebar} ${isStart ? css.startdate : ''} ${isEnd ? css.enddate : ''}`}
                           onClick={e => {
                             e.stopPropagation()
-                            MovePlanPage(day.tripId)
+                            MovePlanPage(day.tripId, day.title)
                           }}
                         >
                           {isStart && (
