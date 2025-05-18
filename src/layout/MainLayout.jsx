@@ -6,6 +6,7 @@ import Footer from '@/components/common/Footer/Footer'
 import Spinner from '@/components/loading/Spinner'
 import { useDispatch, useSelector } from 'react-redux'
 import { fetchProfile, refreshToken } from '@/store/authSlice'
+import ModalRoot from '@/components/common/Modal/ModalRoot'
 const MainLayout = () => {
   const dispatch = useDispatch()
   const location = useLocation()
@@ -36,6 +37,7 @@ const MainLayout = () => {
         <Outlet />
       </Suspense>
       <Footer />
+      <ModalRoot />
     </div>
   )
 }

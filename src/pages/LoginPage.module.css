@@ -1,7 +1,7 @@
 .wrapper {
   width: 100%;
   max-width: 430px;
-  /* margin: 0 auto; */
+  margin: 0 auto;
   /* border: 1px red solid; */
 }
 
@@ -155,6 +155,7 @@
   color: var(--primary-blue);
   font-weight: var(--weight-regular);
   cursor: pointer;
+  margin-left: 3px;
 }
 .link:hover {
   font-weight: var(--weight-medium);
