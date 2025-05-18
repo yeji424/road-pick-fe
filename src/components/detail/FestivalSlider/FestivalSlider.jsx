@@ -5,7 +5,7 @@ import 'swiper/css'
 import 'swiper/css/pagination'
 
 const FestivalSlider = ({ festivals, commonTitle }) => {
-  return (
+  return festivals ? (
     <div className={css.festival}>
       <h3>관련 축제 정보</h3>
       <div>
@@ -25,7 +25,8 @@ const FestivalSlider = ({ festivals, commonTitle }) => {
         </Swiper>
       </div>
     </div>
+  ) : (
+    <div>관련 축제 정보가 없습니다.</div>
   )
 }
-
 export default FestivalSlider
