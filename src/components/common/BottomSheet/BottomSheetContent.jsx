@@ -33,10 +33,11 @@ const BottomSheetContent = ({ list, contentTypeId, setContentTypeId, onItemClick
 
       <div className={css.listWrapper}>
         {list.map(item => (
-          <div key={item.contentid} className={css.listItemWrapper}>
-            <ListCard {...item} />
-            <div className={css.itemOverlay} onClick={() => onItemClick(item)} />
-          </div>
+          <ListCard
+            key={item.contentid}
+            {...item}
+            onClick={() => onItemClick(item)} // (1) overlay 대신 onClick 넘겨주기
+          />
         ))}
       </div>
     </div>

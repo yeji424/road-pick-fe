@@ -23,19 +23,33 @@ function getReviewCountFromId(id) {
   return Math.max(1, hash) // 1 이상 99 이하
 }
 
-const ListCard = ({ firstimage, title, addr1, addr2, contentid, contenttypeid, mapx, mapy }) => {
+const ListCard = ({
+  firstimage,
+  title,
+  addr1,
+  addr2,
+  contentid,
+  contenttypeid,
+  mapx,
+  mapy,
+  onClick,
+}) => {
   const navigate = useNavigate()
 
-  const moveDetail = () => {
-    navigate(`/detail/${contenttypeid}/${contentid}`)
-    console.log(firstimage)
+  const handleClick = e => {
+    e.stopPropagation()
+    if (onClick) {
+      onClick() // 바텀시트에서 받은 onItemClick 호출
+    } else {
+      navigate(`/detail/${contenttypeid}/${contentid}`)
+    }
   }
 
   const randomRating = getRatingFromId(contentid)
   const randomReviewCount = getReviewCountFromId(contentid)
 
   return (
-    <div className={css.card} onClick={moveDetail}>
+    <div className={css.card} onClick={handleClick}>
       <div className={css.thumbnail}>
         <img src={firstimage || noImage} alt={title} />
       </div>

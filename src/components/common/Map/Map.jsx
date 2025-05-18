@@ -60,7 +60,7 @@ const Map = ({ center, list, onMarkerClick, detail, onCloseModal, onReSearch }) 
     const moveLatLon = new kakao.maps.LatLng(center[0], center[1])
     mapInstanceRef.current.setCenter(moveLatLon)
     mapInstanceRef.current.setLevel(2)
-    setTimeout(() => setIsReady(true), 300)
+    setIsReady(true)
   }, [center])
 
   // 3) list 또는 detail 변경 시 마커 다시 그리기
