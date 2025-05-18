@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import noImage from '@/assets/imgs/noImageImg.png'
 import css from './Modal.module.css'
+import CheckboxIcon from '@/assets/icons/checkBoxIcon.svg?react'
 
 const PlanModal = ({ CreateShedule, onClose, image, description, dest, title }) => {
   const [checked, setChecked] = useState(false)
@@ -31,10 +32,22 @@ const PlanModal = ({ CreateShedule, onClose, image, description, dest, title }) 
         </h4>
 
         {description && (
-          <div className={css.description}>
-            <input type="checkbox" checked={checked} onChange={handleCheckboxChange} />
+          <label className={css.description}>
+            <input
+              type="checkbox"
+              checked={checked}
+              onChange={handleCheckboxChange}
+              className={css.hiddenCheckbox}
+              id="customCheckbox"
+            />
+            <span
+              className={`${css.customCheckbox} ${checked ? css.checked : ''}`}
+              aria-hidden="true"
+            >
+              <CheckboxIcon />
+            </span>
             <p>{description}</p>
-          </div>
+          </label>
         )}
         <div className={css.btnArea}>
           <button className={css.closeBtn} onClick={handleCLoseClick}>
