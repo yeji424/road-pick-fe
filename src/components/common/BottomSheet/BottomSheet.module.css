@@ -64,7 +64,7 @@
 
 .active {
   background-color: white;
-  color: var(--gray-600)
+  color: var(--gray-600);
 }
 
 .headerRow {
@@ -173,6 +173,8 @@
 
 .planDaySection {
   margin-bottom: 48px;
+  z-index: 9999;
+  min-height: 200px;
 }
 
 .planDayHeader {
@@ -256,6 +258,7 @@
   font-size: 20px;
   color: var(--gray-400);
   color: var(--primary-blue);
+  position: relative;
 }
 .more:hover,
 .more:active {
@@ -264,8 +267,9 @@
 
 .moreMenu {
   position: absolute;
-  top: 100% - 70px;
-  right: 3px;
+  top: calc(100% - 10px);
+  width: 70px;
+  right: -12px;
   background: var(--background-color);
   border-radius: 6px;
   padding: 2px 0;
