@@ -22,9 +22,6 @@ const RegisterPage = () => {
     confirmPassword: '',
   })
   const { openModal } = useModal()
-  const handleRegisterSuccess = () => {
-    openModal('registerComplete')
-  }
   const [registerMsg, setRegisterMsg] = useState('')
 
   const validate = (name, value) => {
@@ -85,7 +82,7 @@ const RegisterPage = () => {
       }
       const data = await register(payload)
       setRegisterMsg(data.message)
-      navigate('/login')
+      openModal('registerComplete')
     } catch (err) {
       if (err.status === 400 && err.validation) {
         const apiErrors = {}
@@ -179,7 +176,7 @@ const RegisterPage = () => {
         <button className={css.snsBtn}>
           <GoogleIcon />
         </button>
-        <button className={css.snsBtn} onClick={handleRegisterSuccess}>
+        <button className={css.snsBtn}>
           <KakaoIcon />
         </button>
       </div>

@@ -7,6 +7,7 @@ const RegisterModal = ({ onClose }) => {
   const navigate = useNavigate()
 
   const handleLoginClick = () => {
+    onClose()
     navigate('/login')
   }
   return (
@@ -19,7 +20,7 @@ const RegisterModal = ({ onClose }) => {
           <img src={registerImg} alt="회원가입 완료" />
         </div>
         <p className={css.text}>회원가입이 완료되었습니다!</p>
-        <button className={css.loginBtn} onClick={handleLoginClick}>
+        <button className={css.successBtn} onClick={handleLoginClick}>
           로그인하기
         </button>
       </div>
