@@ -8,24 +8,32 @@ import { deleteSchedule } from '@/apis/scheduleApi'
 import { useNavigate } from 'react-router-dom'
 import Spinner from '../loading/Spinner'
 import { useSelector } from 'react-redux'
+import { useLocation } from 'react-router-dom'
 
-const MyTrips = () => {
+const MyTrips = ({ setAlertMessage }) => {
   const user = useSelector(state => state.auth.user)
   const { data: schedules, loading, error } = useScheduleList(user._id)
   const [trips, setTrips] = useState([])
   const navigate = useNavigate()
+  const location = useLocation()
   useEffect(() => {
     // schedules가 바뀔 때마다 로컬 상태에도 반영
     if (schedules) {
       setTrips(schedules)
     }
   }, [schedules])
-
+  useEffect(() => {
+    if (location.state?.fromRegister) {
+      setAlertMessage('여행 일정이 등록되었습니다.')
+      navigate(location.pathname, { replace: true })
+    }
+  }, [location, navigate, setAlertMessage])
   const handleDelete = async scheduleId => {
     if (!scheduleId) return
     try {
       const response = await deleteSchedule(scheduleId)
       setTrips(prevTrips => prevTrips.filter(trip => trip.tripId !== scheduleId))
+      setAlertMessage('일정이 삭제되었습니다.')
       console.log('삭제 성공:', response.data)
     } catch (err) {
       console.error('삭제 실패:', err.response?.data || err.message)

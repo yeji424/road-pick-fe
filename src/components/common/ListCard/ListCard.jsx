@@ -23,11 +23,21 @@ function getReviewCountFromId(id) {
   return Math.max(1, hash) // 1 이상 99 이하
 }
 
-const ListCard = ({ firstimage, title, addr1, addr2, contentid, contenttypeid, mapx, mapy,isFavorite = false }) => {
+const ListCard = ({
+  firstimage,
+  title,
+  addr1,
+  addr2,
+  contentid,
+  contenttypeid,
+  mapx,
+  mapy,
+  isFavorite = false,
+}) => {
   const navigate = useNavigate()
 
   const moveDetail = () => {
-     if (isFavorite) {
+    if (isFavorite) {
       return
     }
     navigate(`/detail/${contenttypeid}/${contentid}`)
@@ -69,7 +79,6 @@ const ListCard = ({ firstimage, title, addr1, addr2, contentid, contenttypeid, m
           />
         </div>
       )}
-
     </div>
   )
 }
