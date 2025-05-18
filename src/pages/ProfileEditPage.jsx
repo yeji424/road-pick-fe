@@ -7,12 +7,13 @@ import { updateProfile } from '@/apis/userApi'
 import { useDispatch } from 'react-redux'
 import { fetchProfile } from '@/store/authSlice'
 import { useNavigate } from 'react-router-dom'
+import AlertModal from '@/components/common/Modal/AlertModal'
 
 const ProfileEditPage = () => {
   const user = useSelector(state => state.auth.user)
   const originalName = user?.name || ''
   const [name, setName] = useState(originalName)
-
+  const [alertMessage, setAlertMessage] = useState()
   const isNameChanged = name.trim() && name.trim() !== originalName.trim()
   const dispatch = useDispatch()
   const navigate = useNavigate()
@@ -25,8 +26,12 @@ const ProfileEditPage = () => {
     try {
       await updateProfile({ name })
       await dispatch(fetchProfile())
-      alert('프로필이 성공적으로 수정되었습니다')
-      navigate('/mypage')
+
+      navigate('/mypage', {
+        state: {
+          alertMessage: '프로필이 수정되었습니다.',
+        },
+      })
     } catch (err) {
       alert(err.message || '프로필 수정 실패')
     }
@@ -35,7 +40,7 @@ const ProfileEditPage = () => {
   return (
     <main>
       <Header />
-
+      {alertMessage && <AlertModal message={alertMessage} onClose={() => setAlertMessage('')} />}
       <section className={css.profileSection}>
         <div className={css.profileImageWrap}>
           <img src={profileImage} alt="프로필 이미지" className={css.profileImage} />
