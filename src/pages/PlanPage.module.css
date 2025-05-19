@@ -8,14 +8,14 @@
 .tripDate {
   margin-top: 4px;
   font-size: var(--fs-2);
-  font-weight: 600;
+  font-weight: var(--weight-regular);
   color: var(--gray-500);
 }
 
 .description {
   margin-top: 8px;
   font-size: var(--fs-2);
-  font-weight: 600;
+  font-weight: var(--weight-regular);
   color: var(--gray-500);
 }
 
@@ -24,6 +24,17 @@
   display: flex;
   margin-top: 16px;
   margin-left: 12px;
+}
+
+.friendSection {
+  position: relative;
+  width: fit-content;
+}
+
+.friendWrapper {
+  display: flex;
+  align-items: center;
+  position: relative;
 }
 
 .friendIcon {
@@ -37,33 +48,46 @@
   align-items: center;
   margin-left: -12px;
   position: relative;
+  opacity: 0;
+  transform: translateX(8px);
+  transition: all 0.3s ease;
 }
-
 .userIcon {
   width: 13px;
   height: 13px;
 }
-
-.color1 .userIcon {
-  color: var(--secondary-orange);
-}
-.color2 .userIcon {
-  color: var(--primary-blue);
-}
-.color3 .userIcon {
-  color: var(--gray-500);
-}
-
 .addButton {
   width: 69px;
   height: 28px;
   background-color: var(--secondary-orange);
-  color: white;
+  color: var(--background-color);
   border-radius: 6.67px;
   font-size: 10px;
-  margin-left: -8px;
+  margin-left: -61px;
+  font-weight: var(--weight-regular);
   cursor: pointer;
   position: relative;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+}
+
+.friendWrapper.open .addButton {
+  transform: translateX(45px);
+}
+
+.friendWrapper.open .friendIcon {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.friendWrapper.open .friendIcon:nth-child(1) {
+  transition-delay: 0.05s;
+}
+.friendWrapper.open .friendIcon:nth-child(2) {
+  transition-delay: 0.1s;
+}
+.friendWrapper.open .friendIcon:nth-child(3) {
+  transition-delay: 0.15s;
 }
 
 .planPrompt {
@@ -71,17 +95,21 @@
   flex-direction: column;
   align-items: center;
   text-align: center;
-  background-color: var(--background-color);
+  background-color: var(--gray-250);
   border-radius: 10px;
-  padding: 100px 0 30px;
+  margin-top: 17px;
+  padding: 100px 0 100px 0;
   color: var(--gray-700);
   font-weight: var(--weight-semibold);
   position: relative;
 }
 
 .planTitle {
-  font-size: var(--fs-5);
+  /* border: 1px solid red; */
+  font-size: 15px;
   color: var(--gray-700);
-  font-weight: var(--weight-semibold);
-  padding-bottom: 18px;
+  line-height: 23px;
+  font-weight: var(--weight-regular);
+  /* padding-bottom: 18px; */
+  letter-spacing: var(--letter-spacing-title);
 }

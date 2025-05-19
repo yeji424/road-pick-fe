@@ -22,6 +22,8 @@ const PlanPage = () => {
   const { data: schedule, loading, error } = useScheduleDetail(tripId)
   const [activitiesByDate, setActivitiesByDate] = useState({})
   const [alertMessage, setAlertMessage] = useState('')
+  const [isOpen, setIsOpen] = useState(false)
+
   useEffect(() => {
     if (location.state?.alertMessage) {
       setAlertMessage(location.state.alertMessage)
@@ -109,27 +111,33 @@ const PlanPage = () => {
       <section className={css.infoSection}>
         <p className={css.tripTitle}>{schedule.title}</p>
         <p className={css.tripDate}>
-          {schedule.start}~{schedule.end}
+          {schedule.start} ~ {schedule.end}
         </p>
       </section>
 
       <h2 className={css.description}>하루하루 구체적인 계획을 세워보아요!</h2>
 
       <section className={css.friendSection}>
-        {[...Array(3)].map((_, idx) => (
-          <div
-            className={`${css.friendIcon} ${css[`color${idx + 1}`]}`}
-            key={idx}
-            style={{ zIndex: idx + 1 }}
+        <div className={`${css.friendWrapper} ${isOpen ? css.open : ''}`}>
+          {[...Array(3)].map((_, idx) => (
+            <div
+              className={`${css.friendIcon} ${css[`color${idx + 1}`]}`}
+              key={idx}
+              style={{ zIndex: idx + 1 }}
+            >
+              <UserIcon className={css.userIcon} />
+            </div>
+          ))}
+          <button
+            className={css.addButton}
+            style={{ zIndex: 3 }}
+            onClick={() => setIsOpen(prev => !prev)}
           >
-            <UserIcon className={css.userIcon} />
-          </div>
-        ))}
-
-        <button className={css.addButton} style={{ zIndex: 3 }}>
-          + 인원추가
-        </button>
+            + 인원추가
+          </button>
+        </div>
       </section>
+
       <section>
         {allActivities.length > 0 ? (
           <MultiPlaceMap places={placeList} />
