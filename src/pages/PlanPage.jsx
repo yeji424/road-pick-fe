@@ -30,9 +30,9 @@ const PlanPage = () => {
   }, [location.state])
 
   const snapPoints = {
-    full: 0, // 최상단
-    mid: screenHeight * 0.6, // 중간
-    min: screenHeight * 0.4, // 초기 위치 (60%)
+    full: 100,
+    mid: screenHeight / 2,
+    min: screenHeight - 50,
   }
 
   const [{ y }, api] = useSpring(() => ({

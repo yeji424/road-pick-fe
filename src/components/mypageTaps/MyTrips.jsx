@@ -3,25 +3,25 @@ import { useEffect, useState } from 'react'
 import PlusBtnIcon from '@/assets/icons/PlusBtnIcon.svg?react'
 import TripListImg from '@/assets/imgs/TripListImg.png'
 import MypageListCard from './MypageListCard'
-import { useScheduleList } from '@/hooks/useScheduleList'
 import { deleteSchedule } from '@/apis/scheduleApi'
 import { useNavigate } from 'react-router-dom'
 import Spinner from '../loading/Spinner'
 import { useSelector } from 'react-redux'
 import { useLocation } from 'react-router-dom'
 
-const MyTrips = ({ setAlertMessage }) => {
+const MyTrips = ({ setAlertMessage,schedules }) => {
   const user = useSelector(state => state.auth.user)
-  const { data: schedules, loading, error } = useScheduleList(user._id)
   const [trips, setTrips] = useState([])
   const navigate = useNavigate()
   const location = useLocation()
   useEffect(() => {
     // schedules가 바뀔 때마다 로컬 상태에도 반영
     if (schedules) {
-      setTrips(schedules)
+      const sorted = [...schedules].sort((a, b) => new Date(a.start) - new Date(b.start)) // 날짜순 정렬
+      setTrips(sorted)
     }
   }, [schedules])
+
   useEffect(() => {
     if (location.state?.fromRegister) {
       setAlertMessage('여행 일정이 등록되었습니다.')
@@ -42,8 +42,7 @@ const MyTrips = ({ setAlertMessage }) => {
   const handleGoToCreateTrip = () => {
     navigate('/selectDate')
   }
-  if (loading || !schedules) return <Spinner />
-  if (error) return <div>error...</div>
+
   return (
     <div className={css.listContainer}>
       <div className={css.tripCreateCard} onClick={handleGoToCreateTrip}>

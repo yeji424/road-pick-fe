@@ -14,13 +14,14 @@ const BottomSheetPlan = ({
   title,
 }) => {
   const dateRange = generateDateRange(schedule.start, schedule.end)
-
+  let activityCounter = 0
   return (
     <div className={css.contentWrapper}>
       {dateRange.map((date, index) => {
         const formattedDate = formatDateToLocalString(date)
         const activities = activitiesByDate[formattedDate] || []
-
+        const currentStartIndex = activityCounter
+        activityCounter += activities.length
         return (
           <PlanDayBlock
             key={formattedDate}
@@ -31,6 +32,7 @@ const BottomSheetPlan = ({
             activities={activities}
             handleDeleteActivity={handleDeleteActivity}
             title={title}
+            startIndex={currentStartIndex}
           />
         )
       })}
@@ -38,7 +40,15 @@ const BottomSheetPlan = ({
   )
 }
 
-const PlanDayBlock = ({ day, date, tripId, activities, handleDeleteActivity, title }) => {
+const PlanDayBlock = ({
+  day,
+  date,
+  tripId,
+  activities,
+  handleDeleteActivity,
+  title,
+  startIndex,
+}) => {
   const [isOpen, setIsOpen] = useState(true)
   const [openMenuId, setOpenMenuId] = useState(1)
   const navigate = useNavigate()
@@ -58,6 +68,14 @@ const PlanDayBlock = ({ day, date, tripId, activities, handleDeleteActivity, tit
     setOpenMenuId(prev => (prev === activityId ? null : activityId))
   }
 
+  const MoveDetail = (contentTypeId, contentId) => {
+    if (!contentTypeId || !contentId) {
+      console.log('잘못된 contentTypeId 또는 contentId', contentTypeId, contentId)
+      return
+    }
+    navigate(`/detail/${contentTypeId}/${contentId}`)
+  }
+  console.log(activities)
   return (
     <div className={css.planDaySection}>
       <div className={css.planDayHeader}>
@@ -70,24 +88,39 @@ const PlanDayBlock = ({ day, date, tripId, activities, handleDeleteActivity, tit
 
       {isOpen && (
         <ul className={css.planActivitiesList}>
-          {activities.map(activity => (
-            <li key={activity._id} className={css.planActivityItem}>
-              <div className={css.activityHeader}>
-                <div className={css.activityName}>{activity.destination.title}</div>
-                <div className={css.more} onClick={() => handleToggleMenu(activity._id)}>
-                  <MoreIcon className={css.more} />
-                  {openMenuId === activity._id && (
-                    <div className={css.moreMenu}>
-                      <button onClick={() => handleDeleteActivity(activity._id, date)}>
-                        일정 삭제
-                      </button>
-                    </div>
-                  )}
-                </div>
+          <div className={css.stepRow}>
+            {activities.map((_, idx) => (
+              <div key={idx} className={css.stepCircle}>
+                {startIndex + idx + 1}
               </div>
-              <div className={css.activityMemo}>{activity.destination.addr1}</div>
-            </li>
-          ))}
+            ))}
+          </div>
+          <div className={css.itemWarp}>
+            {activities.map(activity => (
+              <li
+                key={activity._id}
+                className={css.planActivityItem}
+                onClick={() =>
+                  MoveDetail(activity.destination.contenttypeid, activity.destination.contentid)
+                }
+              >
+                <div className={css.activityHeader}>
+                  <div className={css.activityName}>{activity.destination.title}</div>
+                  <div className={css.more} onClick={() => handleToggleMenu(activity._id)}>
+                    <MoreIcon className={css.more} />
+                    {openMenuId === activity._id && (
+                      <div className={css.moreMenu}>
+                        <button onClick={() => handleDeleteActivity(activity._id, date)}>
+                          일정 삭제
+                        </button>
+                      </div>
+                    )}
+                  </div>
+                </div>
+                <div className={css.activityMemo}>{activity.destination.addr1}</div>
+              </li>
+            ))}
+          </div>
         </ul>
       )}
 

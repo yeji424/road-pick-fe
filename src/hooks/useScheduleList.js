@@ -14,7 +14,7 @@ export const useScheduleList = userId => {
       }))
     },
     enabled: !!userId,
-    staleTime: 5 * 60 * 1000,
+    staleTime: 5 * 60,
     retry: 1,
   })
 }

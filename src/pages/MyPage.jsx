@@ -7,8 +7,11 @@ import FriendsList from '@/components/mypageTaps/FriendsList'
 import { useSelector } from 'react-redux'
 import profileImage from '@/assets/imgs/ProfileBasicImg.png'
 import LogoutIcon from '@/assets/icons/logoutIcon.svg?react'
+import { useNavigate } from 'react-router-dom'
+import { logout } from '@/store/authSlice'
+import { useScheduleList } from '@/hooks/useScheduleList'
+import Spinner from '@/components/loading/Spinner'
 import { Navigate, useLocation, useNavigate } from 'react-router-dom'
-
 import { useModal } from '@/hooks/useModal'
 import AlertModal from '@/components/common/Modal/AlertModal'
 
@@ -18,6 +21,7 @@ const MyPage = () => {
   const user = useSelector(state => state.auth.user)
   const [activeIndex, setActiveIndex] = useState(0)
   const [prevIndex, setPrevIndex] = useState(0)
+  const { data: schedules, loading, error } = useScheduleList(user._id)
   const location = useLocation()
   const [alertMessage, setAlertMessage] = useState('')
   useEffect(() => {
@@ -32,7 +36,7 @@ const MyPage = () => {
       return () => clearTimeout(timer)
     }
   }, [location.state])
-
+  
   const onTabChange = index => {
     setPrevIndex(activeIndex)
     setActiveIndex(index)
@@ -40,13 +44,22 @@ const MyPage = () => {
   const handleLogout = () => {
     openModal('logout')
   }
-
+  console.log(schedules)
   const tabs = [
-    { key: 'myTrips', label: '내 여행', component: <MyTrips setAlertMessage={setAlertMessage} /> },
+    { key: 'myTrips', label: '내 여행', component: <MyTrips setAlertMessage={setAlertMessage}  schedules={schedules} /> },
     { key: 'saved', label: '저장 목록', component: <SavedList /> },
     { key: 'friends', label: '친구 목록', component: <FriendsList /> },
   ]
   const { openModal } = useModal()
+  
+  if (!schedules || loading) return <Spinner />
+  if (error) return <div>error..</div>
+  const title =
+    schedules.length > 0
+      ? schedules[0].title.endsWith('여행')
+        ? schedules[0].title
+        : schedules[0].title + '여행'
+      : ''
   return (
     <main>
       <Header
@@ -73,7 +86,11 @@ const MyPage = () => {
         </div>
         <div className={css.info}>
           <h3>{user.name}님</h3>
-          <p>일정을 생성하고 계획해보세요!</p>
+          {schedules && schedules.length > 0 ? (
+            <p>{`${title} 며칠 남지 않았어요!`}</p>
+          ) : (
+            <p>일정을 생성하고 계획해보세요!</p>
+          )}
         </div>
       </section>
       {/* 탭 영역 */}
