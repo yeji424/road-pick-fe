@@ -18,9 +18,9 @@
 
 .infoBar {
   position: absolute;
-  top: 47px;
-  left: 20px;
-  right: 20px;
+  top: 69px;
+  left: 16px;
+  right: 16px;
   height: 50px;
   background-color: white;
   border-radius: 10px;
@@ -42,18 +42,19 @@
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
-  font-weight: 600;
+  font-weight: var(--weight-regular);
   font-size: var(--fs-4);
   display: -webkit-box;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 1;
   overflow: hidden;
   text-overflow: ellipsis;
+  letter-spacing: -0.02em;
 }
 
 .researchBtnWrapper {
   position: absolute;
-  top: calc(47px + 50px + 12px + 8px); /* 그대로 사용 */
+  top: calc(67px + 50px + 12px + 8px);
   left: 0;
   width: 100%;
   display: flex;

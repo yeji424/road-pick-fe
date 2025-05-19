@@ -26,6 +26,11 @@ const MyPage = () => {
     if (location.state?.alertMessage) {
       setAlertMessage(location.state.alertMessage)
 
+      navigate(location.pathname, {
+        replace: true,
+        state: {},
+      })
+
       // 2초 뒤 알림 닫기
       const timer = setTimeout(() => {
         setAlertMessage('')
@@ -78,7 +83,6 @@ const MyPage = () => {
           message={alertMessage}
           onClose={() => {
             setAlertMessage('')
-            navigate(location.pathname, { replace: true })
           }}
         />
       )}{' '}
