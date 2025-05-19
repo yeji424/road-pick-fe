@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react'
-import { useLocation } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 import Map from '@/components/common/Map/Map'
 import BottomSheet from '@/components/common/BottomSheet/BottomSheet'
 import BottomSheetContent from '@/components/common/BottomSheet/BottomSheetContent'
@@ -13,6 +13,8 @@ const RADIUS = 5000
 
 const MapPage = () => {
   const location = useLocation()
+  const navigate = useNavigate()
+
   const {
     mapx: initMapx,
     mapy: initMapy,
@@ -83,14 +85,38 @@ const MapPage = () => {
   }, [list, contentId, hasAutoFocused, api])
 
   const handleItemClick = item => {
+    const lat = Number(item.mapy)
+    const lng = Number(item.mapx)
     setCenter([Number(item.mapy), Number(item.mapx)])
     setSelectedDetail(item)
     api.start({ y: snapPointsRef.current.min })
+
+    navigate(location.pathname, {
+      replace: true,
+      state: {
+        mapy: lat,
+        mapx: lng,
+        contentTypeId,
+        contentId: item.contentid,
+      },
+    })
   }
 
   const handleMarkerClick = item => {
+    const lat = Number(item.mapy)
+    const lng = Number(item.mapx)
     setSelectedDetail(item)
     api.start({ y: snapPointsRef.current.min })
+
+    navigate(location.pathname, {
+      replace: true,
+      state: {
+        mapy: lat,
+        mapx: lng,
+        contentTypeId,
+        contentId: item.contentid,
+      },
+    })
   }
 
   const handleCloseModal = () => {
@@ -128,6 +154,7 @@ const MapPage = () => {
           contentTypeId={contentTypeId}
           setContentTypeId={setContentTypeId}
           onItemClick={handleItemClick}
+          positionType="absolute"
         />
       </BottomSheet>
     </div>

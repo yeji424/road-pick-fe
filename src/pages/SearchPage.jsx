@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useLocation } from 'react-router-dom'
 import css from './SearchPage.module.css'
-import SortDropdown from '../components/common/BottomSheet/SortDropDown'
 import Header from '@/components/common/Header/Header'
 import Spinner from '@/components/loading/Spinner'
 import ListCard from '@/components/common/ListCard/ListCard'
@@ -10,7 +9,6 @@ import { useTourList } from '@/hooks/useKeywordList'
 const SearchPage = () => {
   const [contentTypeId, setContentTypeId] = useState(12)
   const [searchTerm, setSearchTerm] = useState('')
-  const [sortBy, setSortBy] = useState('name')
   const location = useLocation()
 
   useEffect(() => {
@@ -46,10 +44,6 @@ const SearchPage = () => {
         </button>
       </div>
 
-      <div className={css.headerRow}>
-        <SortDropdown sortBy={sortBy} onChange={setSortBy} />
-      </div>
-
       {isLoading && <Spinner />}
       {isError && <div>오류 발생: {isError.message}</div>}
       {!isLoading && searchResults?.length === 0 && <div>검색 결과가 없습니다.</div>}
@@ -58,7 +52,7 @@ const SearchPage = () => {
         {searchResults?.map((item, idx) => (
           <ListCard
             key={idx}
-            firstimage={item.firstimage || 'https://via.placeholder.com/225x152'}
+            firstimage={item.firstimage}
             title={item.title}
             addr1={item.addr1}
             addr2={item.addr2}

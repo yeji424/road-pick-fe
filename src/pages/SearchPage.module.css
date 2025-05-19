@@ -13,21 +13,14 @@
   flex: 1;
   border-radius: 8px;
   font-size: var(--fs-4);
-  font-weight: 600;
+  font-weight: var(--weight-medium);
   color: var(--gray-400);
   cursor: pointer;
 }
 
 .active {
   background-color: white;
-  color: var(--gray-600)
-}
-
-.headerRow {
-  margin-bottom: 30px;
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
+  color: var(--gray-600);
 }
 
 .cardListWrapper {

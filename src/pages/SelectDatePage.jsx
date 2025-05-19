@@ -6,6 +6,8 @@ import RegistModal from '@/components/common/Modal/RegistModal'
 import { useScheduleList } from '@/hooks/useScheduleList'
 import Spinner from '@/components/loading/Spinner'
 import { useSelector } from 'react-redux'
+import AddIcon from '@/assets/icons/addIcon.svg?react'
+import AlertModal from '@/components/common/Modal/AlertModal'
 
 const SelectDatePage = () => {
   const [start, setStart] = useState('')
@@ -14,13 +16,22 @@ const SelectDatePage = () => {
   const [end, setEnd] = useState('')
   const [showBtn, setShowBtn] = useState(false)
   const [isOpen, setIsOpen] = useState(false)
+  const [alertMessage, setAlertMessage] = useState('')
+
   const { data: schedules, loading, error } = useScheduleList(userId)
 
   const ModalOpen = () => {
+    if (!start || !end) {
+      setAlertMessage('여행 날짜를 먼저 선택해주세요.')
+      return
+    }
     setIsOpen(true)
   }
   const ModalClose = () => {
     setIsOpen(false)
+  }
+  const handleAlertClose = () => {
+    setAlertMessage('')
   }
   const [buttonEffect, setButtonEffect] = useState(false)
   const SelectDate = date => {
@@ -60,8 +71,7 @@ const SelectDatePage = () => {
   return (
     <main className={css.container} ref={containerRef}>
       <Header
-        showButton={true}
-        buttonText="일정 추가"
+        showButton={false}
         onButtonClick={ModalOpen}
         buttonTextClassName={buttonEffect ? css.grow : ''}
       />
@@ -85,6 +95,16 @@ const SelectDatePage = () => {
           </button>
         )}
       </div>
+      <div className={css.floatingButtonWrapper}>
+        <button
+          className={`${css.floatingButton} ${buttonEffect ? css.grow : ''}`}
+          onClick={ModalOpen}
+        >
+          <AddIcon className={css.plusIcon} />
+          <span>일정추가</span>
+        </button>
+      </div>
+      {alertMessage && <AlertModal message={alertMessage} onClose={handleAlertClose} />}
     </main>
   )
 }

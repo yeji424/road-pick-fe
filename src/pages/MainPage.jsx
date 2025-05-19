@@ -116,11 +116,7 @@ const MainPage = () => {
               onClick={() => handleMoveDetail(item.contenttypeid, item.contentid)}
             >
               <div className={css.popularImage}>
-                <img
-                  src={item.firstimage || 'https://via.placeholder.com/225x152'}
-                  alt={item.title}
-                  className={css.popularImage}
-                />
+                <img src={item.firstimage} alt={item.title} className={css.popularImage} />
               </div>
               <div className={css.popularContent}>
                 <div className={css.popularTextWrapper}>
@@ -156,7 +152,7 @@ const MainPage = () => {
               recommendations.map((item, idx) => (
                 <ListCard
                   key={idx}
-                  firstimage={item.firstimage || 'https://via.placeholder.com/225x152'}
+                  firstimage={item.firstimage}
                   title={item.title}
                   addr1={item.addr1}
                   addr2={item.addr2}

@@ -1,29 +1,41 @@
 .tripTitle {
   margin-top: 6px;
-  font-size: var(--fs-6);
-  font-weight: 700;
+  font-size: 24px;
+  font-weight: var(--weight-medium);
   color: var(--gray-600);
+  letter-spacing: var(--letter-spacing-title);
 }
 
 .tripDate {
-  margin-top: 4px;
-  font-size: var(--fs-2);
-  font-weight: 600;
+  margin-top: 6px;
+  font-size: 11px;
+  font-weight: var(--weight-regular);
   color: var(--gray-500);
 }
 
 .description {
-  margin-top: 8px;
-  font-size: var(--fs-2);
-  font-weight: 600;
+  margin-top: 4px;
+  font-size: 11px;
+  font-weight: var(--weight-regular);
   color: var(--gray-500);
 }
 
 .friendSection {
   width: 100%;
   display: flex;
-  margin-top: 16px;
+  margin-top: 12px;
   margin-left: 12px;
+}
+
+.friendSection {
+  position: relative;
+  width: fit-content;
+}
+
+.friendWrapper {
+  display: flex;
+  align-items: center;
+  position: relative;
 }
 
 .friendIcon {
@@ -36,34 +48,51 @@
   justify-content: center;
   align-items: center;
   margin-left: -12px;
+  color: var(--primary-blue);
   position: relative;
+  opacity: 0;
+  transform: translateX(8px);
+  transition: all 0.3s ease;
 }
-
 .userIcon {
   width: 13px;
   height: 13px;
 }
-
-.color1 .userIcon {
-  color: var(--secondary-orange);
-}
-.color2 .userIcon {
-  color: var(--primary-blue);
-}
-.color3 .userIcon {
-  color: var(--gray-500);
-}
-
 .addButton {
   width: 69px;
   height: 28px;
   background-color: var(--secondary-orange);
-  color: white;
+  color: var(--background-color);
   border-radius: 6.67px;
   font-size: 10px;
-  margin-left: -8px;
+  margin-left: -61px;
+  font-weight: var(--weight-regular);
   cursor: pointer;
   position: relative;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+}
+.addButton:hover {
+  transform: scale(1.05);
+}
+.friendWrapper.open .addButton {
+  transform: translateX(45px) scale(1);
+  background-color: var(--secondary-orange-60);
+}
+
+.friendWrapper.open .friendIcon {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.friendWrapper.open .friendIcon:nth-child(1) {
+  transition-delay: 0.05s;
+}
+.friendWrapper.open .friendIcon:nth-child(2) {
+  transition-delay: 0.1s;
+}
+.friendWrapper.open .friendIcon:nth-child(3) {
+  transition-delay: 0.15s;
 }
 
 .planPrompt {
@@ -71,17 +100,21 @@
   flex-direction: column;
   align-items: center;
   text-align: center;
-  background-color: var(--background-color);
+  background-color: var(--gray-250);
   border-radius: 10px;
-  padding: 100px 0 30px;
+  margin-top: 17px;
+  padding: 100px 0 100px 0;
   color: var(--gray-700);
   font-weight: var(--weight-semibold);
   position: relative;
 }
 
 .planTitle {
-  font-size: var(--fs-5);
+  /* border: 1px solid red; */
+  font-size: 15px;
   color: var(--gray-700);
-  font-weight: var(--weight-semibold);
-  padding-bottom: 18px;
+  line-height: 23px;
+  font-weight: var(--weight-regular);
+  /* padding-bottom: 18px; */
+  letter-spacing: var(--letter-spacing-title);
 }

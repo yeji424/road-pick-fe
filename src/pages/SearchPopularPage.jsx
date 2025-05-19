@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import { useLocation } from 'react-router-dom'
 import css from './SearchPage.module.css'
-import SortDropdown from '../components/common/BottomSheet/SortDropDown'
 import Header from '@/components/common/Header/Header'
 import Spinner from '@/components/loading/Spinner'
 import ListCard from '@/components/common/ListCard/ListCard'
@@ -9,7 +8,6 @@ import { usePopularTourList } from '@/hooks/usePopularTourList'
 
 const SearchPopularPage = () => {
   const [contentTypeId, setContentTypeId] = useState(12)
-  const [sortBy, setSortBy] = useState('name') // 기본값 임의 설정
   const location = useLocation()
   const query = new URLSearchParams(location.search)
   const areaCode = query.get('areaCode')
@@ -41,10 +39,6 @@ const SearchPopularPage = () => {
         </button>
       </div>
 
-      <div className={css.headerRow}>
-        <SortDropdown sortBy={sortBy} onChange={setSortBy} />
-      </div>
-
       {loading && <Spinner />}
       {error && <div>오류 발생: {error.message}</div>}
       {!loading && populars.length === 0 && <div>유명 관광지가 없습니다.</div>}
@@ -53,7 +47,7 @@ const SearchPopularPage = () => {
         {populars.map((item, idx) => (
           <ListCard
             key={idx}
-            firstimage={item.firstimage || 'https://via.placeholder.com/225x152'}
+            firstimage={item.firstimage || '/assets/imgs/noImageImg.png'}
             title={item.title}
             addr1={item.addr1}
             addr2={item.addr2}
