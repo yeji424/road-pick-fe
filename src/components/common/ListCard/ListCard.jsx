@@ -32,9 +32,18 @@ const ListCard = ({
   contenttypeid,
   mapx,
   mapy,
+  onClick,
   isFavorite = false,
 }) => {
   const navigate = useNavigate()
+
+  const handleClick = e => {
+    e.stopPropagation()
+    if (onClick) {
+      onClick() // 바텀시트에서 받은 onItemClick 호출
+    } else {
+      navigate(`/detail/${contenttypeid}/${contentid}`)
+    }
 
   const moveDetail = () => {
     if (isFavorite) {
@@ -48,7 +57,7 @@ const ListCard = ({
   const randomReviewCount = getReviewCountFromId(contentid)
 
   return (
-    <div className={css.card} onClick={moveDetail}>
+    <div className={css.card} onClick={handleClick}>
       <div className={css.thumbnail}>
         <img src={firstimage || noImage} alt={title} />
       </div>

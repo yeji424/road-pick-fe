@@ -36,3 +36,17 @@ export const throttle = (func, limit = 300) => {
     }
   }
 }
+
+// 비밀번호 유효성 검사 함수
+export const validatePassword = password => {
+  // 영문자 최소 1개 + 특수문자 최소 1개 포함, 8자 이상
+  const pwdRegex = /^(?=.*[A-Za-z])(?=.*[^A-Za-z0-9]).{8,}$/
+  return pwdRegex.test(password)
+}
+
+// 이메일 유효성 검사 함수
+export const validateEmail = email => {
+  // 공백 없는 문자열@문자열.문자열 형식
+  const emailRegex = /^\S+@\S+\.\S+$/
+  return emailRegex.test(email)
+}

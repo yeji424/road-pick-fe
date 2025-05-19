@@ -45,6 +45,7 @@ const HeartToggle = ({
 
   // 로그인 체크 포함 클릭 핸들러
   const handleClick = e => {
+    e.stopPropagation()
     if (!user) {
       e.stopPropagation()
       return navigate('/login', { state: { from: window.location.pathname } })

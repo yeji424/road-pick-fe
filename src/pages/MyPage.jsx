@@ -39,6 +39,7 @@ const MyPage = () => {
     setPrevIndex(activeIndex)
     setActiveIndex(index)
   }
+
   const handleLogout = () => {
     openModal('logout')
   }

@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useEffect, useLayoutEffect, useRef, useState } from 'react'
 import { loadKakaoMapScript } from '@/loaders/kakaoLoader'
 import css from './Map.module.css'
 import MapModal from './MapModal'
@@ -30,19 +30,23 @@ const Map = ({ center, list, onMarkerClick, detail, onCloseModal, onReSearch }) 
   })
 
   // 1) 지도 스크립트 로드 & 인스턴스 생성
-  useEffect(() => {
+  useLayoutEffect(() => {
     loadKakaoMapScript()
       .then(() => {
-        const kakao = window.kakao
-        const map = new kakao.maps.Map(mapContainerRef.current, {
-          center: new kakao.maps.LatLng(center[0], center[1]),
-          level: 2,
-        })
-        mapInstanceRef.current = map
-        setIsReady(true)
+        requestAnimationFrame(() => {
+          if (!mapContainerRef.current) return
 
-        kakao.maps.event.addListener(map, 'click', () => {
-          setModalClosing(true)
+          const kakao = window.kakao
+          const map = new kakao.maps.Map(mapContainerRef.current, {
+            center: new kakao.maps.LatLng(center[0], center[1]),
+            level: 2,
+          })
+          mapInstanceRef.current = map
+          setIsReady(true)
+
+          kakao.maps.event.addListener(map, 'click', () => {
+            setModalClosing(true)
+          })
         })
       })
       .catch(console.error)
@@ -56,7 +60,7 @@ const Map = ({ center, list, onMarkerClick, detail, onCloseModal, onReSearch }) 
     const moveLatLon = new kakao.maps.LatLng(center[0], center[1])
     mapInstanceRef.current.setCenter(moveLatLon)
     mapInstanceRef.current.setLevel(2)
-    setTimeout(() => setIsReady(true), 300)
+    setIsReady(true)
   }, [center])
 
   // 3) list 또는 detail 변경 시 마커 다시 그리기
@@ -65,14 +69,20 @@ const Map = ({ center, list, onMarkerClick, detail, onCloseModal, onReSearch }) 
 
     const kakao = window.kakao
 
-    const markerSize = new kakao.maps.Size(30, 35)
-    const markerOffset = new kakao.maps.Point(12, 34)
-    const defaultMarkerImage = new kakao.maps.MarkerImage(markerDefaultUrl, markerSize, {
-      offset: markerOffset,
+    const defaultMarkerSize = new kakao.maps.Size(30, 35)
+    const defaultMarkerOffset = new kakao.maps.Point(12, 34)
+    const defaultMarkerImage = new kakao.maps.MarkerImage(markerDefaultUrl, defaultMarkerSize, {
+      offset: defaultMarkerOffset,
     })
-    const selectedMarkerImage = new kakao.maps.MarkerImage(markerSelectedUrl, markerSize, {
-      offset: markerOffset,
+
+    const selectedMarkerSize = new kakao.maps.Size(36, 42)
+    const selectedMarkerOffset = new kakao.maps.Point(18, 42)
+    const selectedMarkerImage = new kakao.maps.MarkerImage(markerSelectedUrl, selectedMarkerSize, {
+      offset: selectedMarkerOffset,
     })
+
+    const defaultZIndex = 1
+    const selectedZIndex = 2
 
     // 기존 마커 전부 제거
     markersRef.current.forEach(m => m.setMap(null))
@@ -84,16 +94,20 @@ const Map = ({ center, list, onMarkerClick, detail, onCloseModal, onReSearch }) 
       const lng = parseFloat(item.mapx)
       if (isNaN(lat) || isNaN(lng)) return
 
-      const image =
-        detail && String(item.contentid) === String(detail.contentid)
-          ? selectedMarkerImage
-          : defaultMarkerImage
+      const isSelected = detail && String(item.contentid) === String(detail.contentid)
+      const image = isSelected ? selectedMarkerImage : defaultMarkerImage
+      const zIndex = isSelected ? selectedZIndex : defaultZIndex
 
       const marker = new kakao.maps.Marker({
         position: new kakao.maps.LatLng(lat, lng),
         image,
         map: mapInstanceRef.current,
+        zIndex, //
       })
+
+      if (isSelected) {
+        marker.setZIndex(selectedZIndex)
+      }
 
       kakao.maps.event.addListener(marker, 'click', () => {
         setModalClosing(false)
