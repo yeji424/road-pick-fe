@@ -4,6 +4,7 @@ import { register } from '@/apis/authApi'
 import { useNavigate } from 'react-router-dom'
 import GoogleIcon from '@/assets/icons/googleIcon.svg?react'
 import KakaoIcon from '@/assets/icons/kakaoIcon.svg?react'
+import { useModal } from '@/hooks/useModal'
 
 const RegisterPage = () => {
   const navigate = useNavigate()
@@ -20,7 +21,7 @@ const RegisterPage = () => {
     password: '',
     confirmPassword: '',
   })
-
+  const { openModal } = useModal()
   const [registerMsg, setRegisterMsg] = useState('')
 
   const validate = (name, value) => {
@@ -81,7 +82,7 @@ const RegisterPage = () => {
       }
       const data = await register(payload)
       setRegisterMsg(data.message)
-      navigate('/login')
+      openModal('registerComplete')
     } catch (err) {
       if (err.status === 400 && err.validation) {
         const apiErrors = {}
@@ -170,7 +171,7 @@ const RegisterPage = () => {
         {registerMsg && <p>{registerMsg}</p>}
       </form>
 
-      <p className={css.alt}>3초만에 로그인하기</p>
+      <p className={css.alt}>3초만에 회원가입하기</p>
       <div className={css.snsButtons}>
         <button className={css.snsBtn}>
           <GoogleIcon />
@@ -179,6 +180,13 @@ const RegisterPage = () => {
           <KakaoIcon />
         </button>
       </div>
+      {/* 로그인 이동 */}
+      <p className={css.alt}>
+        이미 회원이신가요?
+        <span className={css.link} onClick={() => navigate('/login')}>
+          로그인
+        </span>
+      </p>
     </div>
   )
 }

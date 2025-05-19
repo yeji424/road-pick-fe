@@ -1,30 +1,59 @@
 import { useState } from 'react'
-import css from './PlanModal.module.css'
+import noImage from '@/assets/imgs/noImageImg.png'
+import css from './Modal.module.css'
+import CheckboxIcon from '@/assets/icons/checkBoxIcon.svg?react'
 
-const PlanModal = ({ CreateShedule, ModalClose, dest, title }) => {
+const PlanModal = ({ CreateShedule, onClose, image, description, dest, title }) => {
   const [checked, setChecked] = useState(false)
 
   const handleCheckboxChange = e => {
     setChecked(e.target.checked)
   }
+  const handleCLoseClick = () => {
+    onClose()
+  }
   return (
-    <div className={css.container}>
-      <div className={css.modal}>
-        <div className={css.imgwrap}>
-          <img src={dest.firstimage} alt={dest.title} />
+    <div className={css.backdrop}>
+      <div className={css.modal} onClick={e => e.stopPropagation()}>
+        <div className={css.image}>
+          {image && (
+            <img src={dest.firstimage || noImage} alt={dest.title} className={css.imagePreview} />
+          )}
         </div>
-        <div className={css.title}>
-          <h2>{`${dest.title}을 ${title}에 추가하시겠습니까?`}</h2>
-        </div>
-        <div className={css.descript}>
-          <input type="checkbox" checked={checked} onChange={handleCheckboxChange} />
-          <p>{title} 페이지로 이동합니다.</p>
-        </div>
-        <div className={css.btnarea}>
-          <button className={css.close} onClick={ModalClose}>
+        <h4>
+          {title ? (
+            <>
+              <span className={css.title}>"{dest.title}"</span>
+              {`를(을) ${title}에 추가하시겠습니까?`}
+            </>
+          ) : (
+            '해당 관광지를(을) 여행 일정에 추가하시겠습니까?'
+          )}
+        </h4>
+
+        {description && (
+          <label className={css.description}>
+            <input
+              type="checkbox"
+              checked={checked}
+              onChange={handleCheckboxChange}
+              className={css.hiddenCheckbox}
+              id="customCheckbox"
+            />
+            <span
+              className={`${css.customCheckbox} ${checked ? css.checked : ''}`}
+              aria-hidden="true"
+            >
+              <CheckboxIcon />
+            </span>
+            <p>{description}</p>
+          </label>
+        )}
+        <div className={css.btnArea}>
+          <button className={css.closeBtn} onClick={handleCLoseClick}>
             닫기
           </button>
-          <button className={css.create} onClick={e => CreateShedule(e, dest, checked)}>
+          <button className={css.successBtn} onClick={e => CreateShedule(e, dest, checked)}>
             추가
           </button>
         </div>
