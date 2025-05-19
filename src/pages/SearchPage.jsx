@@ -43,26 +43,29 @@ const SearchPage = () => {
           축제/행사
         </button>
       </div>
-
       {isLoading && <Spinner />}
-      {isError && <div>오류 발생: {isError.message}</div>}
-      {!isLoading && searchResults?.length === 0 && <div>검색 결과가 없습니다.</div>}
 
-      <div className={css.cardListWrapper}>
-        {searchResults?.map((item, idx) => (
-          <ListCard
-            key={idx}
-            firstimage={item.firstimage}
-            title={item.title}
-            addr1={item.addr1}
-            addr2={item.addr2}
-            contentid={item.contentid}
-            contenttypeid={item.contenttypeid}
-            mapx={item.mapx}
-            mapy={item.mapy}
-          />
-        ))}
-      </div>
+      {!isLoading && (searchResults?.length === 0 || isError) && (
+        <div className={css.none}>검색 결과가 없습니다.</div>
+      )}
+
+      {!isLoading && !isError && searchResults?.length > 0 && (
+        <div className={css.cardListWrapper}>
+          {searchResults.map((item, idx) => (
+            <ListCard
+              key={idx}
+              firstimage={item.firstimage}
+              title={item.title}
+              addr1={item.addr1}
+              addr2={item.addr2}
+              contentid={item.contentid}
+              contenttypeid={item.contenttypeid}
+              mapx={item.mapx}
+              mapy={item.mapy}
+            />
+          ))}
+        </div>
+      )}
     </main>
   )
 }
