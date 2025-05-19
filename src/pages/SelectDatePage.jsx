@@ -69,7 +69,7 @@ const SelectDatePage = () => {
     )
   }
   return (
-    <main className={css.container} ref={containerRef}>
+    <main className={css.container}>
       <Header
         showButton={false}
         onButtonClick={ModalOpen}
