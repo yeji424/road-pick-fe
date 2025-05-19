@@ -65,7 +65,7 @@ const ListCard = ({
           {randomRating} ({randomReviewCount})
         </p>
         <p className={css.location}>
-          {addr1} {addr2}
+          {addr1}&nbsp;{addr2}
         </p>
       </div>
 

@@ -81,16 +81,6 @@
   letter-spacing: var(--letter-spacing-title);
 }
 
-/* 드롭다운으로 */
-.sortSelect {
-  font-size: 10px;
-  font-weight: var(--weight-demilight);
-  color: var(--gray-400);
-  background: none;
-  border: none;
-  cursor: pointer;
-}
-
 .listWrapper {
   display: flex;
   flex-direction: column;

@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useLocation } from 'react-router-dom'
 import css from './SearchPage.module.css'
-import SortDropdown from '../components/common/BottomSheet/SortDropDown'
 import Header from '@/components/common/Header/Header'
 import Spinner from '@/components/loading/Spinner'
 import ListCard from '@/components/common/ListCard/ListCard'
@@ -10,7 +9,6 @@ import { useTourList } from '@/hooks/useKeywordList'
 const SearchPage = () => {
   const [contentTypeId, setContentTypeId] = useState(12)
   const [searchTerm, setSearchTerm] = useState('')
-  const [sortBy, setSortBy] = useState('name')
   const location = useLocation()
 
   useEffect(() => {
@@ -44,10 +42,6 @@ const SearchPage = () => {
         >
           축제/행사
         </button>
-      </div>
-
-      <div className={css.headerRow}>
-        <SortDropdown sortBy={sortBy} onChange={setSortBy} />
       </div>
 
       {isLoading && <Spinner />}

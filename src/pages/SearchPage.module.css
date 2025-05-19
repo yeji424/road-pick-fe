@@ -23,13 +23,6 @@
   color: var(--gray-600)
 }
 
-.headerRow {
-  margin-bottom: 30px;
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-}
-
 .cardListWrapper {
   display: flex;
   flex-direction: column;
