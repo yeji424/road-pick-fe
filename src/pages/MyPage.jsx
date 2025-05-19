@@ -56,7 +56,7 @@ const MyPage = () => {
       component: <MyTrips setAlertMessage={setAlertMessage} schedules={schedules} />,
     },
     { key: 'saved', label: '저장 목록', component: <SavedList /> },
-    { key: 'friends', label: '친구 목록', component: <FriendsList /> },
+    { key: 'friends', label: '친구 목록', component: <FriendsList activeIndex={activeIndex} /> },
   ]
   const { openModal } = useModal()
 

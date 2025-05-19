@@ -106,7 +106,14 @@ const PlanDayBlock = ({
               >
                 <div className={css.activityHeader}>
                   <div className={css.activityName}>{activity.destination.title}</div>
-                  <div className={css.more} onClick={() => handleToggleMenu(activity._id)}>
+                  <div
+                    className={css.more}
+                    onClick={e => {
+                      // prettier-ignore
+                      e.stopPropagation();
+                      handleToggleMenu(activity._id)
+                    }}
+                  >
                     <MoreIcon className={css.more} />
                     {openMenuId === activity._id && (
                       <div className={css.moreMenu}>

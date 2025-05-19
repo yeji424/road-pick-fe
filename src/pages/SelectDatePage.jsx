@@ -1,5 +1,5 @@
 import Calendar from '@/components/common/Calendar/Calendar'
-import { useEffect, useState } from 'react'
+import { useCallback, useEffect, useRef, useState } from 'react'
 import css from './SelectDatePage.module.css'
 import Header from '@/components/common/Header/Header'
 import RegistModal from '@/components/common/Modal/RegistModal'
@@ -12,12 +12,14 @@ import AlertModal from '@/components/common/Modal/AlertModal'
 const SelectDatePage = () => {
   const [start, setStart] = useState('')
   const user = useSelector(state => state.auth.user)
-  const userId = user._id
+  const userId = user?._id
   const [end, setEnd] = useState('')
+  const [showBtn, setShowBtn] = useState(false)
   const [isOpen, setIsOpen] = useState(false)
   const [alertMessage, setAlertMessage] = useState('')
 
   const { data: schedules, loading, error } = useScheduleList(userId)
+
   const ModalOpen = () => {
     if (!start || !end) {
       setAlertMessage('여행 날짜를 먼저 선택해주세요.')
@@ -67,7 +69,7 @@ const SelectDatePage = () => {
     )
   }
   return (
-    <main className={css.container}>
+    <main className={css.container} ref={containerRef}>
       <Header
         showButton={false}
         onButtonClick={ModalOpen}
@@ -87,6 +89,11 @@ const SelectDatePage = () => {
           isSelect={true}
           showStartEndLabel={true}
         />
+        {showBtn && (
+          <button className={css.floatingBtn} onClick={ModalOpen}>
+            + 일정 추가
+          </button>
+        )}
       </div>
       <div className={css.floatingButtonWrapper}>
         <button

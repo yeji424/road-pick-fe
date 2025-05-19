@@ -19,7 +19,7 @@ export const getTourList = async ({ areaCode, contentTypeId }) => {
   const items = response.data.response.body.items.item || []
 
   // 이미지 있는 항목 중 상위 10개만
-  const filtered = items.filter(item => item.firstimage).slice(0, 10)
+  const filtered = items.filter(item => item.firstimage && item.mapx && item.mapy).slice(0, 10)
 
   return filtered
 }

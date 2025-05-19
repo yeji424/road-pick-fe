@@ -1,6 +1,7 @@
 /* 공통 스타일 */
 .container {
   max-height: 100vh;
+  overflow-y: auto;
 }
 ::-webkit-scrollbar {
   display: none;

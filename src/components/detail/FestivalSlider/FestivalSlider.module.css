@@ -13,3 +13,13 @@
   color: var(--gray-600);
   margin-bottom: 5px;
 }
+
+.none {
+  background-color: var(--gray-200);
+  border-radius: 8px;
+  height: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: var(--fs-2) var(--fs-4);
+}

@@ -44,9 +44,7 @@ const ListCard = ({
       onClick() // 바텀시트에서 받은 onItemClick 호출
     } else if (isFavorite) {
       return
-    } else {
-      navigate(`/detail/${contenttypeid}/${contentid}`)
-    }
+    } else navigate(`/detail/${contenttypeid}/${contentid}`)
   }
 
   const randomRating = getRatingFromId(contentid)
