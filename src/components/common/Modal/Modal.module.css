@@ -149,7 +149,7 @@
 .modal h4 {
   /* border: 1px solid red; */
   text-align: start;
-  font-size: 18px;
+  font-size: 20px;
   font-weight: var(--weight-regular);
   margin-bottom: 17px;
 }
@@ -200,10 +200,84 @@
   height: 18px;
   color: #ccc; /* 체크 전 색상 (연한 회색) */
   transition: color 0.3s ease;
-  margin-right: 8px;
+  margin-right: 11px;
 }
 
 /* 체크됐을 때 색상 */
 .customCheckbox.checked {
   color: #719eff; /* 체크 시 파란색 */
+}
+.inputArea {
+  position: relative;
+  /* border: 1px solid green; */
+  margin-bottom: 27px;
+}
+.inputGroup {
+  position: relative;
+  /* border: 1px solid red; */
+  display: flex;
+  gap: 15px;
+  margin-top: 27px;
+  text-align: center;
+  justify-content: start;
+  align-items: center;
+}
+
+.label {
+  width: 30%;
+  font-weight: var(--weight-regular);
+  font-size: 17px;
+  color: var(--gray-600);
+
+  text-align: justify;
+  display: inline-block;
+  white-space: nowrap;
+  position: relative;
+}
+
+.label::after {
+  content: '';
+  display: inline-block;
+  width: 100%;
+}
+.modal input::placeholder {
+  font-size: 15px;
+}
+.input:focus {
+  border-bottom: 1px solid var(--secondary-orange);
+}
+.input {
+  /* border: 2px solid green; */
+  font-size: 17px;
+  font-weight: var(--weight-regular);
+  padding: 0 0 2px 0;
+  border-bottom: 1px solid var(--gray-300);
+  letter-spacing: -0.02em;
+  transition: border-bottom-color 0.3s ease;
+}
+
+.value {
+  /* border: 2px solid green; */
+  /* padding: 10px; */
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  font-weight: var(--weight-regular);
+  font-size: 17px;
+  color: var(--gray-700);
+
+  word-break: break-word;
+  letter-spacing: var(--letter-spacing-title);
+}
+.error {
+  /* border: 1px red solid; */
+  text-align: start;
+  color: var(--danger);
+  font-size: 14px;
+  margin-top: 4px;
+}
+.inputWrapper {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
 }

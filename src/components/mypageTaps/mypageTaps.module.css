@@ -94,6 +94,9 @@
   transform: scale(1.2);
   opacity: 1;
 }
+.empty p {
+  font-weight: var(--weight-regular);
+}
 /* 내여행, 친구목록 리스트 관련 */
 .listTile {
   display: flex;
