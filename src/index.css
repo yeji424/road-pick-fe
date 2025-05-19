@@ -178,10 +178,12 @@ input {
 .firstLoadingContainer {
   position: fixed;
   top: 0;
-  left: 0;
+  left: 50%;
+  transform: translateX(-50%);
   overflow: hidden;
   height: 100vh;
   width: 100vw;
+  max-width: 600px;
   background-color: var(--primary-blue);
   display: flex;
   justify-content: center;
