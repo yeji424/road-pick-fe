@@ -21,7 +21,7 @@
   font-size: 25px;
   color: var(--gray-600);
   letter-spacing: -0.03em;
-  font-weight: var(--weight-medium);
+  font-weight: var(--weight-semibold);
   /* border: red solid 1px; */
 }
 .saveBtn {
@@ -38,7 +38,7 @@
 .content h3 {
   font-size: 19px;
   letter-spacing: -0.03em;
-  font-weight: var(--weight-medium);
+  font-weight: var(--weight-semibold);
   color: var(--gray-600);
   margin-bottom: 5px;
 }
@@ -50,7 +50,7 @@
 .content p {
   font-size: 14px;
   letter-spacing: -0.03em;
-  font-weight: var(--weight-regular);
+  font-weight: var(--weight-demilight);
   line-height: 1.4;
   transition: all 0.3s ease;
   white-space: pre-line;
@@ -60,6 +60,7 @@
   -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
   overflow: hidden;
+  padding: 20px;
 }
 
 .toggleBtn {
@@ -86,8 +87,7 @@
   width: 70px;
   font-size: 14px;
   font-weight: var(--weight-regular);
-  color: var(--secondary-orange-60);
-
+  color: var(--secondary-orange-40);
   flex-shrink: 0;
 }
 .value {
