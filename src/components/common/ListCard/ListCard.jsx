@@ -41,16 +41,11 @@ const ListCard = ({
     e.stopPropagation()
     if (onClick) {
       onClick() // 바텀시트에서 받은 onItemClick 호출
+    } else if (isFavorite) {
+      return
     } else {
       navigate(`/detail/${contenttypeid}/${contentid}`)
     }
-
-  const moveDetail = () => {
-    if (isFavorite) {
-      return
-    }
-    navigate(`/detail/${contenttypeid}/${contentid}`)
-    console.log(firstimage)
   }
 
   const randomRating = getRatingFromId(contentid)
