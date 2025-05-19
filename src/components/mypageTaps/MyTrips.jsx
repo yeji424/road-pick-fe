@@ -73,9 +73,8 @@ const MyTrips = ({ setAlertMessage, schedules }) => {
                     <>
                       <h4>{trip.title}</h4>
                       <p>
-                        {trip.start}~{trip.end}
+                        {trip.start} ~ {trip.end}
                       </p>
-                      <p>{trip.countryCnt}개 도시</p>
                     </>
                   }
                   renderMoreMenu={() => (

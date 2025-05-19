@@ -281,3 +281,7 @@
   flex-direction: column;
   flex: 1;
 }
+.activeBtn {
+  background-color: var(--primary-blue);
+  cursor: pointer;
+}

@@ -27,7 +27,7 @@ const RegistModal = ({ start, end, onClose }) => {
       await createSchedule(newSchedule)
       onClose()
       navigate('/mypage', {
-        state: { alertMessage: '여행 일정이 등록되었습니다.' },
+        state: { alertMessage: '새로운 여행 일정이 등록되었습니다.' },
       })
     } catch (error) {
       console.error(error)
@@ -79,7 +79,10 @@ const RegistModal = ({ start, end, onClose }) => {
           <button className={css.closeBtn} onClick={onClose}>
             취소
           </button>
-          <button className={css.successBtn} onClick={handleRegist}>
+          <button
+            className={`${css.successBtn} ${title.trim() ? css.activeBtn : ''}`}
+            onClick={handleRegist}
+          >
             등록
           </button>
         </div>

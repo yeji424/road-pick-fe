@@ -3,6 +3,7 @@
   font-size: 24px;
   font-weight: var(--weight-medium);
   color: var(--gray-600);
+  letter-spacing: var(--letter-spacing-title);
 }
 
 .tripDate {
@@ -71,9 +72,12 @@
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
   transition: transform 0.3s ease;
 }
-
+.addButton:hover {
+  transform: scale(1.05);
+}
 .friendWrapper.open .addButton {
-  transform: translateX(45px);
+  transform: translateX(45px) scale(1);
+  background-color: var(--secondary-orange-60);
 }
 
 .friendWrapper.open .friendIcon {
