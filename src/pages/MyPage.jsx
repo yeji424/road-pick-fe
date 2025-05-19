@@ -7,11 +7,9 @@ import FriendsList from '@/components/mypageTaps/FriendsList'
 import { useSelector } from 'react-redux'
 import profileImage from '@/assets/imgs/ProfileBasicImg.png'
 import LogoutIcon from '@/assets/icons/logoutIcon.svg?react'
-import { useNavigate } from 'react-router-dom'
-import { logout } from '@/store/authSlice'
 import { useScheduleList } from '@/hooks/useScheduleList'
 import Spinner from '@/components/loading/Spinner'
-import { Navigate, useLocation, useNavigate } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 import { useModal } from '@/hooks/useModal'
 import AlertModal from '@/components/common/Modal/AlertModal'
 
@@ -36,7 +34,7 @@ const MyPage = () => {
       return () => clearTimeout(timer)
     }
   }, [location.state])
-  
+
   const onTabChange = index => {
     setPrevIndex(activeIndex)
     setActiveIndex(index)
@@ -44,14 +42,18 @@ const MyPage = () => {
   const handleLogout = () => {
     openModal('logout')
   }
-  console.log(schedules)
+
   const tabs = [
-    { key: 'myTrips', label: '내 여행', component: <MyTrips setAlertMessage={setAlertMessage}  schedules={schedules} /> },
+    {
+      key: 'myTrips',
+      label: '내 여행',
+      component: <MyTrips setAlertMessage={setAlertMessage} schedules={schedules} />,
+    },
     { key: 'saved', label: '저장 목록', component: <SavedList /> },
     { key: 'friends', label: '친구 목록', component: <FriendsList /> },
   ]
   const { openModal } = useModal()
-  
+
   if (!schedules || loading) return <Spinner />
   if (error) return <div>error..</div>
   const title =
