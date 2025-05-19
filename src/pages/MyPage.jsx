@@ -7,8 +7,10 @@ import FriendsList from '@/components/mypageTaps/FriendsList'
 import { useDispatch, useSelector } from 'react-redux'
 import profileImage from '@/assets/imgs/ProfileBasicImg.png'
 import LogoutIcon from '@/assets/icons/logoutIcon.svg?react'
-import { Navigate, useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { logout } from '@/store/authSlice'
+import { useScheduleList } from '@/hooks/useScheduleList'
+import Spinner from '@/components/loading/Spinner'
 
 const MyPage = () => {
   // Redux store에서 user 정보만 꺼내서 화면에 표시
@@ -17,6 +19,7 @@ const MyPage = () => {
   const user = useSelector(state => state.auth.user)
   const [activeIndex, setActiveIndex] = useState(0)
   const [prevIndex, setPrevIndex] = useState(0)
+  const { data: schedules, loading, error } = useScheduleList(user._id)
 
   const onTabChange = index => {
     setPrevIndex(activeIndex)
@@ -26,13 +29,21 @@ const MyPage = () => {
     dispatch(logout())
     navigate('/')
   }
-
+  console.log(schedules)
   const tabs = [
-    { key: 'myTrips', label: '내 여행', component: <MyTrips /> },
+    { key: 'myTrips', label: '내 여행', component: <MyTrips schedules={schedules} /> },
     { key: 'saved', label: '저장 목록', component: <SavedList /> },
     { key: 'friends', label: '친구 목록', component: <FriendsList /> },
   ]
 
+  if (!schedules || loading) return <Spinner />
+  if (error) return <div>error..</div>
+  const title =
+    schedules.length > 0
+      ? schedules[0].title.endsWith('여행')
+        ? schedules[0].title
+        : schedules[0].title + '여행'
+      : ''
   return (
     <main>
       <Header
@@ -50,7 +61,11 @@ const MyPage = () => {
         </div>
         <div className={css.info}>
           <h3>{user.name}님</h3>
-          <p>일정을 생성하고 계획해보세요!</p>
+          {schedules && schedules.length > 0 ? (
+            <p>{`${title} 며칠 남지 않았어요!`}</p>
+          ) : (
+            <p>일정을 생성하고 계획해보세요!</p>
+          )}
         </div>
       </section>
       {/* 탭 영역 */}
