@@ -3,24 +3,22 @@ import { useEffect, useState } from 'react'
 import PlusBtnIcon from '@/assets/icons/PlusBtnIcon.svg?react'
 import TripListImg from '@/assets/imgs/TripListImg.png'
 import MypageListCard from './MypageListCard'
-import { useScheduleList } from '@/hooks/useScheduleList'
 import { deleteSchedule } from '@/apis/scheduleApi'
 import { useNavigate } from 'react-router-dom'
 import Spinner from '../loading/Spinner'
-import { useSelector } from 'react-redux'
 
-const MyTrips = () => {
-  const user = useSelector(state => state.auth.user)
-  const { data: schedules, loading, error } = useScheduleList(user._id)
+const MyTrips = ({ schedules }) => {
   const [trips, setTrips] = useState([])
   const navigate = useNavigate()
   useEffect(() => {
     // schedules가 바뀔 때마다 로컬 상태에도 반영
     if (schedules) {
-      setTrips(schedules)
+      const sorted = [...schedules].sort((a, b) => new Date(a.start) - new Date(b.start)) // 날짜순 정렬
+      setTrips(sorted)
     }
   }, [schedules])
 
+  console.log(trips)
   const handleDelete = async scheduleId => {
     if (!scheduleId) return
     try {
@@ -34,8 +32,7 @@ const MyTrips = () => {
   const handleGoToCreateTrip = () => {
     navigate('/selectDate')
   }
-  if (loading || !schedules) return <Spinner />
-  if (error) return <div>error...</div>
+
   return (
     <div className={css.listContainer}>
       <div className={css.tripCreateCard} onClick={handleGoToCreateTrip}>
