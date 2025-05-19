@@ -108,16 +108,16 @@ const PlanPage = () => {
   return (
     <main>
       <Header />
-      <section className={css.infoSection}>
+      <section className={`${css.infoSection} fadeInText`}>
         <p className={css.tripTitle}>{schedule.title}</p>
         <p className={css.tripDate}>
           {schedule.start} ~ {schedule.end}
         </p>
       </section>
 
-      <h2 className={css.description}>하루하루 구체적인 계획을 세워보아요!</h2>
+      <h2 className={`${css.description} fadeInText`}>하루하루 구체적인 계획을 세워보아요!</h2>
 
-      <section className={css.friendSection}>
+      <section className={`${css.friendSection} fadeInText`}>
         <div className={`${css.friendWrapper} ${isOpen ? css.open : ''}`}>
           {[...Array(3)].map((_, idx) => (
             <div
