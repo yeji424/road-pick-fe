@@ -5,12 +5,9 @@ import TripListImg from '@/assets/imgs/TripListImg.png'
 import MypageListCard from './MypageListCard'
 import { deleteSchedule } from '@/apis/scheduleApi'
 import { useNavigate } from 'react-router-dom'
-import Spinner from '../loading/Spinner'
-import { useSelector } from 'react-redux'
 import { useLocation } from 'react-router-dom'
 
-const MyTrips = ({ setAlertMessage,schedules }) => {
-  const user = useSelector(state => state.auth.user)
+const MyTrips = ({ setAlertMessage, schedules }) => {
   const [trips, setTrips] = useState([])
   const navigate = useNavigate()
   const location = useLocation()
