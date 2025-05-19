@@ -3,7 +3,7 @@
   box-shadow: 0 0 7px rgba(0, 0, 0, 0.2);
   width: 143px;
   border-radius: var(--fs-1);
-  height: 120px;
+  height: 116px;
   margin-top: var(--fs-1);
   display: flex;
   flex-direction: column;
@@ -12,7 +12,7 @@
 }
 
 .box > * {
-  padding: 4px 4px;
+  padding: 6px;
 }
 
 .imgWrap {
