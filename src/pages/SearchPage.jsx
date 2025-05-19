@@ -58,7 +58,7 @@ const SearchPage = () => {
         {searchResults?.map((item, idx) => (
           <ListCard
             key={idx}
-            firstimage={item.firstimage || 'https://via.placeholder.com/225x152'}
+            firstimage={item.firstimage}
             title={item.title}
             addr1={item.addr1}
             addr2={item.addr2}
