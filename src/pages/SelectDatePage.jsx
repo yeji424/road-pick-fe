@@ -14,7 +14,6 @@ const SelectDatePage = () => {
   const user = useSelector(state => state.auth.user)
   const userId = user?._id
   const [end, setEnd] = useState('')
-  const [showBtn, setShowBtn] = useState(false)
   const [isOpen, setIsOpen] = useState(false)
   const [alertMessage, setAlertMessage] = useState('')
 
@@ -69,7 +68,7 @@ const SelectDatePage = () => {
     )
   }
   return (
-    <main className={css.container} ref={containerRef}>
+    <main className={css.container}>
       <Header
         showButton={false}
         onButtonClick={ModalOpen}
@@ -89,11 +88,6 @@ const SelectDatePage = () => {
           isSelect={true}
           showStartEndLabel={true}
         />
-        {showBtn && (
-          <button className={css.floatingBtn} onClick={ModalOpen}>
-            + 일정 추가
-          </button>
-        )}
       </div>
       <div className={css.floatingButtonWrapper}>
         <button
