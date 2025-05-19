@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react'
+import React, { useState, useMemo, useEffect } from 'react'
 import css from './MainPage.module.css'
 import Spinner from '@/components/loading/Spinner'
 import SearchCard from '@/components/common/Search/SearchCard'
@@ -11,8 +11,16 @@ import ListCard from '@/components/common/ListCard/ListCard'
 
 const MainPage = () => {
   const [selectedCity, setSelectedCity] = useState('전국')
+  const [currentIndex, setCurrentIndex] = useState(0)
   const navigate = useNavigate()
   const user = useSelector(state => state.auth.user)
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentIndex(prev => (prev + 1) % 2) // 배너 2개
+    }, 3000)
+    return () => clearInterval(interval)
+  }, [])
 
   const areaCodeMap = useMemo(
     () => ({
@@ -123,7 +131,6 @@ const MainPage = () => {
                   <p className={css.popularTitle}>{item.title}</p>
                   <p className={css.popularAddress}>{item.addr1}</p>
                 </div>
-
                 <div onClick={e => e.stopPropagation()}>
                   <HeartToggle
                     contentid={item.contentid}
@@ -144,6 +151,7 @@ const MainPage = () => {
           <div>유명 관광지가 없습니다.</div>
         )}
       </div>
+
       {user && user.name ? (
         <>
           <h3 className={css.recommendTitle}>{user.name}님께 추천해요!</h3>
@@ -166,9 +174,18 @@ const MainPage = () => {
               <div>추천 관광지가 없습니다.</div>
             )}
           </div>
+
           <div className={css.eventBannerSection}>
             <p className={css.eventBannerTitle}>여름 오기 전, 깜짝 이벤트!</p>
-            <div className={css.eventBannerBox}>이벤트 배너</div>
+            <div className={css.sliderWrapper}>
+              <div
+                className={css.sliderInner}
+                style={{ transform: `translateX(-${currentIndex * 100}%)` }}
+              >
+                <img src="src/assets/imgs/BannerImg1.png" alt="배너1" className={css.bannerImage} />
+                <img src="src/assets/imgs/BannerImg2.png" alt="배너2" className={css.bannerImage} />
+              </div>
+            </div>
           </div>
         </>
       ) : (
