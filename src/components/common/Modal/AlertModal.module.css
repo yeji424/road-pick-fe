@@ -1,8 +1,8 @@
 .alert {
   position: fixed;
-  top: 20px;
+  bottom: 120px;
   left: 50%;
-  transform: translateX(-50%);
+  transform: translateX(-50%) translateY(0);
   background-color: var(--background-color);
   color: var(--gray-500);
   padding: 12px 30px;
@@ -25,18 +25,15 @@
 @keyframes fadeInOut {
   0% {
     opacity: 0;
-    transform: translateX(-50%) translateY(-10px);
+    transform: translateX(-50%) translateY(10px);
   }
-  20% {
-    opacity: 1;
-    transform: translateX(-50%) translateY(0);
-  }
+  20%,
   80% {
     opacity: 1;
     transform: translateX(-50%) translateY(0);
   }
   100% {
     opacity: 0;
-    transform: translateX(-50%) translateY(-10px);
+    transform: translateX(-50%) translateY(10px);
   }
 }
