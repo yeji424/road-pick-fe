@@ -3,7 +3,7 @@ import SaveIcon from '@/assets/icons/saveIcon.svg?react'
 import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { useFavorite } from '@/hooks/useFavorite'
-
+import { useModal } from '@/hooks/useModal'
 /**
  * @param {{
  *   contentid: number|string,
@@ -29,6 +29,7 @@ const HeartToggle = ({
 }) => {
   const user = useSelector(state => state.auth.user)
   const navigate = useNavigate()
+  const { openModal } = useModal()
 
   const item = {
     contentid,
@@ -49,7 +50,18 @@ const HeartToggle = ({
       e.stopPropagation()
       return navigate('/login', { state: { from: window.location.pathname } })
     }
-    toggle(e) // useFavorite 훅의 토글 함수 호출
+
+    if (isFavorited) {
+      e.stopPropagation()
+      openModal('delete', {
+        title,
+        image: firstimage,
+        description: '저장 목록에서 삭제된 항목은 장소 추가에 사용할 수 없습니다.',
+        onConfirm: () => toggle(e), // 찜 해제
+      })
+    } else {
+      toggle(e) // useFavorite 훅의 토글 함수 호출
+    }
   }
 
   return (

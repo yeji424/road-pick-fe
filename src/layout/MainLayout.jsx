@@ -6,6 +6,7 @@ import Footer from '@/components/common/Footer/Footer'
 import Spinner from '@/components/loading/Spinner'
 import { useDispatch, useSelector } from 'react-redux'
 import { fetchProfile, refreshToken } from '@/store/authSlice'
+import ModalRoot from '@/components/common/Modal/ModalRoot'
 const MainLayout = () => {
   const dispatch = useDispatch()
   const location = useLocation()
@@ -16,7 +17,7 @@ const MainLayout = () => {
     location.pathname === '/register' ||
     location.pathname === '/login' ||
     location.pathname === '/map' ||
-    location.pathname === '/plan' ||
+    location.pathname.includes('/plan') ||
     location.pathname === '/firstloading'
 
   useEffect(() => {
@@ -36,6 +37,7 @@ const MainLayout = () => {
         <Outlet />
       </Suspense>
       <Footer />
+      <ModalRoot />
     </div>
   )
 }

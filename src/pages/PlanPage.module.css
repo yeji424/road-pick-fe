@@ -29,7 +29,7 @@
 .friendIcon {
   width: 28px;
   height: 28px;
-  background-color: #F0F1F5;
+  background-color: #f0f1f5;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
   border-radius: 6.67px;
   display: flex;
@@ -45,10 +45,10 @@
 }
 
 .color1 .userIcon {
-  color: var(--secondary-orange)
+  color: var(--secondary-orange);
 }
 .color2 .userIcon {
-  color: var(--primary-blue)
+  color: var(--primary-blue);
 }
 .color3 .userIcon {
   color: var(--gray-500);
@@ -64,4 +64,24 @@
   margin-left: -8px;
   cursor: pointer;
   position: relative;
+}
+
+.planPrompt {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  background-color: var(--background-color);
+  border-radius: 10px;
+  padding: 100px 0 30px;
+  color: var(--gray-700);
+  font-weight: var(--weight-semibold);
+  position: relative;
+}
+
+.planTitle {
+  font-size: var(--fs-5);
+  color: var(--gray-700);
+  font-weight: var(--weight-semibold);
+  padding-bottom: 18px;
 }

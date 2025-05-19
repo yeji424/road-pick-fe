@@ -1,42 +1,68 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import css from './MyPage.module.css'
 import Header from '@/components/common/Header/Header'
 import MyTrips from '@/components/mypageTaps/MyTrips'
 import SavedList from '@/components/mypageTaps/SavedList'
 import FriendsList from '@/components/mypageTaps/FriendsList'
-import { useDispatch, useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 import profileImage from '@/assets/imgs/ProfileBasicImg.png'
 import LogoutIcon from '@/assets/icons/logoutIcon.svg?react'
-import { Navigate, useNavigate } from 'react-router-dom'
-import { logout } from '@/store/authSlice'
+import { useScheduleList } from '@/hooks/useScheduleList'
+import Spinner from '@/components/loading/Spinner'
+import { useLocation, useNavigate } from 'react-router-dom'
+import { useModal } from '@/hooks/useModal'
+import AlertModal from '@/components/common/Modal/AlertModal'
 
 const MyPage = () => {
   // Redux store에서 user 정보만 꺼내서 화면에 표시
-  const dispatch = useDispatch()
   const navigate = useNavigate()
   const user = useSelector(state => state.auth.user)
   const [activeIndex, setActiveIndex] = useState(0)
   const [prevIndex, setPrevIndex] = useState(0)
+  const { data: schedules, loading, error } = useScheduleList(user._id)
+  const location = useLocation()
+  const [alertMessage, setAlertMessage] = useState('')
+  useEffect(() => {
+    if (location.state?.alertMessage) {
+      setAlertMessage(location.state.alertMessage)
+
+      // 2초 뒤 알림 닫기
+      const timer = setTimeout(() => {
+        setAlertMessage('')
+      }, 2000)
+
+      return () => clearTimeout(timer)
+    }
+  }, [location.state])
 
   const onTabChange = index => {
     setPrevIndex(activeIndex)
     setActiveIndex(index)
   }
-  const handleLogout = async () => {
-    try {
-      await dispatch(logout()).unwrap()
-      window.location.href = '/'
-    } catch (err) {
-      console.error('로그아웃 에러:', err)
-    }
+
+  const handleLogout = () => {
+    openModal('logout')
   }
 
   const tabs = [
-    { key: 'myTrips', label: '내 여행', component: <MyTrips /> },
+    {
+      key: 'myTrips',
+      label: '내 여행',
+      component: <MyTrips setAlertMessage={setAlertMessage} schedules={schedules} />,
+    },
     { key: 'saved', label: '저장 목록', component: <SavedList /> },
     { key: 'friends', label: '친구 목록', component: <FriendsList /> },
   ]
+  const { openModal } = useModal()
 
+  if (!schedules || loading) return <Spinner />
+  if (error) return <div>error..</div>
+  const title =
+    schedules.length > 0
+      ? schedules[0].title.endsWith('여행')
+        ? schedules[0].title
+        : schedules[0].title + '여행'
+      : ''
   return (
     <main>
       <Header
@@ -47,6 +73,15 @@ const MyPage = () => {
         iconSvg={<LogoutIcon />}
         onIconClick={handleLogout}
       />
+      {alertMessage && (
+        <AlertModal
+          message={alertMessage}
+          onClose={() => {
+            setAlertMessage('')
+            navigate(location.pathname, { replace: true })
+          }}
+        />
+      )}{' '}
       {/* 프로필 영역 */}
       <section className={css.profile}>
         <div className={css.img}>
@@ -54,7 +89,11 @@ const MyPage = () => {
         </div>
         <div className={css.info}>
           <h3>{user.name}님</h3>
-          <p>일정을 생성하고 계획해보세요!</p>
+          {schedules && schedules.length > 0 ? (
+            <p>{`${title} 며칠 남지 않았어요!`}</p>
+          ) : (
+            <p>일정을 생성하고 계획해보세요!</p>
+          )}
         </div>
       </section>
       {/* 탭 영역 */}

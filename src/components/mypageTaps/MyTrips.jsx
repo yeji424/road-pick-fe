@@ -3,28 +3,34 @@ import { useEffect, useState } from 'react'
 import PlusBtnIcon from '@/assets/icons/PlusBtnIcon.svg?react'
 import TripListImg from '@/assets/imgs/TripListImg.png'
 import MypageListCard from './MypageListCard'
-import { useScheduleList } from '@/hooks/useScheduleList'
 import { deleteSchedule } from '@/apis/scheduleApi'
 import { useNavigate } from 'react-router-dom'
-import Spinner from '../loading/Spinner'
+import { useLocation } from 'react-router-dom'
 
-const MyTrips = () => {
-  const { schedules, loading, error } = useScheduleList()
+const MyTrips = ({ setAlertMessage, schedules }) => {
   const [trips, setTrips] = useState([])
   const navigate = useNavigate()
+  const location = useLocation()
   useEffect(() => {
     // schedules가 바뀔 때마다 로컬 상태에도 반영
     if (schedules) {
-      setTrips(schedules)
+      const sorted = [...schedules].sort((a, b) => new Date(a.start) - new Date(b.start)) // 날짜순 정렬
+      setTrips(sorted)
     }
   }, [schedules])
 
+  useEffect(() => {
+    if (location.state?.fromRegister) {
+      setAlertMessage('여행 일정이 등록되었습니다.')
+      navigate(location.pathname, { replace: true })
+    }
+  }, [location, navigate, setAlertMessage])
   const handleDelete = async scheduleId => {
     if (!scheduleId) return
     try {
-      console.log(scheduleId)
       const response = await deleteSchedule(scheduleId)
       setTrips(prevTrips => prevTrips.filter(trip => trip.tripId !== scheduleId))
+      setAlertMessage('일정이 삭제되었습니다.')
       console.log('삭제 성공:', response.data)
     } catch (err) {
       console.error('삭제 실패:', err.response?.data || err.message)
@@ -33,8 +39,7 @@ const MyTrips = () => {
   const handleGoToCreateTrip = () => {
     navigate('/selectDate')
   }
-  if (loading) return <Spinner />
-  if (error) return <div>error...</div>
+
   return (
     <div className={css.listContainer}>
       <div className={css.tripCreateCard} onClick={handleGoToCreateTrip}>

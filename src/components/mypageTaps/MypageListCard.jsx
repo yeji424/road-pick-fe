@@ -7,12 +7,13 @@ const MypageListCard = ({ thumbnail, info, renderMoreMenu, trip }) => {
   const [open, setOpen] = useState(false)
   const menuRef = useRef(null)
   const navigate = useNavigate()
-  const handleToggle = () => {
+  const handleToggle = e => {
+    e.stopPropagation()
     setOpen(prev => !prev)
   }
-
-  const MovePlanPage = () => {
-    navigate(`/plan/${trip.tripId}`)
+  const MovePlanPage = e => {
+    e.stopPropagation()
+    navigate(`/plan/${trip.tripId}`, { state: { title: trip.title } })
   }
   useEffect(() => {
     const handleClickOutside = e => {

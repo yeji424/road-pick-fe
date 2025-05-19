@@ -151,6 +151,7 @@
   font-size: 20px;
   color: var(--gray-400);
   color: var(--primary-blue);
+  z-index: 10;
 }
 .more:hover,
 .more:active {

@@ -27,7 +27,7 @@ const RegistModal = ({ start, end, onClose }) => {
     try {
       await createSchedule(newSchedule)
       onClose()
-      navigate('/mypage')
+      navigate('/mypage', { state: { fromRegister: true } })
     } catch (error) {
       console.log(error)
     }

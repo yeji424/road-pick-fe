@@ -80,9 +80,11 @@ const AppRouter = createBrowserRouter([
       {
         path: '/calendar',
         element: (
-          <Suspense fallback={<Spinner />}>
-            <CalendarPage />
-          </Suspense>
+          <RequireAuth>
+            <Suspense fallback={<Spinner />}>
+              <CalendarPage />
+            </Suspense>
+          </RequireAuth>
         ),
       },
       {

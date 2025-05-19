@@ -33,6 +33,7 @@ const ListCard = ({
   mapx,
   mapy,
   onClick,
+  isFavorite = false,
 }) => {
   const navigate = useNavigate()
 
@@ -43,6 +44,13 @@ const ListCard = ({
     } else {
       navigate(`/detail/${contenttypeid}/${contentid}`)
     }
+
+  const moveDetail = () => {
+    if (isFavorite) {
+      return
+    }
+    navigate(`/detail/${contenttypeid}/${contentid}`)
+    console.log(firstimage)
   }
 
   const randomRating = getRatingFromId(contentid)
@@ -66,18 +74,20 @@ const ListCard = ({
         </p>
       </div>
 
-      <div className={css.saveBtn}>
-        <HeartToggle
-          contentid={contentid}
-          contenttypeid={contenttypeid}
-          firstimage={firstimage}
-          title={title}
-          addr1={addr1}
-          addr2={addr2}
-          mapx={mapx}
-          mapy={mapy}
-        />
-      </div>
+      {!isFavorite && (
+        <div className={css.saveBtn}>
+          <HeartToggle
+            contentid={contentid}
+            contenttypeid={contenttypeid}
+            firstimage={firstimage}
+            title={title}
+            addr1={addr1}
+            addr2={addr2}
+            mapx={mapx}
+            mapy={mapy}
+          />
+        </div>
+      )}
     </div>
   )
 }

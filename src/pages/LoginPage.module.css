@@ -156,6 +156,7 @@
   color: var(--primary-blue);
   font-weight: var(--weight-regular);
   cursor: pointer;
+  margin-left: 3px;
 }
 .link:hover {
   font-weight: var(--weight-medium);
