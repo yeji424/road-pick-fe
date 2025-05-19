@@ -29,3 +29,13 @@
   gap: 16px; /* 카드 간 간격 */
   padding: 16px; /* 양쪽 여백 */
 }
+
+.none {
+  background-color: var(--gray-250);
+  border-radius: 8px;
+  height: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: var(--fs-2) var(--fs-4);
+}
