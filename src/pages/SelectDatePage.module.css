@@ -21,20 +21,58 @@
   width: calc(100% + 36px);
   margin-left: -18px;
 }
-.grow {
-  animation: textGrow 0.5s ease-in-out;
+.floatingButtonWrapper {
+  position: fixed;
+  bottom: 110px;
+  left: 0;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  z-index: 100;
 }
 
-@keyframes textGrow {
+.floatingButton {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  padding: 8px 16px;
+  background: #fff;
+  border-radius: 20px;
+  font-size: 14px;
+  font-weight: var(--weight-regular);
+  color: var(--gray-700);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  border: none;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.floatingButton:hover {
+  transform: translateY(-2.5px);
+}
+.floatingButton:hover .plusIcon {
+  color: var(--secondary-orange);
+}
+.plusIcon {
+  width: 20px;
+  height: 20px;
+  color: var(--secondary-orange-40);
+  transition:
+    color 0.2s ease,
+    transform 0.2s ease;
+}
+@keyframes buttonGrow {
   0% {
-    font-size: 1rem;
+    transform: scale(1);
   }
   50% {
-    font-size: 1.3rem;
-    color: var(--primary-blue);
+    transform: scale(1);
   }
   100% {
-    font-size: 1rem;
-    color: var(--primary-blue);
+    transform: scale(1);
   }
+}
+
+.grow {
+  animation: buttonGrow 0.5s ease-in-out;
 }

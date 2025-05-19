@@ -1,12 +1,12 @@
 .alert {
   position: fixed;
-  bottom: 120px;
+  bottom: 100px;
   left: 50%;
   transform: translateX(-50%) translateY(0);
   background-color: var(--background-color);
   color: var(--gray-500);
   padding: 12px 30px;
-  max-width: 60%;
+  max-width: 100%;
   text-align: center;
   border-radius: 8px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);

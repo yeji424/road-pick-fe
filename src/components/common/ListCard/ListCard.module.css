@@ -6,6 +6,7 @@
   padding: 1px;
   width: 100%;
   height: 96px;
+  overflow: hidden;
   /* border: 1px solid #67d026; */
   position: relative;
   gap: 13px;
@@ -37,7 +38,8 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  /* border: 1px solid red; */
+  overflow: hidden;
+  min-width: 0;
 }
 
 .title {
