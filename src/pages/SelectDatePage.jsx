@@ -1,5 +1,5 @@
 import Calendar from '@/components/common/Calendar/Calendar'
-import { useEffect, useState } from 'react'
+import { useCallback, useEffect, useRef, useState } from 'react'
 import css from './SelectDatePage.module.css'
 import Header from '@/components/common/Header/Header'
 import RegistModal from '@/components/common/Modal/RegistModal'
@@ -10,10 +10,29 @@ import { useSelector } from 'react-redux'
 const SelectDatePage = () => {
   const [start, setStart] = useState('')
   const user = useSelector(state => state.auth.user)
-  const userId = user._id
+  const userId = user?._id
   const [end, setEnd] = useState('')
+  const [showBtn, setShowBtn] = useState(false)
   const [isOpen, setIsOpen] = useState(false)
+  const containerRef = useRef(null)
   const { data: schedules, loading, error } = useScheduleList(userId)
+
+  useEffect(() => {
+    const scrollEl = containerRef.current
+    if (!scrollEl) return
+
+    const onScroll = () => {
+      const scrollTop = scrollEl.scrollTop
+      setShowBtn(scrollTop > 0)
+    }
+
+    scrollEl.addEventListener('scroll', onScroll)
+
+    // cleanup
+    return () => scrollEl.removeEventListener('scroll', onScroll)
+  }, [containerRef])
+
+  console.log(window.screenY)
   const ModalOpen = () => {
     setIsOpen(true)
   }
@@ -56,7 +75,7 @@ const SelectDatePage = () => {
     )
   }
   return (
-    <main className={css.container}>
+    <main className={css.container} ref={containerRef}>
       <Header
         showButton={true}
         buttonText="일정 추가"
@@ -77,6 +96,11 @@ const SelectDatePage = () => {
           isSelect={true}
           showStartEndLabel={true}
         />
+        {showBtn && (
+          <button className={css.floatingBtn} onClick={ModalOpen}>
+            + 일정 추가
+          </button>
+        )}
       </div>
     </main>
   )

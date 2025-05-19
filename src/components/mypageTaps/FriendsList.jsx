@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import css from './mypageTaps.module.css'
 import profileImage from '@/assets/imgs/ProfileBasicImg.png'
 import MypageListCard from './MypageListCard'
@@ -9,9 +9,22 @@ const friends = [
   { name: '홍석준', shared: '강원도 여행 일정 공유 중\n2025.05.11 - 05.15', color: 'gray' },
 ]
 
-const FriendsList = () => {
+const FriendsList = ({ activeIndex }) => {
+  const [overlayOpen, setOverlayOpen] = useState(false)
+
+  useEffect(() => {
+    if (activeIndex === 2) setOverlayOpen(true)
+  }, [activeIndex])
   return (
     <div className={css.listTile}>
+      {overlayOpen && (
+        <div className={css.overlay}>
+          <div className={css.overlayContent}>
+            <p>😅 기능 구현 중입니다 😅</p>
+            <button onClick={() => setOverlayOpen(false)}>닫기</button>
+          </div>
+        </div>
+      )}
       {friends.map((friend, i) => (
         <MypageListCard
           key={i}
