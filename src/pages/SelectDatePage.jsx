@@ -14,25 +14,8 @@ const SelectDatePage = () => {
   const [end, setEnd] = useState('')
   const [showBtn, setShowBtn] = useState(false)
   const [isOpen, setIsOpen] = useState(false)
-  const containerRef = useRef(null)
   const { data: schedules, loading, error } = useScheduleList(userId)
 
-  useEffect(() => {
-    const scrollEl = containerRef.current
-    if (!scrollEl) return
-
-    const onScroll = () => {
-      const scrollTop = scrollEl.scrollTop
-      setShowBtn(scrollTop > 0)
-    }
-
-    scrollEl.addEventListener('scroll', onScroll)
-
-    // cleanup
-    return () => scrollEl.removeEventListener('scroll', onScroll)
-  }, [containerRef])
-
-  console.log(window.screenY)
   const ModalOpen = () => {
     setIsOpen(true)
   }
