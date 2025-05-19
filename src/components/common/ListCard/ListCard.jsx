@@ -34,6 +34,7 @@ const ListCard = ({
   mapy,
   onClick,
   isFavorite = false,
+  className = '',
 }) => {
   const navigate = useNavigate()
 
@@ -52,7 +53,7 @@ const ListCard = ({
   const randomReviewCount = getReviewCountFromId(contentid)
 
   return (
-    <div className={css.card} onClick={handleClick}>
+    <div className={`${css.card} ${className}`} onClick={handleClick}>
       <div className={css.thumbnail}>
         <img src={firstimage || noImage} alt={title} />
       </div>

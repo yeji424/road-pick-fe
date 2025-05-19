@@ -1,6 +1,6 @@
 .modal {
-  position: fixed;
-  bottom: 10%;
+  position: absolute;
+  bottom: 11%;
   left: 18px;
   right: 18px;
   background: #fff;
@@ -9,8 +9,10 @@
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
   z-index: 100;
   animation: slideUp 0.3s ease-out forwards;
+  transition: transform 0.2s ease;
+  max-width: 600px;
+  margin: auto 0;
 }
-
 .slideOut {
   animation: slideDown 0.3s ease-in forwards;
 }
@@ -35,6 +37,15 @@
     transform: translateY(100%);
     opacity: 0;
   }
+}
+
+.noHover {
+  transition: none !important;
+}
+
+.noHover:hover {
+  transform: none !important;
+  box-shadow: none;
 }
 /* 전에 쓰던 모달 css
 .card {
