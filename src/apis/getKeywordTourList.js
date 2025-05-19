@@ -16,5 +16,5 @@ export const getKeywordTourList = async ({ keyword, contentTypeId }) => {
 
   const item = response.data.response.body.items.item
 
-  return item
+  return item.filter(item => item.mapx && item.mapy)
 }

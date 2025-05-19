@@ -23,7 +23,7 @@ export const getLocationTourList = async ({ mapX, mapY, radius, contentTypeId })
 
   const items = response.data.response.body.items.item || []
 
-  return items.slice(0, 100)
+  return items.filter(item => item.mapx && item.mapy).slice(0, 100)
 }
 
 // const filtered = items.filter(item => item.firstimage).slice(0, 10)
