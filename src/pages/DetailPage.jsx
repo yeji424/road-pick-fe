@@ -15,11 +15,15 @@ const DetailPage = () => {
   const common = commonData?.[0]
   const mapx = common?.mapx
   const mapy = common?.mapy
-  const { data: festivals, isLoading, isError } = useLocationTourList(mapx, mapy, 5000, 15)
+  const {
+    data: festivals,
+    isLoading,
+    isError,
+  } = useLocationTourList(mapx || 0, mapy || 0, 5000, 15)
 
   if (isLoading || loading) return <Spinner />
   if (isError || error) return <p>에러 발생</p>
-
+  if (!commonData?.length) return <p>상세 데이터가 없습니다.</p>
   return (
     <main className={css.container}>
       <Header title="상세 정보" />
