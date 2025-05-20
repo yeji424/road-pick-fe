@@ -132,7 +132,7 @@ const MapPage = () => {
   }
 
   if (isError) return <div className={css.error}>데이터를 불러오는 중 오류가 발생했습니다.</div>
-  if (!list || list.length === 0) return <div className={css.empty}>데이터가 없습니다.</div>
+  //if (!list || list.length === 0) return <div className={css.empty}>데이터가 없습니다.</div>
 
   return (
     <div className={css.fullPage}>

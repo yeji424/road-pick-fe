@@ -318,3 +318,23 @@
   font-size: 14px;
   font-weight: bold;
 }
+
+.empty {
+  position: relative;
+  letter-spacing: -0.02em;
+  padding: 8em 0;
+  margin-bottom: 20px;
+  border: #d2d4da solid 0.2px;
+  border-radius: 5px;
+  font-size: 15px;
+  text-align: center;
+  color: var(--gray-600);
+  line-height: 1.5;
+}
+
+.loadingWrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 200px;
+}
