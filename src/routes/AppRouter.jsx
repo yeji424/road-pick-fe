@@ -8,7 +8,6 @@ import NotFoundPage from '@/pages/NotFoundPage'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import MyPage from '@/pages/MyPage'
 import ListPage from '@/pages/ListPage'
-import BookMarkPage from '@/pages/BookMarkPage'
 import DetailPage from '@/pages/DetailPage'
 import CalendarPage from '@/pages/CalendarPage'
 import MapPage from '@/pages/MapPage'
@@ -66,14 +65,6 @@ const AppRouter = createBrowserRouter([
         element: (
           <Suspense fallback={<Spinner />}>
             <PlanPage />
-          </Suspense>
-        ),
-      },
-      {
-        path: '/bookmark',
-        element: (
-          <Suspense fallback={<Spinner />}>
-            <BookMarkPage />
           </Suspense>
         ),
       },

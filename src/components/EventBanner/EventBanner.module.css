@@ -1,0 +1,21 @@
+/* YourComponent.module.css */
+
+.eventBannerSection {
+  width: 100%;
+  overflow: hidden;
+  padding: var(--fs-1) 0;
+}
+
+.eventBannerTitle {
+  font-size: var(--fs-5);
+  color: var(--gray-700);
+  font-weight: var(--weight-medium);
+  margin-bottom: 1rem;
+}
+
+.bannerImage {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  border-radius: 10px;
+}
