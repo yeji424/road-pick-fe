@@ -62,6 +62,7 @@ const MyPage = () => {
 
   if (!schedules || loading) return <Spinner />
   if (error) return <div>error..</div>
+
   const title =
     schedules.length > 0
       ? schedules[0].title.endsWith('여행')

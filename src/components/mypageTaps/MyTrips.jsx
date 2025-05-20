@@ -17,7 +17,7 @@ const MyTrips = ({ setAlertMessage, schedules }) => {
       const sorted = [...schedules].sort((a, b) => new Date(a.start) - new Date(b.start)) // 날짜순 정렬
       setTrips(sorted)
     }
-  }, [schedules])
+  }, [schedules, setTrips])
 
   useEffect(() => {
     if (location.state?.fromRegister) {
