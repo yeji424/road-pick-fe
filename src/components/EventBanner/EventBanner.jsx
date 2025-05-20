@@ -19,10 +19,10 @@ const EventBanner = () => {
         slidesPerView={1}
       >
         <SwiperSlide>
-          <img src="src/assets/imgs/BannerImg1.png" alt="배너1" className={css.bannerImage} />
+          <img src="/src/BannerImg1.png" alt="배너1" className={css.bannerImage} />
         </SwiperSlide>
         <SwiperSlide>
-          <img src="src/assets/imgs/BannerImg2.png" alt="배너2" className={css.bannerImage} />
+          <img src="/src/BannerImg2.png" alt="배너2" className={css.bannerImage} />
         </SwiperSlide>
       </Swiper>
     </div>
