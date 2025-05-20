@@ -10,8 +10,18 @@
   border-radius: 12px;
   overflow: hidden;
 }
-
-.emptyOverlay {
+.empty {
+  text-align: center;
+  /* border: 1px solid red; */
+  padding: 60px 0;
+  border-radius: 10px;
+  background-color: var(--gray-250);
+  color: var(--gray-600);
+  line-height: 29px;
+  font-weight: var(--weight-regular);
+  font-size: 14px;
+}
+.plusOverlay {
   position: absolute;
   top: 0;
   left: 0;
@@ -35,7 +45,7 @@
   transition: all 0.3s ease;
 }
 
-.cardWrapper:hover .emptyOverlay {
+.cardWrapper:hover .plusOverlay {
   opacity: 1;
   pointer-events: auto;
 }
