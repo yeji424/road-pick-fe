@@ -73,7 +73,10 @@ const SaveListPage = () => {
     <main>
       <Header title="저장 목록" />
       {favorites.length === 0 ? (
-        <p className={css.empty}>아직 찜한 항목이 없습니다.</p>
+        <div className={`${css.empty} fadeInText`}>
+          <p>저장된 관광지 및 축제 정보가 존재하지 않습니다.</p>
+          <p>저장 후 다시 이용해주세요.</p>
+        </div>
       ) : (
         <ul className={css.list}>
           {favorites.map(fav => {
@@ -104,7 +107,7 @@ const SaveListPage = () => {
                     mapy={dest.mapy}
                     isFavorite="true"
                   />
-                  <div className={css.emptyOverlay}>
+                  <div className={css.plusOverlay}>
                     <PlusBtnIcon className={css.plusIcon} />
                   </div>
                 </div>
