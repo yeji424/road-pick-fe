@@ -171,7 +171,7 @@ const RegisterPage = () => {
         </button>
 
         {/* 중복 이메일일 경우 */}
-        {registerMsg && <p className={css.registerError}>{registerMsg}</p>}
+        {registerMsg && <p className={css.error}>{registerMsg}</p>}
       </form>
 
       <p className={css.alt}>3초만에 회원가입하기</p>

@@ -194,11 +194,3 @@
   align-items: center;
   justify-content: center;
 }
-
-.registerError {
-  color: var(--danger);
-  font-size: 13px;
-  font-weight: var(--weight-regular);
-  margin-top: 8px;
-  text-align: center;
-}
