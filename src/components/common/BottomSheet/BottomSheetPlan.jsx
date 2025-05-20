@@ -70,12 +70,11 @@ const PlanDayBlock = ({
 
   const MoveDetail = (contentTypeId, contentId) => {
     if (!contentTypeId || !contentId) {
-      console.log('잘못된 contentTypeId 또는 contentId', contentTypeId, contentId)
+      //console.log('잘못된 contentTypeId 또는 contentId', contentTypeId, contentId)
       return
     }
     navigate(`/detail/${contentTypeId}/${contentId}`)
   }
-  console.log(activities)
   return (
     <div className={css.planDaySection}>
       <div className={css.planDayHeader}>

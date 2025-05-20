@@ -14,8 +14,6 @@ const BottomSheetContent = ({ list, contentTypeId, setContentTypeId, onItemClick
     }
   }, [])
 
-  if (!list || list.length === 0) return <div>데이터 불러오는 중..</div>
-
   return (
     <div className={css.contentWrapper}>
       <div className={css.tabWrapper}>
@@ -33,17 +31,21 @@ const BottomSheetContent = ({ list, contentTypeId, setContentTypeId, onItemClick
         </button>
       </div>
 
-      <div className={css.listWrapper}>
-        {list.map(item => (
-          <Suspense fallback={<Spinner />}>
-            <ListCard
-              key={item.contentid}
-              {...item}
-              onClick={() => onItemClick(item)} // (1) overlay 대신 onClick 넘겨주기
-            />
-          </Suspense>
-        ))}
-      </div>
+      {list === undefined ? (
+        <div className={css.loadingWrapper}>
+          <Spinner />
+        </div>
+      ) : list.length === 0 ? (
+        <p className={css.empty}>리스트가 없습니다.</p>
+      ) : (
+        <div className={css.listWrapper}>
+          {list.map(item => (
+            <Suspense key={item.contentid} fallback={<Spinner />}>
+              <ListCard {...item} onClick={() => onItemClick(item)} />
+            </Suspense>
+          ))}
+        </div>
+      )}
     </div>
   )
 }
