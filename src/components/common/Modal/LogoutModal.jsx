@@ -12,7 +12,7 @@ const LogoutModal = ({ onClose }) => {
     navigate('/')
     setTimeout(() => {
       window.location.reload()
-    }, 1000)
+    }, 500)
   }
   const handleCLoseClick = () => {
     onClose()
