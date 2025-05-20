@@ -2,7 +2,7 @@ import axios from 'axios'
 
 axios.defaults.withCredentials = false
 
-const API_URL = 'http://localhost:5000'
+const API_URL = import.meta.env.VITE_API_URL
 
 // 일정 생성
 export const createScheduleDetail = async detail => {

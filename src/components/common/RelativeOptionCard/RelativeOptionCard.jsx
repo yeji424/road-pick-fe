@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom'
 import css from './RelativeOptionCard.module.css'
-
+import noImage from '@/assets/imgs/noImageImg.png'
 const RelativeOptionCard = ({ festival, currentTitle }) => {
   const { firstimage, title, dist, contentid, contenttypeid } = festival
   const navigate = useNavigate()
@@ -12,7 +12,7 @@ const RelativeOptionCard = ({ festival, currentTitle }) => {
   return (
     <div className={css.box} onClick={moveDetailPage}>
       <div className={css.imgWrap}>
-        <img src={firstimage || '/assets/imgs/noImageImg.png'} alt={title} />
+        <img src={firstimage || noImage} alt={title} />
       </div>
       <h3 className={css.title}>{title}</h3>
       <p className={css.dist}>

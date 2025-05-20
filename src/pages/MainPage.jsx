@@ -8,7 +8,6 @@ import { usePopularTourList } from '@/hooks/usePopularTourList'
 import { useRecommendTourList } from '@/hooks/useRecommendTourList'
 import { useSelector } from 'react-redux'
 import ListCard from '@/components/common/ListCard/ListCard'
-
 const MainPage = () => {
   const [selectedCity, setSelectedCity] = useState('전국')
   const [currentIndex, setCurrentIndex] = useState(0)
@@ -117,14 +116,19 @@ const MainPage = () => {
       </div>
       <div className={css.popularWrapper}>
         {populars.length > 0 ? (
-          populars.map((item, idx) => (
+          populars.map(item => (
             <div
-              key={idx}
+              key={item.contentid}
               className={css.popularItem}
               onClick={() => handleMoveDetail(item.contenttypeid, item.contentid)}
             >
               <div className={css.popularImage}>
-                <img src={item.firstimage} alt={item.title} className={css.popularImage} />
+                <img
+                  src={item.firstimage}
+                  alt={item.title}
+                  className={css.popularImage}
+                  loading="lazy"
+                />
               </div>
               <div className={css.popularContent}>
                 <div className={css.popularTextWrapper}>
@@ -182,8 +186,18 @@ const MainPage = () => {
                 className={css.sliderInner}
                 style={{ transform: `translateX(-${currentIndex * 100}%)` }}
               >
-                <img src="src/assets/imgs/BannerImg1.png" alt="배너1" className={css.bannerImage} />
-                <img src="src/assets/imgs/BannerImg2.png" alt="배너2" className={css.bannerImage} />
+                <img
+                  src="src/assets/imgs/BannerImg1.png"
+                  alt="배너1"
+                  className={css.bannerImage}
+                  loading="lazy"
+                />
+                <imgs
+                  src="src/assets/imgs/BannerImg2.png"
+                  alt="배너2"
+                  className={css.bannerImage}
+                  loading="lazy"
+                />
               </div>
             </div>
           </div>

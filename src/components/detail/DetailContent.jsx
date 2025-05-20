@@ -1,9 +1,9 @@
-import { useState } from 'react'
+import React, { Suspense, useState } from 'react'
 import DetailBasicInfo from './DetailBasicInfo'
 import FestivalInfo from './FestivalInfo'
-import FestivalSlider from './FestivalSlider/FestivalSlider'
 import css from './Detail.module.css'
-
+import Spinner from '../loading/Spinner'
+const FestivalSlider = React.lazy(() => import('@/components/detail/FestivalSlider/FestivalSlider'))
 const DetailContent = ({ common, contenttypeid, festivals, intro }) => {
   const [expanded, setExpanded] = useState(false)
   const toggleExpanded = () => setExpanded(prev => !prev)
@@ -21,7 +21,9 @@ const DetailContent = ({ common, contenttypeid, festivals, intro }) => {
       </div>
       <DetailBasicInfo common={common} intro={intro} />
       {contenttypeid !== '15' ? <></> : <FestivalInfo intro={intro} />}
-      <FestivalSlider festivals={festivals} commonTitle={common.title} />
+      <Suspense fallback={<Spinner />}>
+        <FestivalSlider festivals={festivals} commonTitle={common.title} />
+      </Suspense>
     </div>
   )
 }

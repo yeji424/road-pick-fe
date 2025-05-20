@@ -1,6 +1,8 @@
-import React, { useEffect } from 'react'
+import React, { Suspense, useEffect } from 'react'
 import css from './BottomSheet.module.css'
-import ListCard from '@/components/common/ListCard/ListCard'
+import Spinner from '@/components/loading/Spinner'
+
+const ListCard = React.lazy(() => import('@/components/common/ListCard/ListCard'))
 
 const BottomSheetContent = ({ list, contentTypeId, setContentTypeId, onItemClick }) => {
   useEffect(() => {
@@ -33,11 +35,13 @@ const BottomSheetContent = ({ list, contentTypeId, setContentTypeId, onItemClick
 
       <div className={css.listWrapper}>
         {list.map(item => (
-          <ListCard
-            key={item.contentid}
-            {...item}
-            onClick={() => onItemClick(item)} // (1) overlay 대신 onClick 넘겨주기
-          />
+          <Suspense fallback={<Spinner />}>
+            <ListCard
+              key={item.contentid}
+              {...item}
+              onClick={() => onItemClick(item)} // (1) overlay 대신 onClick 넘겨주기
+            />
+          </Suspense>
         ))}
       </div>
     </div>
