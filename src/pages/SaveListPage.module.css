@@ -45,7 +45,7 @@
   transition: all 0.3s ease;
 }
 
-.cardWrapper:hover .emptyOverlay {
+.cardWrapper:hover .plusOverlay {
   opacity: 1;
   pointer-events: auto;
 }
