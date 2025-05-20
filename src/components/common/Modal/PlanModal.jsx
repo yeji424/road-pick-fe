@@ -1,5 +1,4 @@
 import { useState } from 'react'
-import noImage from '@/assets/imgs/noImageImg.png'
 import css from './Modal.module.css'
 import CheckboxIcon from '@/assets/icons/checkBoxIcon.svg?react'
 
@@ -17,7 +16,11 @@ const PlanModal = ({ CreateShedule, onClose, image, description, dest, title }) 
       <div className={css.modal} onClick={e => e.stopPropagation()}>
         <div className={css.image}>
           {image && (
-            <img src={dest.firstimage || noImage} alt={dest.title} className={css.imagePreview} />
+            <img
+              src={dest.firstimage || '/noImageImg.png'}
+              alt={dest.title}
+              className={css.imagePreview}
+            />
           )}
         </div>
         <h4>

@@ -47,7 +47,7 @@ const SearchPopularPage = () => {
         {populars.map((item, idx) => (
           <ListCard
             key={idx}
-            firstimage={item.firstimage || '/assets/imgs/noImageImg.png'}
+            firstimage={item.firstimage || '/noImageImg.png'}
             title={item.title}
             addr1={item.addr1}
             addr2={item.addr2}

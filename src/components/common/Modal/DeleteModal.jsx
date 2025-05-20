@@ -1,5 +1,4 @@
 import React from 'react'
-import noImage from '@/assets/imgs/noImageImg.png'
 import css from './Modal.module.css'
 
 const DeleteModal = ({ onClose, onConfirm, title, image, description }) => {
@@ -17,7 +16,9 @@ const DeleteModal = ({ onClose, onConfirm, title, image, description }) => {
           ✕
         </button> */}
         <div className={css.image}>
-          {image && <img src={image || noImage} alt={title} className={css.imagePreview} />}
+          {image && (
+            <img src={image || '/noImageImg.png'} alt={title} className={css.imagePreview} />
+          )}
         </div>
         <h4>
           {title ? (

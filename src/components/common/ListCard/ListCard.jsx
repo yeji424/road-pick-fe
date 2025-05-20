@@ -3,7 +3,6 @@ import { useNavigate } from 'react-router-dom'
 import css from './ListCard.module.css'
 import StarIcon from '@/assets/icons/starIcon.svg?react'
 import HeartToggle from '@/components/common/ListCard/HeartToggle'
-import noImage from '@/assets/imgs/noImageImg.png'
 
 // contentid 해시로 3.5~5.0 별점 계산 함수
 function getRatingFromId(id) {
@@ -53,7 +52,7 @@ const ListCard = ({
   return (
     <div className={`${css.card} ${className}`} onClick={handleClick}>
       <div className={css.thumbnail}>
-        <img src={firstimage || noImage} alt={title} />
+        <img src={firstimage || '/noImageImg.png'} alt={title} />
       </div>
       <div className={css.content}>
         <h3 className={css.title}>{title}</h3>
