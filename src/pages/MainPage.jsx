@@ -192,7 +192,7 @@ const MainPage = () => {
                   className={css.bannerImage}
                   loading="lazy"
                 />
-                <imgs
+                <img
                   src="src/assets/imgs/BannerImg2.png"
                   alt="배너2"
                   className={css.bannerImage}
