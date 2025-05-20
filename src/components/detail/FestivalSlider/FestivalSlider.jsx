@@ -18,6 +18,12 @@ const FestivalSlider = ({ festivals, commonTitle }) => {
             pagination={{
               clickable: true,
             }}
+            breakpoints={{
+              600: {
+                slidesPerView: 4,
+                spaceBetween: 30,
+              },
+            }}
             className={css.mySwiper}
           >
             {festivals.map(festival => (
