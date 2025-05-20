@@ -28,26 +28,20 @@ const RegisterPage = () => {
   const validate = (name, value) => {
     switch (name) {
       case 'email':
-        // util의 validateEmail 사용
         if (!validateEmail(value)) return '올바른 이메일 형식을 입력하세요.'
         return ''
-
       case 'username':
         if (value.length < 2) return '닉네임은 2자 이상이어야 합니다.'
         return ''
-
       case 'password':
         if (!value) return '비밀번호를 입력하세요.'
-        // util의 validatePassword 사용
         if (!validatePassword(value)) {
           return '비밀번호는 영문자와 특수문자를 포함한 8자 이상이어야 합니다.'
         }
         return ''
-
       case 'confirmPassword':
         if (value !== form.password) return '비밀번호가 일치하지 않습니다.'
         return ''
-
       default:
         return ''
     }
@@ -55,14 +49,10 @@ const RegisterPage = () => {
 
   const handleChange = e => {
     const { name, value } = e.target
-
-    // 값 갱신
     setForm(prev => ({ ...prev, [name]: value }))
 
-    // 유효성 검사
     const newError = validate(name, value)
 
-    // confirmPassword는 password와 비교하므로 password 변경 시도 함께 확인
     let confirmError = ''
     if (name === 'password' && form.confirmPassword) {
       confirmError = validate('confirmPassword', form.confirmPassword)
@@ -173,12 +163,15 @@ const RegisterPage = () => {
           </div>
           {errors.confirmPassword && <p className={css.error}>{errors.confirmPassword}</p>}
         </div>
+
         <p className={css.forgot}> </p>
 
         <button className={css.submit} type="submit" disabled={!isFormValid()}>
           회원가입
         </button>
-        {registerMsg && <p>{registerMsg}</p>}
+
+        {/* 중복 이메일일 경우 */}
+        {registerMsg && <p className={css.registerError}>{registerMsg}</p>}
       </form>
 
       <p className={css.alt}>3초만에 회원가입하기</p>
@@ -190,6 +183,7 @@ const RegisterPage = () => {
           <KakaoIcon />
         </button>
       </div>
+
       {/* 로그인 이동 */}
       <p className={css.alt}>
         이미 회원이신가요?
