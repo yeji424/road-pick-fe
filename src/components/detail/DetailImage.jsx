@@ -1,10 +1,9 @@
 import css from './Detail.module.css'
-import noImage from './assets/noImageImg.png'
 
 const DetailImage = ({ common }) => {
   return (
     <div className={css.imgwrap}>
-      <img src={common.firstimage || noImage} alt={common.title} />
+      <img src={common.firstimage || '/imgs/noImageImg.png'} alt={common.title} />
     </div>
   )
 }
