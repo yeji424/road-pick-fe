@@ -116,7 +116,7 @@
 </table>
 
 ## 6. 폴더 구조
-### FrontENd
+### FrontEnd
 ```
 📦src
  ┣ 📂apis
@@ -330,8 +330,13 @@
 ```
 
 ## 테이블 구조
+ <img src="https://github.com/user-attachments/assets/e8d24147-6b0f-44ff-92bd-e72efd17dfb3" height="400" width="600" />
+
 
 ## 유저플로우 
+ <img src="https://github.com/user-attachments/assets/6909a8da-7f7a-4270-ae40-b23c870c79a9" height="400" width="600" />
+
+
 ## 개선 목표
 
 ## 프로젝트 소감
