@@ -1,25 +1,29 @@
 .wrapper {
-  position: fixed;
-  inset: 0;
   display: flex;
+  position: fixed;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 100%;
-  height: 100%;
+  height: 100vh;
+  width: 100vw;
+  max-width: 600px;
+  background: linear-gradient(to bottom, #d8e4ff, var(--background-color));
+  font-family: 'Pretendard', sans-serif;
 }
-.spinner {
-  width: 40px;
-  height: 40px;
-  border: 5px solid #ccdcff;
-  border-top: 5px solid var(--primary-blue-40);
-  border-radius: 50%;
-  animation: spin 1s linear infinite;
+
+.text {
+  font-size: 48px;
+  font-weight: bold;
+  display: flex;
+  gap: 4px;
+  color: var(--primary-blue);
 }
-@keyframes spin {
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(360deg);
-  }
+
+.subtitle {
+  margin-top: 16px;
+  font-size: 18px;
+  color: var(--gray-500);
 }
