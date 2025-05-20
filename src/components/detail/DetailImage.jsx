@@ -1,5 +1,5 @@
 import css from './Detail.module.css'
-import noImage from '@/assets/imgs/noImageImg.png'
+import noImage from './assets/imgs/noImageImg.png'
 
 const DetailImage = ({ common }) => {
   return (
