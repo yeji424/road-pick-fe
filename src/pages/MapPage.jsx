@@ -9,7 +9,7 @@ import css from './MapPage.module.css'
 import Spinner from '@/components/loading/Spinner'
 
 const DEFAULT_CITY = { name: '서울', lat: 37.5665, lng: 126.978 }
-const RADIUS = 5000
+const RADIUS = 2500
 
 const MapPage = () => {
   const location = useLocation()
