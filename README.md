@@ -2,8 +2,6 @@
  ![image](https://github.com/user-attachments/assets/5a947729-2635-4c94-a99e-30667042bb1f)
 # RoadPick
 
-<img src="https://github.com/user-attachments/assets/c78bf31c-f7e3-4519-adfa-91be6e9ff6d3" height="500" />
-
 ***
 ## 1. Project Overview (프로젝트 개요)
 
