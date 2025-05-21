@@ -127,8 +127,10 @@
 </table>
 
 ## 8. 폴더 구조
-### FrontEnd
-```
+<details>
+  <summary>FrontEnd</summary>
+ 
+```plaintext
 📦src
  ┣ 📂apis
  ┃ ┣ 📜authApi.js
@@ -304,6 +306,7 @@
  ┣ 📜index.css
  ┗ 📜main.jsx
 ```
+</details>
 
 ## 9. Development Workflow (개발 워크플로우)
 ### 브랜치 전략
