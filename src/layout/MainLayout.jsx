@@ -1,4 +1,4 @@
-import React, { Suspense, useEffect } from 'react'
+import React, { Suspense, useEffect, useState } from 'react'
 import { Outlet, useLocation } from 'react-router-dom'
 
 import Navbar from '@/components/common/Navbar/Navbar'
@@ -19,10 +19,14 @@ const MainLayout = () => {
     location.pathname === '/map' ||
     location.pathname.includes('/plan') ||
     location.pathname === '/firstloading'
+  const [profileFetched, setProfileFetched] = useState(false)
 
   useEffect(() => {
-    dispatch(fetchProfile())
-  }, [dispatch])
+    if (!profileFetched) {
+      dispatch(fetchProfile())
+      setProfileFetched(true)
+    }
+  }, [dispatch, profileFetched])
 
   useEffect(() => {
     if (user) {
