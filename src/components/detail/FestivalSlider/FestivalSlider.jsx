@@ -20,6 +20,7 @@ const FestivalSlider = ({ festivals, commonTitle }) => {
             }}
             breakpoints={{
               420: {
+                slidesPerView: 3,
                 spaceBetween: 50,
               },
               600: {
