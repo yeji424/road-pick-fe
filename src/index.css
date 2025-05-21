@@ -166,7 +166,18 @@ input {
   animation: fadeIn 1s ease forwards;
   animation-delay: 0.2s;
 }
-
+.dragging {
+  cursor: grabbing;
+  user-select: none;
+}
+.draggable-scroll {
+  cursor: grab;
+  user-select: none;
+}
+.your-draggable-element {
+  cursor: grab;
+  user-select: none; /* 드래그할 때 텍스트 선택 방지 */
+}
 @keyframes fadeIn {
   to {
     opacity: 1;

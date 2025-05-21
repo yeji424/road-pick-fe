@@ -15,7 +15,6 @@
 }
 .cityWrapper {
   padding-top: 25px;
-  width: 100%;
   display: flex;
   flex-direction: row;
   overflow-x: auto;
@@ -27,6 +26,11 @@
   margin-left: -18px;
   padding-left: 18px;
   padding-right: 18px;
+  /* cursor: grab; */
+}
+
+.cityWrapper:active {
+  cursor: grabbing;
 }
 .cityWrapper::after,
 .popularWrapper:after {
@@ -108,7 +112,6 @@
   display: flex;
   overflow-x: auto;
   scroll-behavior: smooth;
-  cursor: grab;
   padding-bottom: 85px;
   width: calc(100% + 36px);
   margin-left: -18px;
