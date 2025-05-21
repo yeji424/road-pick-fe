@@ -47,6 +47,6 @@ export const validatePassword = password => {
 // 이메일 유효성 검사 함수
 export const validateEmail = email => {
   // 공백 없는 문자열@문자열.문자열 형식
-  const emailRegex = /^\S+@\S+\.\S+$/
+  const emailRegex = /^\S+@\S+\.(com|net|co\.kr)$/
   return emailRegex.test(email)
 }
