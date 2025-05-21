@@ -45,3 +45,9 @@
   overflow: hidden; /* 넘치는 건 숨김 */
   text-overflow: ellipsis; /* ... 처리 */
 }
+
+@media (max-width: 420px) {
+  .box {
+    width: 100%;
+  }
+}
