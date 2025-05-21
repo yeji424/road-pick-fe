@@ -59,7 +59,13 @@ const MainPage = () => {
   })
 
   if (recLoading || popLoading) return <Spinner />
-  if (recError || popError) return <div>오류 발생: {recError?.message || popError?.message}</div>
+  if (recError || popError)
+    return (
+      <div className={`${css.error} fadeInText`}>
+        <p>페이지를 로드하는 중 오류가 발생하였습니다.</p>
+        <p>관리자에게 문의해주세요!</p>
+      </div>
+    )
 
   const handleCityChange = city => {
     setSelectedCity(city)
@@ -145,7 +151,7 @@ const MainPage = () => {
             </div>
           ))
         ) : (
-          <div>유명 관광지가 없습니다.</div>
+          <div className={css.emptyMessage}>유명 관광지가 없습니다.</div>
         )}
       </div>
 
