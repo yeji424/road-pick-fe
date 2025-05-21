@@ -14,7 +14,7 @@ const FestivalSlider = ({ festivals, commonTitle }) => {
         <div>
           <Swiper
             slidesPerView={2}
-            spaceBetween={0}
+            spaceBetween={10}
             pagination={{
               clickable: true,
             }}
