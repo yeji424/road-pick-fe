@@ -8,6 +8,8 @@ import { usePopularTourList } from '@/hooks/usePopularTourList'
 import { useRecommendTourList } from '@/hooks/useRecommendTourList'
 import { useSelector } from 'react-redux'
 import ListCard from '@/components/common/ListCard/ListCard'
+import DraggableScroll from '@/components/common/DraggableScroll/DraggableScroll'
+
 const EventBanner = React.lazy(() => import('@/components/EventBanner/EventBanner'))
 const MainPage = () => {
   const [selectedCity, setSelectedCity] = useState('전국')
@@ -59,7 +61,13 @@ const MainPage = () => {
   })
 
   if (recLoading || popLoading) return <Spinner />
-  if (recError || popError) return <div>오류 발생: {recError?.message || popError?.message}</div>
+  if (recError || popError)
+    return (
+      <div className={`${css.error} fadeInText`}>
+        <p>페이지를 로드하는 중 오류가 발생하였습니다.</p>
+        <p>관리자에게 문의해주세요!</p>
+      </div>
+    )
 
   const handleCityChange = city => {
     setSelectedCity(city)
@@ -76,13 +84,14 @@ const MainPage = () => {
         <br />
         지역을 선택해보세요
       </h2>
+
       <p className={`${css.description} fadeInText`}>
         지역명이나 관광지명을 입력해 관련된 축제 및 행사
         <br />
         정보를 확인하세요
       </p>
       <SearchCard />
-      <div className={css.cityWrapper}>
+      <DraggableScroll className={css.cityWrapper}>
         {cities.map(city => (
           <button
             key={city}
@@ -92,7 +101,7 @@ const MainPage = () => {
             {city}
           </button>
         ))}
-      </div>
+      </DraggableScroll>
 
       <div className={css.selectedInfoWrapper}>
         <h3 className={css.selectedInfoText}>{selectedCity} 유명 관광지</h3>
@@ -107,7 +116,7 @@ const MainPage = () => {
           모두 보기
         </button>
       </div>
-      <div className={css.popularWrapper}>
+      <DraggableScroll className={css.popularWrapper}>
         {populars.length > 0 ? (
           populars.map(item => (
             <div
@@ -121,6 +130,7 @@ const MainPage = () => {
                   alt={item.title}
                   className={css.popularImage}
                   loading="lazy"
+                  draggable={false}
                 />
               </div>
               <div className={css.popularContent}>
@@ -145,9 +155,9 @@ const MainPage = () => {
             </div>
           ))
         ) : (
-          <div>유명 관광지가 없습니다.</div>
+          <div className={css.emptyMessage}>유명 관광지가 없습니다.</div>
         )}
-      </div>
+      </DraggableScroll>
 
       {user && user.name ? (
         <>

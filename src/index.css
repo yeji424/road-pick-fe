@@ -98,7 +98,7 @@ body {
   overflow-x: hidden;
   position: relative;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  padding: 69px 18px 34px 18px;
+  padding: 34px 18px 34px 18px;
 }
 html,
 body,
@@ -166,7 +166,18 @@ input {
   animation: fadeIn 1s ease forwards;
   animation-delay: 0.2s;
 }
-
+.dragging {
+  cursor: grabbing;
+  user-select: none;
+}
+.draggable-scroll {
+  cursor: grab;
+  user-select: none;
+}
+.your-draggable-element {
+  cursor: grab;
+  user-select: none; /* 드래그할 때 텍스트 선택 방지 */
+}
 @keyframes fadeIn {
   to {
     opacity: 1;
