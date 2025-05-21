@@ -6,11 +6,11 @@ import { logout } from '@/store/authSlice'
 const LogoutModal = ({ onClose }) => {
   const navigate = useNavigate()
   const dispatch = useDispatch()
-  const handleLogoutClick = async () => {
+  const handleLogoutClick = () => {
     onClose()
-    await dispatch(logout())
+    dispatch(logout())
     navigate('/')
-    //window.location.reload()
+    window.location.reload()
   }
   const handleCLoseClick = () => {
     onClose()
